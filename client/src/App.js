@@ -7,6 +7,7 @@ import Pricing from "./pages/Pricing";
 import Faq from "./pages/Faq";
 import ContactUs from "./pages/ContactUs";
 import HowItWorks from "./pages/HowItWorks";
+import LogIn from "./pages/LogIn";
 
 
 const App = () =>
@@ -19,6 +20,7 @@ const App = () =>
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/Pricing" component={Pricing} />
             <Route exact path="/FAQ" component={Faq} />
+            <Route exact path="/LogIn" component={LogIn} />
           </Wrapper>
       </div>
   </Router>
