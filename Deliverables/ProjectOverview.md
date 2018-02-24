@@ -7,6 +7,12 @@ The user page will give users the capability of scheduling their services as wel
 
 We are excited to work on the project as it adds value to a specific client's business. We will be able to present a website that will hopefully increase the traffic for Metro Curbside Cleaning. 
 
+### Site Plan
+![site plan](/Deliverables/IMG_3531.jpg)
+
+### Project Management
+![Trello](/Deliverables/trello.jpg)
+
 ### Team Members
 * Chris Lynam
 * Leo Galey
