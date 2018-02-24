@@ -10,6 +10,9 @@ We are excited to work on the project as it adds value to a specific client's bu
 ### Site Plan
 ![site plan](/Deliverables/IMG_3531.jpg)
 
+### Project Management
+![Trello](/Deliverables/trello.jpg)
+
 ### Team Members
 * Chris Lynam
 * Leo Galey
