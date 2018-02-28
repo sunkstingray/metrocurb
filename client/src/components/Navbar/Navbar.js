@@ -7,7 +7,7 @@ const Navbar = props =>
             <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="/">Metro Curbside Cleaning</a>
+            <a className="navbar-brand" href="/">Metro Curbside Cleaning</a>
             <div className="collapse navbar-collapse text-right" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item">
