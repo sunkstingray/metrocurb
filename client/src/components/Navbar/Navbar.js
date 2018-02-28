@@ -1,32 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = props =>
-    <nav className=" navbar-expand-lg navbar-light bg-light">
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="/">Metro Curbside Cleaning</a>
-            <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul className="navbar-nav">
+    <nav className="navbar navbar-expand-lg navbar-dark">
+        <div className="container">
+            <a className="navbar-brand" href="/">Metro Curbside Cleaning</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
                     <li className={window.location.pathname === "/" ? "nav-item active" : "nav-item"}>
-                        <Link className="nav-link" to="/">Home</Link>
+                        <a className="nav-link" href="/">Home</a>
                     </li>
                     <li className={window.location.pathname === "/HowItWorks" ? "nav-item active" : "nav-item"}>
-                        <Link className="nav-link" to="/HowItWorks">How It Works</Link>
+                        <a className="nav-link" href="/HowItWorks">How It Works</a>
                     </li>
                     <li className={window.location.pathname === "/Pricing" ? "nav-item active" : "nav-item"}>
-                        <Link className="nav-link" to="/Pricing">Pricing</Link>
+                        <a className="nav-link" href="/Pricing">Pricing</a>
                     </li>
                     <li className={window.location.pathname === "/ContactUs" ? "nav-item active" : "nav-item"}>
-                        <Link className="nav-link" to="/ContactUs">Contact Us</Link>
+                        <a className="nav-link" href="/ContactUs">Contact Us</a>
                     </li>
                     <li className={window.location.pathname === "/Faq" ? "nav-item active" : "nav-item"}>
-                        <Link className="nav-link" to="/Faq">FAQ</Link>
+                        <a className="nav-link" href="/Faq">FAQ</a>
                     </li>
                     <li className={window.location.pathname === "/LogIn" ? "nav-item active" : "nav-item"}>
-                        <Link className="nav-link" to="/LogIn">Log-In</Link>
+                        <a className="nav-link" href="/LogIn">Log-In</a>
                     </li>
                 </ul>
             </div>

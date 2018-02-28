@@ -8,13 +8,15 @@ import Faq from "./pages/Faq";
 import ContactUs from "./pages/ContactUs";
 import HowItWorks from "./pages/HowItWorks";
 import LogIn from "./pages/LogIn";
+import Footer from "./components/Footer";
+import "./App.css";
 
 
 const App = () =>
   <Router>
       <div>
-          <Navbar />
           <Wrapper>
+            <Navbar />
             <Route exact path="/" component={Home} />
             <Route exact path="/HowItWorks" component={HowItWorks} />
             <Route exact path="/ContactUs" component={ContactUs} />
@@ -22,6 +24,7 @@ const App = () =>
             <Route exact path="/FAQ" component={Faq} />
             <Route exact path="/LogIn" component={LogIn} />
           </Wrapper>
+          <Footer />
       </div>
   </Router>
 

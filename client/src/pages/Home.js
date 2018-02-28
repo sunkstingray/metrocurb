@@ -10,12 +10,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.loadContent();
+    // this.loadContent();
   }
 
-  loadContent = (page) => {
-    //do something to get the content for homepage from MongoDB and save it as the current state
-  }
+  // loadContent = () => {
+  //   //do something to get the content for homepage from MongoDB and save it as the current state
+  // }
   
   render(){
     return(

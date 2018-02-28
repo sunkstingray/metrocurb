@@ -1,4 +1,7 @@
 .card {
     padding: 20px;
-    margin: 20px
+    margin: 20px;
+    background-color: #D7CEC7;
+    color: #565656;
+    border-color: #D7CEC7;
 }
