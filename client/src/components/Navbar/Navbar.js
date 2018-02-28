@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = props =>
+
     <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container">
             <a className="navbar-brand" href="/">Metro Curbside Cleaning</a>
@@ -13,6 +14,7 @@ const Navbar = props =>
                 <ul className="navbar-nav mr-auto">
                     <li className={window.location.pathname === "/" ? "nav-item active" : "nav-item"}>
                         <a className="nav-link" href="/">Home</a>
+
                     </li>
                     <li className={window.location.pathname === "/HowItWorks" ? "nav-item active" : "nav-item"}>
                         <a className="nav-link" href="/HowItWorks">How It Works</a>
