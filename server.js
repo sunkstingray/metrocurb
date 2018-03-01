@@ -4,22 +4,13 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
+const passport = require('./passport')
 const mongoose = require("mongoose");
-var logger = require("morgan");
+const logger = require("morgan");
 const zoho = require('./routes/zoho');
 
-// Configure body parser for AJAX requests
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// Add routes
-app.use(routes);
-
-app.use(logger("dev"));
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/metrocurb";
@@ -30,6 +21,35 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
 const mydb = mongoose.connection;
+
+
+// Configure body parser for AJAX requests
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(
+	session({
+		secret: process.env.APP_SECRET || 'this is the default passphrase',
+		store: new MongoStore({ mongooseConnection: mydb }),
+		resave: false,
+		saveUninitialized: false
+	})
+)
+
+// ===== Passport ====
+app.use(passport.initialize())
+app.use(passport.session()) // will call the deserializeUser
+
+// Add routes
+app.use(routes);
+
+app.use(logger("dev"));
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+
 
 // If there are any errors connecting to the db
 mydb.on("error", function(error) {

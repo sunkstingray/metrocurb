@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
+import axios from "axios";
 import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
 class LogIn extends Component {
@@ -29,11 +30,30 @@ handleChange = event => {
 
 handleSubmit = event => {
   event.preventDefault()
-  console.log('handleSubmit')
-  this.props._login(this.state.username, this.state.password)
-  this.setState({
-    redirectTo: '/'
+
+  axios.post('/auth/login', {
+    username: this.state.username,
+    password: this.state.password
   })
+  .then(response => {
+    console.log(response);
+    if (response.status === 200) {
+      // update the state
+      this.setState({
+        loggedIn: true,
+        user: response.data.user
+      })
+    }
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+  // console.log('handleSubmit')
+  // this.props._login(this.state.username, this.state.password)
+  // this.setState({
+  //   redirectTo: '/'
+  // })
 }
   
   render(){
@@ -42,9 +62,10 @@ handleSubmit = event => {
 		} else {
       return(
         <div className="container">
+          <Card>
           <form>
             <div className="form-group">
-              <label forHtml="emailInput">Email address</label>
+              <label htmlFor="emailInput">Email address</label>
               <input
                 type="email"
                 className="form-control"
@@ -57,7 +78,7 @@ handleSubmit = event => {
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="form-group">
-              <label forHtml="exampleInputPassword1">Password</label>
+              <label htmlFor="exampleInputPassword1">Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -69,10 +90,13 @@ handleSubmit = event => {
             </div>
             <button onClick={this.handleSubmit} className="btn btn-primary">Login</button>
           </form>
+          <Card>
           <a href="/auth/google">
 						{/* <GoogleButton /> */}
 						<img src={googleButton} alt="sign into Google Button" />
 					</a>
+          </Card>
+          </Card>
         </div>
       );
     }
