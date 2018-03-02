@@ -1,29 +1,45 @@
 import React, { Component } from "react";
 import Card from "./../components/Card";
+import axios from "axios";
 
 class Pricing extends Component {
   state = {
-    page:"PricingPage",
-    contents:["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Senectus et netus et malesuada fames ac turpis egestas. Quam viverra orci sagittis eu volutpat odio facilisis mauris sit. Scelerisque eu ultrices vitae auctor. Sit amet porttitor eget dolor morbi non. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Leo duis ut diam quam nulla. Sit amet consectetur adipiscing elit pellentesque habitant morbi. Euismod quis viverra nibh cras. Massa eget egestas purus viverra accumsan in nisl nisi scelerisque. Condimentum mattis pellentesque id nibh tortor. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit. Orci porta non pulvinar neque laoreet. Cras pulvinar mattis nunc sed. Vitae semper quis lectus nulla. Blandit aliquam etiam erat velit scelerisque. Leo in vitae turpis massa. Dui accumsan sit amet nulla facilisi morbi tempus. Quis risus sed vulputate odio ut enim blandit volutpat. Lectus vestibulum mattis ullamcorper velit sed.",
-    "Arcu bibendum at varius vel pharetra vel turpis. Ipsum dolor sit amet consectetur adipiscing elit. Lacus laoreet non curabitur gravida. Leo in vitae turpis massa sed elementum tempus. Id cursus metus aliquam eleifend mi in nulla posuere. Rhoncus urna neque viverra justo nec ultrices dui sapien. Pretium vulputate sapien nec sagittis. In ante metus dictum at. Ac orci phasellus egestas tellus rutrum tellus pellentesque. Dui accumsan sit amet nulla. Mauris pharetra et ultrices neque ornare aenean euismod elementum nisi. Elementum eu facilisis sed odio. Eget arcu dictum varius duis at consectetur lorem. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. Feugiat in ante metus dictum at. Sagittis id consectetur purus ut faucibus. Sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Faucibus purus in massa tempor nec. Amet dictum sit amet justo donec enim diam vulputate ut."
-  ]
+    page:"Pricing",
+    contents:[
+      "Weekly Cleaning: $364/year (Our beat deal!!)", 
+      "Bi-Weekly Cleaning: $250/year", 
+      "Monthly Cleaning: $199/year", 
+      "Alternating Months: $99/year", 
+      "Quarterly Cleaning: $75/year", 
+      "Single Cleaning: $25", 
+    ]
   }
 
-  // componentDidMount() {
-  //   this.loadContent();
-  // }
+  componentDidMount() {
+    this.loadContent();
+  }
 
-  // loadContent = (this.state.page) => {
-  //   //do something to get the content for homepage from MongoDB and save it as the current state
-  // }
+  loadContent = () => {
+    //do something to get the content for homepage from MongoDB and save it as the current state
+    axios.get("/api/content", {
+      component: this.state.page
+    }).then(result => {
+      this.setState.contents = result.contents
+    })
+  }
   
   render(){
     return(
       <div className="container">
+        
         <Card>
-          {this.state.contents.map(paragraph => (          
-            <p>{paragraph}</p>
-          ))}
+          <h1>Pricing</h1>
+          <ul>
+            {this.state.contents.map(paragraph => (          
+              <li>{paragraph}</li>
+            ))}
+          </ul>
+          <h4>Rates listed above are for 2 bins (1 trash & 1 recycle)</h4>
         </Card>
       </div>
     )
