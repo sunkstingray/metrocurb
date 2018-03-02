@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
-import googleButton from '../images/btn_google_signin_dark_normal_web.png'
+import axios from "axios";
+// import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
 class SignUp extends Component {
 	constructor() {
 		super()
 		this.state = {
       firstName: '',
-      LastName: '',
+      lastName: '',
       address: '',
       city: '',
-      state: '',
+      state: 'Kansas',
 			zip: '',
 			username: '',
 			password: '',
-			redirectTo: null
+			redirectTo: "null"
 		}
 	}
 
@@ -36,22 +37,42 @@ handleChange = event => {
 handleSubmit = event => {
   event.preventDefault()
   console.log('handleSubmit')
-  this.props._login(this.state.username, this.state.password)
-  this.setState({
-    redirectTo: '/'
+
+  axios.post('/api/users', {
+    firstName: this.state.firstName,
+    lastName: this.state.lastName,
+    address: this.state.address,
+    city: this.state.city,
+    state: this.state.state,
+    zip: this.state.zip,
+    local:{
+    username: this.state.username,
+    password: this.state.password
+    }
   })
+  .then(response =>{
+    console.log(response);
+  })
+  .catch(error =>{
+    console.log(error);
+  });
+
+  // this.props._login(this.state.username, this.state.password)
+  // this.setState({
+  //   redirectTo: '/'
+  // })
 }
   
   render(){
-    if (this.state.redirectTo) {
-			return <Redirect to={{ pathname: this.state.redirectTo }} />
-		} else {
+    // if (this.state.redirectTo) {
+		// 	return <Redirect to={{ pathname: this.state.redirectTo }} />
+		// } else {
       return(
         <div className="container">
           <Card>
           <form>
             <div className="form-group">
-              <label forHtml="firstInput">First Name</label>
+              <label htmlFor="firstInput">First Name</label>
               <input
                 type="text"
                 className="form-control"
@@ -62,9 +83,9 @@ handleSubmit = event => {
               />
             </div>
             <div className="form-group">
-              <label forHtml="lastInput">Last Name</label>
+              <label htmlFor="lastInput">Last Name</label>
               <input
-                type="test"
+                type="text"
                 className="form-control"
                 id="lastInput"
                 name="lastName"
@@ -73,7 +94,7 @@ handleSubmit = event => {
               />
             </div>
             <div className="form-group">
-              <label forHtml="inputAddress">Address</label>
+              <label htmlFor="inputAddress">Address</label>
               <input
                 type="text"
                 className="form-control"
@@ -85,7 +106,7 @@ handleSubmit = event => {
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label forHtml="inputCity">City</label>
+                <label htmlFor="inputCity">City</label>
                 <input
                   type="text"
                   className="form-control"
@@ -96,7 +117,7 @@ handleSubmit = event => {
                 />
               </div>
               <div className="form-group col-md-4">
-                <label forHtml="inputState">State</label>
+                <label htmlFor="inputState">State</label>
                 <select
                   id="inputState"
                   className="form-control"
@@ -104,13 +125,12 @@ handleSubmit = event => {
 							    value={this.state.state}
 							    onChange={this.handleChange}
                 >
-                  <option selected>Choose...</option>
                   <option>Kansas</option>
                   <option>Missouri</option>
                 </select>
               </div>
               <div className="form-group col-md-2">
-                <label forHtml="inputZip">Zip</label>
+                <label htmlFor="inputZip">Zip</label>
                 <input
                   type="text"
                   className="form-control"
@@ -122,7 +142,7 @@ handleSubmit = event => {
               </div>
             </div>
             <div className="form-group">
-              <label forHtml="emailInput">Email address</label>
+              <label htmlFor="emailInput">Email address</label>
               <input
                 type="email"
                 className="form-control"
@@ -135,7 +155,7 @@ handleSubmit = event => {
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="form-group">
-              <label forHtml="exampleInputPassword1">Password</label>
+              <label htmlFor="exampleInputPassword1">Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -153,6 +173,6 @@ handleSubmit = event => {
       );
     }
   }
-}
+// }
 export default SignUp;
 
