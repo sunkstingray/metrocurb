@@ -3,7 +3,7 @@ const contentRoutes = require("./content");
 const usersRoutes = require("./users");
 
 // Content routes
-router.use("/conent", contentRoutes);
+router.use("/content", contentRoutes);
 
 // Users routes
 router.use("/users", usersRoutes);

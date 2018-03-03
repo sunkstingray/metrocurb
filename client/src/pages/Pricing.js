@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "./../components/Card";
-import axios from "axios";
+import API from "../utils/API";
 
 class Pricing extends Component {
   state = {
@@ -16,16 +16,18 @@ class Pricing extends Component {
   }
 
   componentDidMount() {
-    this.loadContent();
+    this.loadContent("Pricing");
   }
 
-  loadContent = () => {
+  loadContent = (page) => {
     //do something to get the content for homepage from MongoDB and save it as the current state
-    axios.get("/api/content", {
-      component: this.state.page
-    }).then(result => {
-      this.setState.contents = result.contents
-    })
+    API.getContent(page)
+      .then(result => {
+        console.log(result.data.content);
+        this.setState({
+          contents: result.data.content
+        })
+    }).catch(err => console.log(err))
   }
   
   render(){
@@ -35,8 +37,8 @@ class Pricing extends Component {
         <Card>
           <h1>Pricing</h1>
           <ul>
-            {this.state.contents.map(paragraph => (          
-              <li>{paragraph}</li>
+            {this.state.contents.map((paragraph,i) => (          
+              <li key={i}>{paragraph}</li>
             ))}
           </ul>
           <h4>Rates listed above are for 2 bins (1 trash & 1 recycle)</h4>
