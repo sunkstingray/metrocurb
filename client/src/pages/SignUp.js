@@ -38,17 +38,17 @@ handleSubmit = event => {
   event.preventDefault()
   console.log('handleSubmit')
 
-  axios.post('/api/users', {
-    firstName: this.state.firstName,
-    lastName: this.state.lastName,
-    address: this.state.address,
-    city: this.state.city,
-    state: this.state.state,
-    zip: this.state.zip,
-    local:{
+  axios.post('/auth/signup', {
+    // firstName: this.state.firstName,
+    // lastName: this.state.lastName,
+    // address: this.state.address,
+    // city: this.state.city,
+    // state: this.state.state,
+    // zip: this.state.zip,
+    // local:{
     username: this.state.username,
     password: this.state.password
-    }
+    // }
   })
   .then(response =>{
     console.log(response);
@@ -70,8 +70,9 @@ handleSubmit = event => {
       return(
         <div className="container">
           <Card>
+            <h1>Sign up for a new account.</h1>
           <form>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="firstInput">First Name</label>
               <input
                 type="text"
@@ -140,7 +141,7 @@ handleSubmit = event => {
 							    onChange={this.handleChange}
                 />
               </div>
-            </div>
+            </div> */}
             <div className="form-group">
               <label htmlFor="emailInput">Email address</label>
               <input
@@ -165,7 +166,7 @@ handleSubmit = event => {
 							  onChange={this.handleChange}
               />
             </div>
-            <button onClick={this.handleSubmit} className="btn btn-primary">Login</button>
+            <button onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
           </form>
           </Card>
         </div>
