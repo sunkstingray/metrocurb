@@ -11,6 +11,7 @@ import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogIn";
 import Footer from "./components/Footer";
+import Admin from "./pages/Admin";
 import "./App.css";
 
 
@@ -27,6 +28,7 @@ const App = () =>
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/Profile" component={Profile} />
             <Route exact path="/LogIn" component={LogIn} />
+            <Route exact path="/Admin" component={Admin} />
           </Wrapper>
           <Footer />
       </div>

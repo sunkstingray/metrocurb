@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+mongoose.promise = Promise;
 
-var Schema = mongoose.Schema;
-
-var ContentSchema = new Schema({
+const ContentSchema = new Schema({
 
   component: {
     type: String,
@@ -16,7 +16,7 @@ var ContentSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Content = mongoose.model("Content", ContentSchema);
+const Content = mongoose.model("Content", ContentSchema);
 
 // Export the Content model
 module.exports = Content;
