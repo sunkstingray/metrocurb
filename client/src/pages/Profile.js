@@ -18,16 +18,16 @@ class Profile extends Component {
   // }
   
   render(){
-    return(
+    return this.props.user !== null ? (
       <div className="container">
         <Card>
-          <h3>{JSON.stringify(this.props.user)}</h3>
+          <h3>{this.props.user.local.username}</h3>
           {this.state.contents.map(paragraph => (          
             <p>{paragraph}</p>
           ))}
         </Card>
       </div>
-    )
+    ) : <div className="container"></div>;
   }
 }
 export default Profile;
