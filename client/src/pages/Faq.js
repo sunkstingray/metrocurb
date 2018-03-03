@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "./../components/Card";
+import API from "../utils/API";
 
 class Home extends Component {
   state = {
@@ -12,12 +13,19 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // this.loadContent();
+    this.loadContent("Faq");
   }
 
-  // loadContent = () => {
-  //   //do something to get the content for homepage from MongoDB and save it as the current state
-  // }
+  loadContent = (page) => {
+    //do something to get the content for homepage from MongoDB and save it as the current state
+    API.getContent(page)
+      .then(result => {
+        console.log(result.data.content);
+        this.setState({
+          contents: result.data.content
+        })
+    }).catch(err => console.log(err))
+  }
   
   render(){
     return(

@@ -7,11 +7,12 @@ class Admin extends Component {
     state = {
         page:"Admin",
         contents: [],
-        open: false,
+        style: "display.none",
+        contentEdit: "",
     }
 
     componentDidMount() {
-        
+        this.handleClick("Home");
     }
 
     handleClick = (page) => {
@@ -25,6 +26,14 @@ class Admin extends Component {
     }
 
     handleEditButton = (i) => {
+        console.log(this.state.contents[i])
+        let newEdit = this.state.contents[i]
+        this.setState({
+            contentEdit: newEdit,
+        })
+    }
+
+    handleSubmit = () => {
         
     }
     
@@ -42,11 +51,16 @@ class Admin extends Component {
                     <div>
                         <div>
                             {this.state.contents.map((paragraph,i) => (          
-                            <p key={i}><Button value={i} onClick={() => this.handleEditButton(i)} >Edit </Button>    {paragraph}</p>
+                            <p key={i}><Button value={i} onClick={() => this.handleEditButton(i)} >Edit </Button>   <span> {paragraph}</span></p>
                             ))}
                         </div>
                     </div>
                 </Card>
+                <form>
+                    <textarea className="form-control" rows="3" placeholder={this.state.contentEdit}></textarea>
+                    <br />
+                    <Button type="submit" className="btn btn-default" onClick={() => this.handleSubmit()}>Submit Change</Button>
+                </form>
             </div>
         )}
         
