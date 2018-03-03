@@ -44,6 +44,7 @@ handleSubmit = event => {
         user: response.data.user
       })
     }
+    window.location.href = "/Profile";
   })
   .catch(error => {
     console.log(error);
@@ -63,6 +64,7 @@ handleSubmit = event => {
       return(
         <div className="container">
           <Card>
+            <h1>Log in to your account.</h1>
           <form>
             <div className="form-group">
               <label htmlFor="emailInput">Email address</label>
@@ -90,12 +92,12 @@ handleSubmit = event => {
             </div>
             <button onClick={this.handleSubmit} className="btn btn-primary">Login</button>
           </form>
-          <Card>
+          {/* <Card>
           <a href="/auth/google">
-						{/* <GoogleButton /> */}
+						<GoogleButton />
 						<img src={googleButton} alt="sign into Google Button" />
 					</a>
-          </Card>
+          </Card> */}
           </Card>
         </div>
       );

@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import Card from "./../components/Card";
 
 class Home extends Component {
-  state = {
-    page:"Home",
-    contents:[
-      ""
-      
-    ]
+  constructor() {
+    super()
+    this.state = {
+      page:"Home",
+      contents:[
+        ""
+        
+      ]
+    }
   }
+
 
   componentDidMount() {
     // this.loadContent();
