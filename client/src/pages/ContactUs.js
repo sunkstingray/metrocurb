@@ -28,11 +28,20 @@ class ContactUs extends Component {
   render(){
     return(
       <div className="container">
-        <Card>
-          {this.state.contents.map((paragraph, i) => (          
-            <p key={i}>{paragraph}</p>
-          ))}
-        </Card>
+        <div class='row'>
+            <h4>Contact Me:</h4>
+
+            <form action="mailto:jnguye89@gmail.com" method="post" enctype="text/plain">
+                Name:<br />
+                <input type="text" name="name" /><br />
+                E-mail:<br />
+                <input type="text" name="mail" /><br />
+                Comment:<br />
+                <input type="text" name="comment" size="50" /><br /><br />
+                <input type="submit" value="Send" />
+                <input type="reset" value="Reset" />
+            </form>
+        </div>
       </div>
     )
   }

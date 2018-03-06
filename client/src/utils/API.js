@@ -6,5 +6,9 @@ export default {
     },
     postContent: function(content){
         return axios.post("/api/content", content)
+    },
+    updateContent: function(page, body){
+        return axios.put("/api/content/" + page, body)
     }
+    // updateContent: function()
 }

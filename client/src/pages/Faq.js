@@ -33,9 +33,9 @@ class Home extends Component {
         <Card>
           {this.state.contents.map(paragraph => (          
             <div>
-              <h4>{paragraph.question}</h4>
+              <h4>{paragraph.value}</h4>
               <br />
-              <p>{paragraph.answer}</p>
+              <p>{paragraph.attribute}</p>
               <br />
             </div>
           ))}
