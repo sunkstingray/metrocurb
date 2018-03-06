@@ -8,8 +8,4 @@ router
   .get(contentController.findContent)
   .put(contentController.update)
 
-router
-  .route("/")
-  .post(contentController.postContent)
-
 module.exports = router;

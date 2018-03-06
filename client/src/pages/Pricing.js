@@ -38,7 +38,7 @@ class Pricing extends Component {
           <h1>Pricing</h1>
           <ul>
             {this.state.contents.map((paragraph,i) => (          
-              <li key={i}>{paragraph}</li>
+              <li key={i}>{paragraph.attribute}</li>
             ))}
           </ul>
           <h4>Rates listed above are for 2 bins (1 trash & 1 recycle)</h4>

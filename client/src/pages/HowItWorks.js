@@ -39,7 +39,7 @@ class HowItWorks extends Component {
           <h1>How It Works</h1>
           <ol>
             {this.state.contents.map((paragraph,i) => (          
-              <li key={i}>{paragraph}</li>
+              <li key={i}>{paragraph.attribute}</li>
             ))}
           </ol>
         </Card>

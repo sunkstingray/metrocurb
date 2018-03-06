@@ -42,7 +42,7 @@ class Home extends Component {
             <br />
             <img src="./images/cleaner.png" />  
             {this.state.contents.map((paragraph, i) => (          
-              <h6 key={i}>{paragraph}</h6>
+              <h6 key={i}>{paragraph.attribute}</h6>
             ))}
           </div>
         </Card>

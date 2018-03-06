@@ -7,34 +7,60 @@ class Admin extends Component {
     state = {
         page:"Admin",
         contents: [],
-        style: "display.none",
         contentEdit: "",
+        arrayIndex: 0,
     }
 
     componentDidMount() {
         this.handleClick("Home");
     }
 
+    //Once user choses a page, this pulls all of the editable content from database for use to chose from
     handleClick = (page) => {
         API.getContent(page)
             .then(result => {
-            console.log(result.data.content);
             this.setState({
-                contents: result.data.content
+                page: page,
+                contents: result.data.content,
+                dbContents: result.data.content,
             })
+            console.log(this.state.dbContents);
+            console.log(this.state.contents)
         }).catch(err => console.log(err))
     }
 
+    //user chooses which element they want to edit and renders it in the text box for the user to edit
     handleEditButton = (i) => {
-        console.log(this.state.contents[i])
-        let newEdit = this.state.contents[i]
+        let newEdit = this.state.contents[i].attribute
         this.setState({
             contentEdit: newEdit,
+            arrayIndex: i,
         })
     }
 
-    handleSubmit = () => {
-        
+    //As the user types their edit, it saves it to the state of the contents
+    handleInputChange = event => {
+        let contentEdit = event.target.value;
+        let contentArray = this.state.contents;
+        contentArray[this.state.arrayIndex].attribute = contentEdit;
+        this.setState({
+          contents: contentArray,
+        });
+        console.log(this.state.dbContents)
+        // console.log(this.state.contents)
+      };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const object = {
+            content: this.state.contents
+        }
+        API.updateContent(this.state.page, object)
+            .then(result => {
+                this.handleClick(this.state.page)
+                alert("Element successfully updated!");
+            })
+            .catch(err => console.log(err));
     }
     
     render(){
@@ -51,15 +77,18 @@ class Admin extends Component {
                     <div>
                         <div>
                             {this.state.contents.map((paragraph,i) => (          
-                            <p key={i}><Button value={i} onClick={() => this.handleEditButton(i)} >Edit </Button>   <span> {paragraph}</span></p>
+                                <div key={i}>
+                                    <h4><span> {paragraph.value}</span></h4>
+                                    <h6><Button value={i} onClick={() => this.handleEditButton(i)} >Edit </Button>  <span> {paragraph.attribute}</span></h6>
+                                </div>
                             ))}
                         </div>
                     </div>
                 </Card>
                 <form>
-                    <textarea className="form-control" rows="3" placeholder={this.state.contentEdit}></textarea>
+                    <textarea className="form-control" rows="3" placeholder={this.state.contentEdit} onChange={this.handleInputChange}></textarea>
                     <br />
-                    <Button type="submit" className="btn btn-default" onClick={() => this.handleSubmit()}>Submit Change</Button>
+                    <Button type="submit" className="btn btn-default" onClick={this.handleSubmit}>Submit Change</Button>
                 </form>
             </div>
         )}
