@@ -60,13 +60,13 @@ handleSubmit = event => {
   }
 
   axios.post('/auth/signup', {
-    // firstName: this.state.firstName,
-    // lastName: this.state.lastName,
-    // address: this.state.address,
-    // city: this.state.city,
-    // state: this.state.state,
-    // zip: this.state.zip,
-    // local:{
+    firstName: this.state.firstName,
+    lastName: this.state.lastName,
+    address: this.state.address,
+    city: this.state.city,
+    state: this.state.state,
+    zip: this.state.zip,
+    //local:{
     username: this.state.username,
     password: this.state.password,
     password: this.state.passwordVal
@@ -112,7 +112,7 @@ canBeSubmitted() {
           <Card>
             <h1>Sign up for a new account.</h1>
           <form>
-            {/* <div className="form-group">
+             <div className="form-group">
               <label htmlFor="firstInput">First Name</label>
               <input
                 type="text"
@@ -181,7 +181,7 @@ canBeSubmitted() {
 							    onChange={this.handleChange}
                 />
               </div>
-            </div> */}
+            </div> 
             <div className="form-group">
               <label htmlFor="emailInput">Email address</label>
               <input

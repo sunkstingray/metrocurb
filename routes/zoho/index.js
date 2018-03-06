@@ -16,7 +16,16 @@ module.exports = {
   getLeads: cb => {
       zoho.execute('crm', 'Leads', 'getRecords',{}, cb);//return all leads as array (JSON)
   },
-  createContact: cb => {
-      zoho.execute('crm','Contacts','insertRecords',records,cb);//test contact only, creates hard coded contact listed above
+  createContact: (data,cb) => {
+      zoho.execute('crm','Contacts','insertRecords',[data],cb);
   }
 }
+  // findOne: (username,cb) => {
+  //     return User.findOne({ 'local.username': username }, (err, user) => {
+  //       if (err) {
+  //           return res.json({
+  //             error: `Sorry, unable to find that user`
+  //             })
+  //       }
+  //     }
+  // }
