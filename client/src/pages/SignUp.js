@@ -4,29 +4,48 @@ import Card from "./../components/Card";
 import axios from "axios";
 // import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
+
+function validate(username, password, passwordVal){
+  
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(username))
+  {
+    const emailTest = false;
+    return {
+      username: emailTest,
+      password: password.length === 0 || password !== passwordVal,
+    };
+  } else {
+    const emailTest = true;
+    return {
+      username: emailTest,
+      password: password.length === 0 || password !== passwordVal,
+    };
+  }
+  // true means invalid, so our conditions got reversed
+
+}
+
 class SignUp extends Component {
 	constructor() {
 		super()
 		this.state = {
-      firstName: '',
-      lastName: '',
-      address: '',
-      city: '',
-      state: 'Kansas',
-			zip: '',
 			username: '',
-			password: '',
+      password: '',
+      touched: {
+        username: false,
+        password: false,
+      },
 			redirectTo: "null"
 		}
 	}
 
-  componentDidMount() {
-    // this.loadContent();
-  }
 
-//   loadContent = (page) => {
-//     //do something to get the content for homepage from MongoDB and save it as the current state
-//   }
+
+handleBlur = (field) => (evt) => {
+  this.setState({
+    touched: { ...this.state.touched, [field]: true },
+  });
+}
 
 handleChange = event => {
   this.setState({
@@ -37,6 +56,9 @@ handleChange = event => {
 handleSubmit = event => {
   event.preventDefault()
   console.log('handleSubmit')
+  if (!this.canBeSubmitted()) {
+    return;
+  }
 
   axios.post('/auth/signup', {
     // firstName: this.state.firstName,
@@ -47,7 +69,8 @@ handleSubmit = event => {
     // zip: this.state.zip,
     // local:{
     username: this.state.username,
-    password: this.state.password
+    password: this.state.password,
+    password: this.state.passwordVal
     // }
   })
   .then(response =>{
@@ -62,8 +85,24 @@ handleSubmit = event => {
   //   redirectTo: '/'
   // })
 }
+
+canBeSubmitted() {
+  const errors = validate(this.state.username, this.state.password, this.state.passwordVal);
+  const isDisabled = Object.keys(errors).some(x => errors[x]);
+  return !isDisabled;
+}
+
   
   render(){
+    const errors = validate(this.state.username, this.state.password, this.state.passwordVal);
+    const isDisabled = Object.keys(errors).some(x => errors[x]);
+    
+    const shouldMarkError = (field) => {
+      const hasError = errors[field];
+      const shouldShow = this.state.touched[field];
+
+      return hasError ? shouldShow : false;
+    };
     // if (this.state.redirectTo) {
 		// 	return <Redirect to={{ pathname: this.state.redirectTo }} />
 		// } else {
@@ -145,8 +184,9 @@ handleSubmit = event => {
             <div className="form-group">
               <label htmlFor="emailInput">Email address</label>
               <input
+                onBlur={this.handleBlur('username')}
                 type="email"
-                className="form-control"
+                className={shouldMarkError('username') ? "error form-control" : "form-control"}
                 id="emailInput"
                 aria-describedby="emailHelp"
                 name="username"
@@ -156,17 +196,30 @@ handleSubmit = event => {
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
+              <label htmlFor="passwordInput1">Password</label>
               <input
+              onBlur={this.handleBlur('password')}
                 type="password"
-                className="form-control"
-                id="exampleInputPassword1"
+                className={shouldMarkError('password') ? "error form-control" : "form-control"}
+                id="passwordInput1"
                 name="password"
 							  value={this.state.password}
 							  onChange={this.handleChange}
               />
             </div>
-            <button onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
+            <div className="form-group">
+              <label htmlFor="passwordInput2">Password</label>
+              <input
+                onBlur={this.handleBlur('password')}
+                type="password"
+                className={shouldMarkError('password') ? "error form-control" : "form-control"}
+                id="passwordInput2"
+                name="passwordVal"
+							  value={this.state.passwordVal}
+							  onChange={this.handleChange}
+              />
+            </div>
+            <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
           </form>
           </Card>
         </div>
