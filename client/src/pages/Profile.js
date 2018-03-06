@@ -20,6 +20,7 @@ class Profile extends Component {
       <div className="container">
         <Card>
           <h3>{this.props.user.local.username}</h3>
+          <h3>{this.props.user.loggedIn}</h3>
           {this.state.contents.map(paragraph => (          
             <p>{paragraph}</p>
           ))}

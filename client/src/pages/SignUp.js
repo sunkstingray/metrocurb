@@ -22,7 +22,6 @@ function validate(username, password, passwordVal){
     };
   }
   // true means invalid, so our conditions got reversed
-
 }
 
 class SignUp extends Component {
@@ -74,7 +73,9 @@ handleSubmit = event => {
     // }
   })
   .then(response =>{
+    // const user = {username: this.state.username, password: this.state.password};
     console.log(response);
+    window.location.href = "/Profile";
   })
   .catch(error =>{
     console.log(error);
@@ -208,7 +209,7 @@ canBeSubmitted() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="passwordInput2">Password</label>
+              <label htmlFor="passwordInput2">Re-Enter Password</label>
               <input
                 onBlur={this.handleBlur('password')}
                 type="password"
