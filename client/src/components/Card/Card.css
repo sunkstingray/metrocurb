@@ -5,3 +5,7 @@
     color: #565656;
     border-color: #D7CEC7;
 }
+
+.error {
+    border: 2px solid red;
+  }
