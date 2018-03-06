@@ -37,13 +37,13 @@ handleSubmit = event => {
   })
   .then(response => {
     console.log(response);
-    if (response.status === 200) {
-      // update the state
-      this.setState({
-        loggedIn: true,
-        user: response.data.user
-      })
-    }
+    // if (response.status === 200) {
+    //   // update the state
+    //   this.setState({
+    //     loggedIn: true,
+    //     user: response.data.user
+    //   })
+    // }
     window.location.href = "/Profile";
   })
   .catch(error => {

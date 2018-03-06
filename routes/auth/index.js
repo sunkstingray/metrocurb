@@ -70,7 +70,14 @@ router.post('/signup', (req, res) => {
 			if (err) return res.json(err)
 			return res.json(savedUser)
 		})
+		req.login(newUser, function(err) {
+			if (err) {
+			  console.log(err);
+			}
+			console.log("USER LOGGED IN!!!!!!!!");
+		  });
 	})
+
 })
 
 module.exports = router
