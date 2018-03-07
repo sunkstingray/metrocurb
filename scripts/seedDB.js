@@ -32,7 +32,7 @@ const contentsSeed = [
         attribute: "Quarterly Cleaning: $75/year", 
       }, {
         value: 6, 
-        attribute: "test: test"
+        attribute: "Single Cleaning: $25.00"
       }
    ]
   }, {

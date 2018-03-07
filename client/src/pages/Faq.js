@@ -6,9 +6,18 @@ class Home extends Component {
   state = {
     page:"Faq",
     contents:[
-      {question: "How do I know when to put my bins out?", answer:"Please leave your trash & recycle bins out after your regular pick-up day, so when we come by (within 24 hours of the regular pick-up) the bins are ready and waiting to be cleaned!"}, 
-      {question: "Why get my trash cleaned?", answer:"Bacteria such as Salmonella, Listeria, Staphylococcus, and E-Coli aren't just on the inside...that stuff is on the lid & handle too! Contact us today to get rid of all bacteria!"},
-      {question: "What if I need to reschedule?", answer:"Just let us know at least a week in advance and we will be in contact with you to reschedule"}
+      {
+        value : "How do I know when to put my bins out?",
+        attribute : "Please leave your trash & recycle bins out after your regular pick-up day, so when we come by (within 24 hours of the regular pick-up) the bins are ready and waiting to be cleaned!"
+      }, 
+      {
+          value : "Why get my trash cleaned?",
+          attribute : "Bacteria such as Salmonella, Listeria, Staphylococcus, and E-Coli aren't just on the inside...that stuff is on the lid & handle too! Contact us today to get rid of all bacteria!"
+      }, 
+      {
+          value : "What if I need to reschedule?",
+          attribute : "Just let us know at least a week in advance and we will be in contact with you to reschedule"
+      }
     ]
   }
 

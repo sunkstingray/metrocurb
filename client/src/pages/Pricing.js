@@ -6,12 +6,25 @@ class Pricing extends Component {
   state = {
     page:"Pricing",
     contents:[
-      "Weekly Cleaning: $364/year (Our beat deal!!)", 
-      "Bi-Weekly Cleaning: $250/year", 
-      "Monthly Cleaning: $199/year", 
-      "Alternating Months: $99/year", 
-      "Quarterly Cleaning: $75/year", 
-      "Single Cleaning: $25", 
+      {
+        value: 1, 
+        attribute: "Weekly Cleaning: $364/year (Our beat deal!!)", 
+      }, {
+        value: 2, 
+        attribute: "Bi-Weekly Cleaning: $250/year",
+      }, {
+        value: 3, 
+        attribute: "Monthly Cleaning: $199/year",
+      }, {
+        value: 4, 
+        attribute: "Alternating Months: $99/year", 
+      }, {
+        value: 5,
+        attribute: "Quarterly Cleaning: $75/year", 
+      }, {
+        value: 6, 
+        attribute: "test: test"
+      }
     ]
   }
 
