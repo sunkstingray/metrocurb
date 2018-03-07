@@ -11,6 +11,7 @@ const userSchema = new Schema({
 	city: { type: String, unique: false },
 	state: { type: String, unique: false },
 	zip: { type: String, unique: false },
+	userRole: { type: String, required: true, default:"user"},
 	local: {
 		username: { type: String, unique: false, required: false },
 		password: { type: String, unique: false, required: false }
