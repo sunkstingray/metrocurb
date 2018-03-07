@@ -12,11 +12,27 @@ var records = [
 ];
 
 
+
 module.exports = {
   getLeads: cb => {
       zoho.execute('crm', 'Leads', 'getRecords',{}, cb);//return all leads as array (JSON)
   },
-  createContact: cb => {
-      zoho.execute('crm','Contacts','insertRecords',records,cb);//test contact only, creates hard coded contact listed above
+  createContact: (data,cb) => {
+      zoho.execute('crm','Contacts','insertRecords',[data],cb);
+  },
+
+  findById: (req,res) => {
+      var zohoId = req.params.zohoId;
+      console.log("zohohoid: " + zohoId);
+
+      zoho.execute('crm','Contacts','getRecordById',zohoId,function(err,userData){
+        if(err){
+          console.log(err);
+        }
+        else {
+          res.send(userData.data);
+          console.log(userData.data);
+        }
+      });
   }
 }
