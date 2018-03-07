@@ -25,8 +25,6 @@ constructor() {
     loggedIn: false,
     user: null
   }
-}
-componentDidMount() {
   axios.get('/auth/user').then(response => {
     console.log(response.data)
     if (!!response.data.user) {
@@ -42,6 +40,9 @@ componentDidMount() {
       })
     }
   })
+}
+componentWillMount() {
+  
 }
 
 LogOutMethod = () => {
@@ -72,11 +73,17 @@ render() {
             <Route
               exact
               path="/Profile"
-              render={() =>
-              <Profile
-                user={this.state.user}
-                logoutmethod={this.LogOutMethod}
-              />}
+              render={() =>{
+                  if(this.state.user) {
+                      return (<Profile
+                      user={this.state.user}
+                      logoutmethod={this.LogOutMethod}
+                    />)
+                  } else {
+                    return (<h1></h1>);
+                  }
+                }
+              }
             />
             <Route exact path="/LogOut" component={LogOut} />
             <Route exact path="/LogIn" component={LogIn} />

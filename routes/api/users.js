@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
+const zoho = require("../zoho");
 
 
 // Matches with "/api/users/"
@@ -17,6 +18,8 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
-
+router
+  .route("/zoho/:zohoId")
+  .get(zoho.findById);
 
 module.exports = router;
