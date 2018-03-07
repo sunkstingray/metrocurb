@@ -6,14 +6,34 @@ class HowItWorks extends Component {
   state = {
     page:"HowItWorks",
     contents:[
-      "Trash bins are lifted into the washing position by a lift.",
-      "The inside of the bin is blasted with hot water.",
-      "During the cleaning process, the operator uses a hand-held, high pressure washer to clean the exterior and the lid.",
-      "The bin is then lowered, vacuumed, wiped, sanitized and deodorized.",
-      "All waste water is collected and filtered by us (so no worries about it getting in your yard, driveway or down the drain).",
-      "Believe it or not, it actually takes a very small amount of water to thoroughly clean & sanitize each unit (if you did the cleaning yourself, you'd use about 27 gallons each time!).",
-      "The process we use is automated and fully contained, so no run-off enters the storm drains or your yard.",
-      "All products we use are biodegradable."
+      {
+        value: 1, 
+        attribute: "Trash bins are lifted into the washing position by a lift.", 
+      }, {
+        value: 2, 
+        attribute: "The inside of the bin is blasted with hot water.", 
+      }, {
+        value: 3,
+        attribute: "During the cleaning process, the operator uses a hand-held, high pressure washer to clean the exterior and the lid.", 
+      }, {
+        value: 4, 
+        attribute: "The bin is then lowered, vacuumed, wiped, sanitized and deodorized.", 
+      }, {
+        value: 5, 
+        attribute: "All waste water is collected and filtered by us (so no worries about it getting in your yard, driveway or down the drain).", 
+      }, {
+        value: 6, 
+        attribute: "Believe it or not, it actually takes a very small amount of water to thoroughly clean & sanitize each unit (if you did the cleaning yourself, you'd use about 27 gallons each time!).", 
+      }, {
+        value: 7, 
+        attribute: "Believe it or not, it actually takes a very small amount of water to thoroughly clean & sanitize each unit (if you did the cleaning yourself, you'd use about 27 gallons each time!).", 
+      }, {
+        value: 8, 
+        attribute: "The process we use is automated and fully contained, so no run-off enters the storm drains or your yard.", 
+      }, {
+        value: 9,
+        attribute: "All products we use are biodegradable."
+      }
     ]
   }
 
