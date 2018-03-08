@@ -37,49 +37,138 @@ class Profile extends Component {
             const zohoUrl = '/api/users/zoho/' + zohoId;
             axios.get(zohoUrl)
                   .then(result => {
+
                      this.setState({
-                        "FirstName" : result.data["First Name"]  
+                        "firstName" : result.data["First Name"],
+                        "lastName"  : result.data["Last Name"],
+                        "address"   : result.data["Mailing Street"],
+                        "city"      : result.data["Mailing City"],
+                        "state"     : result.data["Mailing State"],
+                        "zip"       : result.data["Mailing Zip"],
+                        "username"  : result.data["Email"]
+
                      })
                   })
-                 // .then(userData => {
-                 //    console.log("userdata from zoho: ");
-                 //    console.log(userData);
-                 // })
+
           });
          
 
     }
-  
+
+
   render(){
     return this.props.user !== null ? (
-      <div className="container">
-        <Card>
-          <h3>{this.props.user.local.username}</h3>
-          <h3>{this.props.user.loggedIn}</h3>
-          
-          <h3>{this.state.FirstName}</h3>
-          {this.state.contents.map(paragraph => (          
-            <p>{paragraph}</p>
-          ))}
-        </Card>
-      </div>
+         <div className="container">
+          <Card>
+            <h1>My Account (View)</h1>
+            <h5><a href="#">Click Here</a> to edit account details. </h5>
+          <form>
+             <div className="form-group">
+              <label htmlFor="firstInput">First Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="firstInput"
+                name="firstName"
+                value={this.state.firstName}
+                readOnly
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastInput">Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="lastInput"
+                name="lastName"
+                value={this.state.lastName}
+                readOnly
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="inputAddress">Address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputAddress"
+                name="address"
+                value={this.state.address}
+                readOnly
+              />
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="inputCity">City</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputCity"
+                  name="city"
+                  value={this.state.city}
+                  readOnly
+                />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="inputState">State</label>
+                <select
+                  id="inputState"
+                  className="form-control"
+                  name="state"
+                  value={this.state.state}
+                  readOnly
+                >
+                  <option>Kansas</option>
+                  <option>Missouri</option>
+                </select>
+              </div>
+              <div className="form-group col-md-2">
+                <label htmlFor="inputZip">Zip</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputZip"
+                  name="zip"
+                  value={this.state.zip}
+                  readOnly
+                />
+              </div>
+            </div> 
+            <div className="form-group">
+              <label htmlFor="emailInput">Email address</label>
+              <input
+                type="email"
+                className="form-control"
+                id="emailInput"
+                aria-describedby="emailHelp"
+                name="username"
+                value={this.state.username}
+                readOnly
+              />
+              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            
+           
+          </form>
+          </Card>
+          <Card className="iFrame">
+            <iframe src="https://subscriptions.zoho.com/subscribe/6ebbfd08b4cde1f9e3d79454c55797d0a5e12fff46ccfe5bad482bf477cf719e/1"></iframe>
+          </Card>  
+        </div>
+
+
+
+
     ) : <div className="container"></div>;
-  }
+  }  
+  
+  
 }
 export default Profile;
 
 
 
-// User.findOne({ 'local.username': this.props.user.local.username}, (err, user) => {
-//         if (err) {
-//             return console.log(err);
-//         }
-//         console.log(JSON.stringify(user));
-//         const zohoId = user.zohoId;
 
-//       })
-
-// CONTACTID
+/// CONTACTID
 // :
 // "3071280000000197009"
 // Contact Owner
