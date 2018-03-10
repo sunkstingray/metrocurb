@@ -14,13 +14,6 @@ class LogIn extends Component {
 		}
 	}
 
-  componentDidMount() {
-    // this.loadContent();
-  }
-
-//   loadContent = (page) => {
-//     //do something to get the content for homepage from MongoDB and save it as the current state
-//   }
 
 handleChange = event => {
   this.setState({
@@ -91,6 +84,7 @@ handleSubmit = event => {
               />
             </div>
             <button onClick={this.handleSubmit} className="btn btn-primary">Login</button>
+            <a href="/forgot" className="btn btn-link"> Forgot Password?</a>
           </form>
           {/* <Card>
           <a href="/auth/google">
