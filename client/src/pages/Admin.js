@@ -16,84 +16,84 @@ class Admin extends Component {
     }
 
 
-        componentDidMount() {
-            this.handleClick("HowItWorks");
+    componentDidMount() {
+        this.handleClick("HowItWorks");
+    }
+
+    //Once user choses a page, this pulls all of the editable content from database for use to chose from
+    handleClick = (page) => {
+        API.getContent(page)
+            .then(result => {
+            this.setState({
+                page: page,
+                contents: result.data.content,
+            })
+            console.log(result)
+
+        }).catch(err => console.log(err))
+    }
+
+    //user chooses which element they want to edit and renders it in the text box for the user to edit
+    handleEditButtons = (i) => {
+        let newEdit = this.state.contents[i].attribute
+        this.setState({
+            contentEdit: newEdit,
+            arrayIndex: i,
+        })
+    }
+
+    //As the user types their edit, it saves it to the state of the contents
+    handleInputChange = event => {
+        let contentEdit = event.target.value;
+        
+        this.setState({
+            contentEdit: contentEdit,
+        });
+
+        };
+
+    moveUp = (i) => {
+        const content = this.state.contents;
+        const tempContent = content[i];
+        content[i] = content[i - 1];
+        content[i - 1] = tempContent;
+        
+        this.setState({
+            contents: content
+        })
+    }
+
+    moveDown = (i) => {
+        const content = this.state.contents;
+        const tempContent = content[i];
+        content[i] = content[i + 1];
+        content[i + 1] = tempContent;
+        
+        this.setState({
+            contents: content
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        let contentEdit = this.state.contentEdit;
+        let contentArray = this.state.contents;
+        contentArray[this.state.arrayIndex].attribute = contentEdit;
+        this.setState({
+            contents: contentArray
+        })
+        const object = {
+            content: this.state.contents
         }
-    
-        //Once user choses a page, this pulls all of the editable content from database for use to chose from
-        handleClick = (page) => {
-            API.getContent(page)
-                .then(result => {
+        API.updateContent(this.state.page, object)
+            .then(result => {
+                alert("Element successfully updated!");
                 this.setState({
-                    page: page,
-                    contents: result.data.content,
+                    contentEdit: "",
                 })
-                console.log(result)
-    
-            }).catch(err => console.log(err))
-        }
-    
-        //user chooses which element they want to edit and renders it in the text box for the user to edit
-        handleEditButtons = (i) => {
-            let newEdit = this.state.contents[i].attribute
-            this.setState({
-                contentEdit: newEdit,
-                arrayIndex: i,
             })
-        }
-    
-        //As the user types their edit, it saves it to the state of the contents
-        handleInputChange = event => {
-            let contentEdit = event.target.value;
-            
-            this.setState({
-              contentEdit: contentEdit,
-            });
-    
-          };
-
-        moveUp = (i) => {
-            const content = this.state.contents;
-            const tempContent = content[i];
-            content[i] = content[i - 1];
-            content[i - 1] = tempContent;
-            
-            this.setState({
-                contents: content
-            })
-        }
-
-        moveDown = (i) => {
-            const content = this.state.contents;
-            const tempContent = content[i];
-            content[i] = content[i + 1];
-            content[i + 1] = tempContent;
-            
-            this.setState({
-                contents: content
-            })
-        }
-    
-        handleSubmit = (event) => {
-            event.preventDefault();
-            let contentEdit = this.state.contentEdit;
-            let contentArray = this.state.contents;
-            contentArray[this.state.arrayIndex].attribute = contentEdit;
-            this.setState({
-                contents: contentArray
-            })
-            const object = {
-                content: this.state.contents
-            }
-            API.updateContent(this.state.page, object)
-                .then(result => {
-                    alert("Element successfully updated!");
-                    this.setState({
-                        contentEdit: "",
-                    })
-                })
-                .catch(err => console.log(err));
-        }
+            .catch(err => console.log(err));
+    }
     
     render(){
         return(

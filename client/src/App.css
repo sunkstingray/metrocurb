@@ -10,8 +10,8 @@
 }
 
 body {
-  /* background-image: url("./images/grey_wash_wall.png"); */
-  background-color: #98878F;
+  background-image: url("./images/grey_wash_wall.png");
+  /* background-color: #98878F; */
   display: flex;
   min-height: 100vh;
   flex-direction: column;

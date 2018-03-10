@@ -164,48 +164,48 @@ class Home extends Component {
     return(
       <div  className="container">
         <Card>
-        <div className="center-align">
-            <h1>Metro Curbside Cleaning</h1>
-            <h4>We are a curbside cleaning service for your trash and recycle bins. </h4>
-            <h5>All of our cleaning products are eco friendly (which means they won't hurt the environment)</h5>
-        </div>
-          <div className="card-tabs transparent">
-              <ul className="tabs tabs-fixed-width transparent">
-                  <li className="tab"><a href="#howItWorks" className="black">How It Works</a></li>
-                  <li className="tab"><a href="#pricing" className="black">Pricing</a></li>
-                  <li className="tab"><a href="#faq" className="black">FAQ</a></li>
-              </ul>
-          </div>
-          <div className="card-content cards">
-              <div id="howItWorks">
-                  <h3 className="center-align">How It Works</h3>
-                  <ul>
-                        {this.state.mongoData[1].content.map((paragraph,i) => ( 
-                                  
+            <div className="center-align">
+                <h1>Metro Curbside Cleaning</h1>
+                <h4>We are a curbside cleaning service for your trash and recycle bins. </h4>
+                <h5>All of our cleaning products are eco friendly (which means they won't hurt the environment)</h5>
+            </div>
+            <div className="card-tabs transparent">
+                <ul className="tabs tabs-fixed-width transparent">
+                    <li className="tab"><a href="#howItWorks" className="black">How It Works</a></li>
+                    <li className="tab"><a href="#pricing" className="black">Pricing</a></li>
+                    <li className="tab"><a href="#faq" className="black">FAQ</a></li>
+                </ul>
+            </div>
+            <div className="card-content cards">
+                <div id="howItWorks">
+                    <h3 className="center-align">How It Works</h3>
+                    <ul>
+                            {this.state.mongoData[1].content.map((paragraph,i) => ( 
+                                    
+                            <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
+                            ))}
+                    </ul>
+                </div>
+                <div id="pricing">
+                    <h3 className="center-align">Pricing</h3>
+                    <ul>
+                        {this.state.mongoData[0].content.map((paragraph,i) => (          
                         <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
                         ))}
-                  </ul>
-              </div>
-              <div id="pricing">
-                  <h3 className="center-align">Pricing</h3>
-                  <ul>
-                      {this.state.mongoData[0].content.map((paragraph,i) => (          
-                      <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
-                      ))}
-                  </ul>
-                  <h5>Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
-              </div>
-              <div id="faq">
-                  <h3 className="center-align">FAQ</h3>
-                      {this.state.mongoData[3].content.map((paragraph, i) => (          
-                      <div key={i}>
-                          <h5>{paragraph.value}</h5>
-                          <p>{paragraph.attribute}</p>
-                          <br />
-                      </div>
-                  ))}
-              </div>
-          </div>
+                    </ul>
+                    <h5>Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
+                </div>
+                <div id="faq">
+                    <h3 className="center-align">FAQ</h3>
+                        {this.state.mongoData[3].content.map((paragraph, i) => (          
+                        <div key={i}>
+                            <h5>{paragraph.value}</h5>
+                            <p>{paragraph.attribute}</p>
+                            <br />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </Card>
       </div>
     )

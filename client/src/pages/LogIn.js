@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
+import Buttons from "./../components/Buttons";
 import axios from "axios";
 import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
@@ -18,44 +19,41 @@ class LogIn extends Component {
     // this.loadContent();
   }
 
-//   loadContent = (page) => {
-//     //do something to get the content for homepage from MongoDB and save it as the current state
-//   }
 
-handleChange = event => {
-  this.setState({
-    [event.target.name]: event.target.value
-  })
-}
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
-handleSubmit = event => {
-  event.preventDefault()
+  handleSubmit = event => {
+    event.preventDefault()
 
-  axios.post('/auth/login', {
-    username: this.state.username,
-    password: this.state.password
-  })
-  .then(response => {
-    console.log(response);
-    // if (response.status === 200) {
-    //   // update the state
-    //   this.setState({
-    //     loggedIn: true,
-    //     user: response.data.user
-    //   })
-    // }
-    window.location.href = "/Profile";
-  })
-  .catch(error => {
-    console.log(error);
-  });
+    axios.post('/auth/login', {
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then(response => {
+      console.log(response);
+      // if (response.status === 200) {
+      //   // update the state
+      //   this.setState({
+      //     loggedIn: true,
+      //     user: response.data.user
+      //   })
+      // }
+      window.location.href = "/Profile";
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
-  // console.log('handleSubmit')
-  // this.props._login(this.state.username, this.state.password)
-  // this.setState({
-  //   redirectTo: '/'
-  // })
-}
+    // console.log('handleSubmit')
+    // this.props._login(this.state.username, this.state.password)
+    // this.setState({
+    //   redirectTo: '/'
+    // })
+  }
   
   render(){
     if (this.state.redirectTo) {
@@ -89,7 +87,7 @@ handleSubmit = event => {
 							  onChange={this.handleChange}
               />
             </div>
-            <button onClick={this.handleSubmit} className="btn btn-primary">Login</button>
+            <Buttons onClick={this.handleSubmit}>Login</Buttons>
           </form>
           {/* <Card>
           <a href="/auth/google">

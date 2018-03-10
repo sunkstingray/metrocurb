@@ -109,118 +109,120 @@ canBeSubmitted() {
 		// } else {
       return(
         <div className="container">
+          <Card>
             <h1>Sign up for a new account.</h1>
-          <form>
-             <div className="form-group">
-              <label htmlFor="firstInput">First Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="firstInput"
-                name="firstName"
-							  value={this.state.firstName}
-							  onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="lastInput">Last Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="lastInput"
-                name="lastName"
-							  value={this.state.lastName}
-							  onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="inputAddress">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                id="inputAddress"
-                name="address"
-							  value={this.state.address}
-							  onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-row">
-              <div className="form-group col-md-6">
-                <label htmlFor="inputCity">City</label>
+            <form>
+              <div className="form-group">
+                <label htmlFor="firstInput">First Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="inputCity"
-                  name="city"
-							    value={this.state.city}
-							    onChange={this.handleChange}
+                  id="firstInput"
+                  name="firstName"
+                  value={this.state.firstName}
+                  onChange={this.handleChange}
                 />
               </div>
-              <div className="form-group col-md-4">
-                <label htmlFor="inputState">State</label>
-                <select
-                  id="inputState"
-                  className="form-control"
-                  name="state"
-							    value={this.state.state}
-							    onChange={this.handleChange}
-                >
-                  <option>Kansas</option>
-                  <option>Missouri</option>
-                </select>
-              </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="inputZip">Zip</label>
+              <div className="form-group">
+                <label htmlFor="lastInput">Last Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="inputZip"
-                  name="zip"
-							    value={this.state.zip}
-							    onChange={this.handleChange}
+                  id="lastInput"
+                  name="lastName"
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
                 />
               </div>
-            </div> 
-            <div className="form-group">
-              <label htmlFor="emailInput">Email address</label>
-              <input
-                onBlur={this.handleBlur('username')}
-                type="email"
-                className={shouldMarkError('username') ? "error form-control" : "form-control"}
-                id="emailInput"
-                aria-describedby="emailHelp"
-                name="username"
-							  value={this.state.username}
-							  onChange={this.handleChange}
-              />
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="passwordInput1">Password</label>
-              <input
-              onBlur={this.handleBlur('password')}
-                type="password"
-                className={shouldMarkError('password') ? "error form-control" : "form-control"}
-                id="passwordInput1"
-                name="password"
-							  value={this.state.password}
-							  onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="passwordInput2">Re-Enter Password</label>
-              <input
+              <div className="form-group">
+                <label htmlFor="inputAddress">Address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputAddress"
+                  name="address"
+                  value={this.state.address}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="inputCity">City</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputCity"
+                    name="city"
+                    value={this.state.city}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group col-md-4">
+                  <label htmlFor="inputState">State</label>
+                  <select
+                    id="inputState"
+                    className="form-control"
+                    name="state"
+                    value={this.state.state}
+                    onChange={this.handleChange}
+                  >
+                    <option>Kansas</option>
+                    <option>Missouri</option>
+                  </select>
+                </div>
+                <div className="form-group col-md-2">
+                  <label htmlFor="inputZip">Zip</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputZip"
+                    name="zip"
+                    value={this.state.zip}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div> 
+              <div className="form-group">
+                <label htmlFor="emailInput">Email address</label>
+                <input
+                  onBlur={this.handleBlur('username')}
+                  type="email"
+                  className={shouldMarkError('username') ? "error form-control" : "form-control"}
+                  id="emailInput"
+                  aria-describedby="emailHelp"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div className="form-group">
+                <label htmlFor="passwordInput1">Password</label>
+                <input
                 onBlur={this.handleBlur('password')}
-                type="password"
-                className={shouldMarkError('password') ? "error form-control" : "form-control"}
-                id="passwordInput2"
-                name="passwordVal"
-							  value={this.state.passwordVal}
-							  onChange={this.handleChange}
-              />
-            </div>
-            <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
-          </form>
+                  type="password"
+                  className={shouldMarkError('password') ? "error form-control" : "form-control"}
+                  id="passwordInput1"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="passwordInput2">Re-Enter Password</label>
+                <input
+                  onBlur={this.handleBlur('password')}
+                  type="password"
+                  className={shouldMarkError('password') ? "error form-control" : "form-control"}
+                  id="passwordInput2"
+                  name="passwordVal"
+                  value={this.state.passwordVal}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
+            </form>
+          </Card>
         </div>
         
       );
