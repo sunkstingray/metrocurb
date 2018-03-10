@@ -1,18 +1,23 @@
 import React, { Component } from "react";
-import Button from "./../components/Button"
+import Buttons from "./../components/Buttons"
 import Card from "./../components/Card"
 import API from "../utils/API";
+import {Modal, Button} from "react-materialize";
 
 class Admin extends Component {
-    state = {
-        page:"Admin",
-        contents: [],
-        contentEdit: "",
-        arrayIndex: 0,
+    constructor() {
+        super();
+        this.state = {
+            page:"Admin",
+            contents: [],
+            contentEdit: "",
+            arrayIndex: 0,
+        };
     }
 
+
     componentDidMount() {
-        this.handleClick("Home");
+        this.handleClick("HowItWorks");
     }
 
     //Once user choses a page, this pulls all of the editable content from database for use to chose from
@@ -22,15 +27,14 @@ class Admin extends Component {
             this.setState({
                 page: page,
                 contents: result.data.content,
-                dbContents: result.data.content,
             })
-            console.log(this.state.dbContents);
-            console.log(this.state.contents)
+            console.log(result)
+
         }).catch(err => console.log(err))
     }
 
     //user chooses which element they want to edit and renders it in the text box for the user to edit
-    handleEditButton = (i) => {
+    handleEditButtons = (i) => {
         let newEdit = this.state.contents[i].attribute
         this.setState({
             contentEdit: newEdit,
@@ -41,24 +45,52 @@ class Admin extends Component {
     //As the user types their edit, it saves it to the state of the contents
     handleInputChange = event => {
         let contentEdit = event.target.value;
-        let contentArray = this.state.contents;
-        contentArray[this.state.arrayIndex].attribute = contentEdit;
+        
         this.setState({
-          contents: contentArray,
+            contentEdit: contentEdit,
         });
-        console.log(this.state.dbContents)
-        // console.log(this.state.contents)
-      };
+
+        };
+
+    moveUp = (i) => {
+        const content = this.state.contents;
+        const tempContent = content[i];
+        content[i] = content[i - 1];
+        content[i - 1] = tempContent;
+        
+        this.setState({
+            contents: content
+        })
+    }
+
+    moveDown = (i) => {
+        const content = this.state.contents;
+        const tempContent = content[i];
+        content[i] = content[i + 1];
+        content[i + 1] = tempContent;
+        
+        this.setState({
+            contents: content
+        })
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
+        let contentEdit = this.state.contentEdit;
+        let contentArray = this.state.contents;
+        contentArray[this.state.arrayIndex].attribute = contentEdit;
+        this.setState({
+            contents: contentArray
+        })
         const object = {
             content: this.state.contents
         }
         API.updateContent(this.state.page, object)
             .then(result => {
-                this.handleClick(this.state.page)
                 alert("Element successfully updated!");
+                this.setState({
+                    contentEdit: "",
+                })
             })
             .catch(err => console.log(err));
     }
@@ -67,32 +99,52 @@ class Admin extends Component {
         return(
             <div className="container">
                 <div className="btn-group" role="group">
-                    <Button value="Home" onClick={() => this.handleClick("Home")}>Home Page</Button>
-                    <Button value="HowItWorks" onClick={() => this.handleClick("HowItWorks")}>How It Works Page</Button>
-                    <Button value="Pricing" onClick={() => this.handleClick("Pricing")}>Pricing Page</Button>
-                    <Button value="ContactUs" onClick={() => this.handleClick("ContactUs")}>Contact Us Page</Button>
-                    <Button value="Faq" onClick={() => this.handleClick("Faq")}>FAQ Page</Button>
+                    <Buttons value="HowItWorks" onClick={() => this.handleClick("HowItWorks")}>How It Works Page</Buttons>
+                    <Buttons value="Pricing" onClick={() => this.handleClick("Pricing")}>Pricing Page</Buttons>
+                    <Buttons value="Faq" onClick={() => this.handleClick("Faq")}>FAQ Page</Buttons>
                 </div>
                 <Card>
+                    
                     <div>
-                        <div>
-                            {this.state.contents.map((paragraph,i) => (          
-                                <div key={i}>
-                                    <h4><span> {paragraph.value}</span></h4>
-                                    <h6><Button value={i} onClick={() => this.handleEditButton(i)} >Edit </Button>  <span> {paragraph.attribute}</span></h6>
-                                </div>
-                            ))}
-                        </div>
+                        {this.state.contents.map((paragraph,i) => (     
+                            <div className="line-separator" key={i}>
+                                <br />
+                                <Modal
+                                    header={paragraph.value}
+                                    trigger={<Buttons>Edit</Buttons>}
+                                    value={i}
+                                    onClick={() => this.handleEditButtons(i)}>
+                                    
+                                    <form>
+                                        <textarea className="form-control" rows="3" placeholder={this.state.contentEdit} onChange={this.handleInputChange}></textarea>
+                                        <br />
+                                        <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
+                                    </form>
+                                </Modal>
+                                <h5>{paragraph.value} </h5> <p>{paragraph.attribute}</p>
+                                    {(() => {
+                                            let content = this.state.contents
+                                            switch (i) {
+                                            case 0:   return <Buttons type="submit" onClick={() => this.moveDown(i)}>Move Down</Buttons>;
+                                            case content.length - 1: return <Buttons type="submit" onClick={() => this.moveUp(i)}>Move Up</Buttons>;
+                                            default:      return (
+                                                <div>
+                                                    <Buttons type="submit" onClick={() => this.moveUp(i)}>Move Up</Buttons>
+                                                    <Buttons type="submit" onClick={() => this.moveDown(i)}>Move Down</Buttons>
+                                                </div>
+                                            )
+                                            }
+                                        })()}
+                                <br /><br />
+                            </div>
+                        ))}
                     </div>
                 </Card>
-                <form>
-                    <textarea className="form-control" rows="3" placeholder={this.state.contentEdit} onChange={this.handleInputChange}></textarea>
-                    <br />
-                    <Button type="submit" className="btn btn-default" onClick={this.handleSubmit}>Submit Change</Button>
-                </form>
             </div>
+            
         )}
         
+      
     }
 
     export default Admin;
