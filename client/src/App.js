@@ -5,10 +5,7 @@ import axios from 'axios'
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/Wrapper";
 import Home from "./pages/Home";
-import Pricing from "./pages/Pricing";
-import Faq from "./pages/Faq";
 import ContactUs from "./pages/ContactUs";
-import HowItWorks from "./pages/HowItWorks";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogIn";
@@ -27,8 +24,6 @@ constructor() {
     loggedIn: false,
     user: null
   }
-}
-componentDidMount() {
   axios.get('/auth/user').then(response => {
     console.log(response.data)
     if (!!response.data.user) {
@@ -44,6 +39,9 @@ componentDidMount() {
       })
     }
   })
+}
+componentWillMount() {
+  
 }
 
 LogOutMethod = () => {
@@ -66,19 +64,22 @@ render() {
           <Wrapper>
             <Navbar loggedIn={this.state.loggedIn} logoutmethod={this.LogOutMethod}/>
             <Route exact path="/" render={() => <Home user={this.state.user} />} />
-            <Route exact path="/HowItWorks" component={HowItWorks} />
             <Route exact path="/ContactUs" component={ContactUs} />
-            <Route exact path="/Pricing" component={Pricing} />
-            <Route exact path="/FAQ" component={Faq} />
             <Route exact path="/SignUp" component={SignUp} />
             <Route
               exact
               path="/Profile"
-              render={() =>
-              <Profile
-                user={this.state.user}
-                logoutmethod={this.LogOutMethod}
-              />}
+              render={() =>{
+                  if(this.state.user) {
+                      return (<Profile
+                      user={this.state.user}
+                      logoutmethod={this.LogOutMethod}
+                    />)
+                  } else {
+                    return (<h1></h1>);
+                  }
+                }
+              }
             />
             <Route exact path="/LogOut" component={LogOut} />
             <Route exact path="/LogIn" component={LogIn} />

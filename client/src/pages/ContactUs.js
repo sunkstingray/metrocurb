@@ -84,6 +84,7 @@ class ContactUs extends Component {
     return !isDisabled;
   }
 
+
   render(){
     const errors = validate(this.state.name, this.state.email, this.state.phone);
     const isDisabled = Object.keys(errors).some(x => errors[x]);

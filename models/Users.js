@@ -20,7 +20,8 @@ const userSchema = new Schema({
 	},
 	google: {
 		googleId: { type: String, required: false }
-	}
+	},
+	zohoId: { type: String, unique: false }
 })
 
 // Define schema methods

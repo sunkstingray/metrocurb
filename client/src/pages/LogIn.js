@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
+import Buttons from "./../components/Buttons";
 import axios from "axios";
 import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
@@ -14,41 +15,40 @@ class LogIn extends Component {
 		}
 	}
 
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
-handleChange = event => {
-  this.setState({
-    [event.target.name]: event.target.value
-  })
-}
+  handleSubmit = event => {
+    event.preventDefault()
 
-handleSubmit = event => {
-  event.preventDefault()
+    axios.post('/auth/login', {
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then(response => {
+      console.log(response);
+      // if (response.status === 200) {
+      //   // update the state
+      //   this.setState({
+      //     loggedIn: true,
+      //     user: response.data.user
+      //   })
+      // }
+      window.location.href = "/Profile";
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
-  axios.post('/auth/login', {
-    username: this.state.username,
-    password: this.state.password
-  })
-  .then(response => {
-    console.log(response);
-    // if (response.status === 200) {
-    //   // update the state
-    //   this.setState({
-    //     loggedIn: true,
-    //     user: response.data.user
-    //   })
-    // }
-    window.location.href = "/Profile";
-  })
-  .catch(error => {
-    console.log(error);
-  });
-
-  // console.log('handleSubmit')
-  // this.props._login(this.state.username, this.state.password)
-  // this.setState({
-  //   redirectTo: '/'
-  // })
-}
+    // console.log('handleSubmit')
+    // this.props._login(this.state.username, this.state.password)
+    // this.setState({
+    //   redirectTo: '/'
+    // })
+  }
   
   render(){
     if (this.state.redirectTo) {
@@ -70,7 +70,7 @@ handleSubmit = event => {
 							  value={this.state.username}
 							  onChange={this.handleChange}
               />
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
             </div>
             <div className="form-group">
               <label htmlFor="exampleInputPassword1">Password</label>
@@ -86,12 +86,7 @@ handleSubmit = event => {
             <button onClick={this.handleSubmit} className="btn btn-primary">Login</button>
             <a href="/forgot" className="btn btn-link"> Forgot Password?</a>
           </form>
-          {/* <Card>
-          <a href="/auth/google">
-						<GoogleButton />
-						<img src={googleButton} alt="sign into Google Button" />
-					</a>
-          </Card> */}
+
           </Card>
         </div>
       );
