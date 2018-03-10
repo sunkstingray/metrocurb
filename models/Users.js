@@ -12,8 +12,8 @@ const userSchema = new Schema({
 	state: { type: String, unique: false },
 	zip: { type: String, unique: false },
 	userRole: { type: String, required: true, default:"user"},
-	resetPasswordToken: {type: String},
-	resetPasswordExpires: {type: Date},
+	resetPasswordToken: {type: String, required: false},
+	resetPasswordExpires: {type: Date, required: false},
 	local: {
 		username: { type: String, unique: false, required: false },
 		password: { type: String, unique: false, required: false }
