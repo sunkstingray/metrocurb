@@ -144,17 +144,17 @@ class Home extends Component {
 }
 
 
-  componentDidMount() {
-    this.loadContent("HowItWorks");
+componentDidMount() {
+    this.loadContent();
   }
 
-  loadContent = (page) => {
+  loadContent = () => {
     //do something to get the content for homepage from MongoDB and save it as the current state
-    API.getContent(page)
+    API.getAllContent()
       .then(result => {
-        console.log(result.data.content);
+        console.log(result.data);
         this.setState({
-          contents: result.data.content
+          mongoData: result.data
         })
     }).catch(err => console.log(err))
   }

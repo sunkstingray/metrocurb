@@ -71,3 +71,7 @@ iframe {
 .line-separator {
   border-bottom: 1px solid #000000;
 }
+
+button{
+  border: 0px
+}

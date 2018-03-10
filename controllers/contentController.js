@@ -3,8 +3,6 @@ const db = require("../models");
 // Defining methods for the contentController
 module.exports = {
   findContent: function(req,res){
-    // console.log(req.params.component)
-    console.log(req.params.component);
     db.Content
       .findOne({component:req.params.component})
       .then(result => res.json(result))
