@@ -5,10 +5,7 @@ import axios from 'axios'
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/Wrapper";
 import Home from "./pages/Home";
-import Pricing from "./pages/Pricing";
-import Faq from "./pages/Faq";
 import ContactUs from "./pages/ContactUs";
-import HowItWorks from "./pages/HowItWorks";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogIn";
@@ -65,10 +62,7 @@ render() {
           <Wrapper>
             <Navbar loggedIn={this.state.loggedIn} logoutmethod={this.LogOutMethod}/>
             <Route exact path="/" render={() => <Home user={this.state.user} />} />
-            <Route exact path="/HowItWorks" component={HowItWorks} />
             <Route exact path="/ContactUs" component={ContactUs} />
-            <Route exact path="/Pricing" component={Pricing} />
-            <Route exact path="/FAQ" component={Faq} />
             <Route exact path="/SignUp" component={SignUp} />
             <Route
               exact

@@ -109,7 +109,6 @@ canBeSubmitted() {
 		// } else {
       return(
         <div className="container">
-          <Card>
             <h1>Sign up for a new account.</h1>
           <form>
              <div className="form-group">
@@ -222,7 +221,6 @@ canBeSubmitted() {
             </div>
             <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
           </form>
-          </Card>
         </div>
         
       );

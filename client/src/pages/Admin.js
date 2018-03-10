@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Button from "./../components/Button"
+import Buttons from "./../components/Buttons"
 import Card from "./../components/Card"
 import API from "../utils/API";
+import {Modal, Button} from "react-materialize";
 
 class Admin extends Component {
     state = {
@@ -30,7 +31,7 @@ class Admin extends Component {
     }
 
     //user chooses which element they want to edit and renders it in the text box for the user to edit
-    handleEditButton = (i) => {
+    handleEditButtons = (i) => {
         let newEdit = this.state.contents[i].attribute
         this.setState({
             contentEdit: newEdit,
@@ -67,11 +68,11 @@ class Admin extends Component {
         return(
             <div className="container">
                 <div className="btn-group" role="group">
-                    <Button value="Home" onClick={() => this.handleClick("Home")}>Home Page</Button>
-                    <Button value="HowItWorks" onClick={() => this.handleClick("HowItWorks")}>How It Works Page</Button>
-                    <Button value="Pricing" onClick={() => this.handleClick("Pricing")}>Pricing Page</Button>
-                    <Button value="ContactUs" onClick={() => this.handleClick("ContactUs")}>Contact Us Page</Button>
-                    <Button value="Faq" onClick={() => this.handleClick("Faq")}>FAQ Page</Button>
+                    <Buttons value="Home" onClick={() => this.handleClick("Home")}>Home Page</Buttons>
+                    <Buttons value="HowItWorks" onClick={() => this.handleClick("HowItWorks")}>How It Works Page</Buttons>
+                    <Buttons value="Pricing" onClick={() => this.handleClick("Pricing")}>Pricing Page</Buttons>
+                    <Buttons value="ContactUs" onClick={() => this.handleClick("ContactUs")}>Contact Us Page</Buttons>
+                    <Buttons value="Faq" onClick={() => this.handleClick("Faq")}>FAQ Page</Buttons>
                 </div>
                 <Card>
                     <div>
@@ -79,20 +80,22 @@ class Admin extends Component {
                             {this.state.contents.map((paragraph,i) => (          
                                 <div key={i}>
                                     <h4><span> {paragraph.value}</span></h4>
-                                    <h6><Button value={i} onClick={() => this.handleEditButton(i)} >Edit </Button>  <span> {paragraph.attribute}</span></h6>
+                                    <h6><Buttons value={i} onClick={() => this.handleEditButtons(i)} >Edit </Buttons>  <span> {paragraph.attribute}</span></h6>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </Card>
-                <form>
-                    <textarea className="form-control" rows="3" placeholder={this.state.contentEdit} onChange={this.handleInputChange}></textarea>
-                    <br />
-                    <Button type="submit" className="btn btn-default" onClick={this.handleSubmit}>Submit Change</Button>
-                </form>
+                <Modal
+                    header='Modal Header'
+                    trigger={<Button>MODAL</Button>}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                </Modal>
             </div>
+            
         )}
         
+      
     }
 
     export default Admin;

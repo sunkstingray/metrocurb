@@ -7,15 +7,133 @@ class Home extends Component {
   constructor() {
     super()
     this.state = {
-      page:"Home",
-    contents:[
-      {
-        value: 1, 
-        attribute: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum odio eu feugiat pretium. Lobortis scelerisque fermentum dui faucibus in ornare quam viverra orci. Tellus mauris a diam maecenas sed enim ut sem. Et leo duis ut diam quam nulla porttitor.", 
-      }, {
-        value:2, 
-        attribute: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan lacus vel facilisis volutpat est velit egestas dui. Ultricies leo integer malesuada nunc vel risus commodo viverra. Nunc pulvinar sapien et ligula ullamcorper malesuada. Sed viverra ipsum nunc aliquet bibendum."
-      }
+      mongoData: [
+        {
+        "content": [
+        {
+        "value": 1,
+        "attribute": "Weekly Cleaning: $400/year (Our best deal!!)"
+        },
+        {
+        "value": 2,
+        "attribute": "Bi-Weekly Cleaning: $250/year"
+        },
+        {
+        "value": 3,
+        "attribute": "Monthly Cleaning: $199/year"
+        },
+        {
+        "value": 4,
+        "attribute": "Alternating Months: $99/year"
+        },
+        {
+        "value": 5,
+        "attribute": "Quarterly Cleaning: $75/year"
+        },
+        {
+        "value": 6,
+        "attribute": "Single Cleaning: $25"
+        }
+        ],
+        "_id": "5a9f312bd417471117b63b70",
+        "component": "Pricing"
+        },
+        {
+        "content": [
+        {
+        "value": 1,
+        "attribute": "Trash bins are lifted into the washing position by a lift."
+        },
+        {
+        "value": 2,
+        "attribute": "The inside of the bin is blasted with hot water."
+        },
+        {
+        "value": 3,
+        "attribute": "During the cleaning process, the operator uses a hand-held, high pressure washer to clean the exterior and the lid."
+        },
+        {
+        "value": 4,
+        "attribute": "The bin is then lowered, vacuumed, wiped, sanitized and deodorized."
+        },
+        {
+        "value": 5,
+        "attribute": "All waste water is collected and filtered by us (so no worries about it getting in your yard, driveway or down the drain)."
+        },
+        {
+        "value": 6,
+        "attribute": "Believe it or not, it actually takes a very small amount of water to thoroughly clean & sanitize each unit (if you did the cleaning yourself, you'd use about 27 gallons each time!)."
+        },
+        {
+        "value": 7,
+        "attribute": "Believe it or not, it actually takes a very small amount of water to thoroughly clean & sanitize each unit (if you did the cleaning yourself, you'd use about 27 gallons each time!)."
+        },
+        {
+        "value": 8,
+        "attribute": "The process used automated and fully contained, so no run-off enters the storm drains or your yard."
+        },
+        {
+        "value": 9,
+        "attribute": "All products are biodegradable"
+        }
+        ],
+        "_id": "5a9f312bd417471117b63b71",
+        "component": "HowItWorks"
+        },
+        {
+        "content": [
+        {
+        "value": 1,
+        "attribute": "Hello and welcome!"
+        },
+        {
+        "value": 2,
+        "attribute": "Welcome to Curbside Cleaning"
+        }
+        ],
+        "_id": "5a9f312bd417471117b63b72",
+        "component": "Home"
+        },
+        {
+        "content": [
+        {
+        "value": "How do I know when to put my bins out?",
+        "attribute": "Please leave your trash & recycle bins out after your regular pick-up day, so when we come by (within 24 hours of the regular pick-up) the bins are ready and waiting to be cleaned!"
+        },
+        {
+        "value": "Why get my trash cleaned?",
+        "attribute": "Bacteria such as Salmonella, Listeria, Staphylococcus, and E-Coli aren't just on the inside...that stuff is on the lid & handle too! Contact us today to get rid of all bacteria!"
+        },
+        {
+        "value": "What if I need to reschedule?",
+        "attribute": "Just let us know at least a week in advance and we will be in contact with you within 24 hours to reschedule"
+        }
+        ],
+        "_id": "5a9f312bd417471117b63b73",
+        "component": "Faq"
+        },
+        {
+        "content": [
+        {
+        "value": "Address",
+        "attribute": "12345 Main St. "
+        },
+        {
+        "value": "City",
+        "attribute": "Overland Park"
+        },
+        {
+        "value": "State",
+        "attribute": "KS"
+        },
+        {
+        "value": "Zip Code",
+        "attribute": "66213"
+        }
+        ],
+        "_id": "5a9f312bd417471117b63b74",
+        "component": "ContactUs"
+        }
     ]
     }
   }
@@ -39,16 +157,48 @@ class Home extends Component {
   
   render(){
     return(
-      <div className="container">
-        
+      <div  className="container">
         <Card>
-          <div>
-            <h1>Welcome to Metro Curbside Cleaning</h1>
-            <br />
-            <img src="./images/cleaner.png" />  
-            {this.state.contents.map((paragraph, i) => (          
-              <h6 key={i}>{paragraph.attribute}</h6>
-            ))}
+        <div className="center-align">
+            <h1>Metro Curbside Cleaning</h1>
+            <h4>We are a curbside cleaning service for your trash and recycle bins. </h4>
+            <h5>All of our cleaning products are eco friendly (which means they won't hurt the environment)</h5>
+        </div>
+          <div className="card-tabs transparent">
+              <ul className="tabs tabs-fixed-width transparent">
+                  <li className="tab"><a href="#howItWorks" className="black">How It Works</a></li>
+                  <li className="tab"><a href="#pricing" className="black">Pricing</a></li>
+                  <li className="tab"><a href="#faq" className="black">FAQ</a></li>
+              </ul>
+          </div>
+          <div className="card-content cards">
+              <div id="howItWorks">
+                  <h3 className="center-align">How It Works</h3>
+                  <ol>
+                      {this.state.mongoData[1].content.map((paragraph,i) => (          
+                      <li key={i}>{paragraph.attribute}</li>
+                      ))}
+                  </ol>
+              </div>
+              <div id="pricing">
+                  <h3 className="center-align">Pricing</h3>
+                  <ul>
+                      {this.state.mongoData[0].content.map((paragraph,i) => (          
+                      <li key={i}>{paragraph.attribute}</li>
+                      ))}
+                  </ul>
+                  <h5>Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
+              </div>
+              <div id="faq">
+                  <h3 className="center-align">FAQ</h3>
+                      {this.state.mongoData[3].content.map((paragraph, i) => (          
+                      <div key={i}>
+                          <h5>{paragraph.value}</h5>
+                          <p>{paragraph.attribute}</p>
+                          <br />
+                      </div>
+                  ))}
+              </div>
           </div>
         </Card>
       </div>

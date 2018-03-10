@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 
 const Footer = props => 
-    <footer className="footer">
+    <footer className="footer-fixed">
             <span>Metro Curbside Cleaning</span>
     </footer>;
 

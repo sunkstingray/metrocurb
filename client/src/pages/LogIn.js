@@ -63,7 +63,6 @@ handleSubmit = event => {
 		} else {
       return(
         <div className="container">
-          <Card>
             <h1>Log in to your account.</h1>
           <form>
             <div className="form-group">
@@ -98,7 +97,6 @@ handleSubmit = event => {
 						<img src={googleButton} alt="sign into Google Button" />
 					</a>
           </Card> */}
-          </Card>
         </div>
       );
     }

@@ -2,8 +2,22 @@
   text-align: center;
 }
 
+.container{
+  /* background-color: #743340; */
+  color: #ffffff;
+  opacity: 0.6;
+  padding: 10px;
+}
+
 body {
   background-image: url("./images/grey_wash_wall.png");
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 .App-header {
@@ -37,4 +51,18 @@ iframe {
   width:100%;
   height:1200px;
   border:none;
+}
+
+.cards {
+  padding: 10px;
+}
+
+.btn-large {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: black;
+}
+
+.tabs { 
+  color: black;
 }
