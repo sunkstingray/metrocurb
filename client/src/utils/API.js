@@ -9,6 +9,8 @@ export default {
     },
     updateContent: function(page, body){
         return axios.put("/api/content/" + page, body)
+    },
+    getAllContent: function(){
+        return axios.get("/api/content")
     }
-    // updateContent: function()
 }

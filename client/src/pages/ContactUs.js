@@ -8,7 +8,7 @@ class ContactUs extends Component {
     return(
       <div className="container">
         <Card>
-          <h4>Contact Me:</h4>
+          <h4>Contact Us:</h4>
           <form action="mailto:jnguye89@gmail.com" method="post" enctype="text/plain">
               Name:<br />
               <input type="text" name="name" /><br />
