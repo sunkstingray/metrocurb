@@ -10,7 +10,8 @@
 }
 
 body {
-  background-image: url("./images/grey_wash_wall.png");
+  /* background-image: url("./images/grey_wash_wall.png"); */
+  background-color: #98878F;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -65,4 +66,8 @@ iframe {
 
 .tabs { 
   color: black;
+}
+
+.line-separator {
+  border-bottom: 1px solid #000000;
 }

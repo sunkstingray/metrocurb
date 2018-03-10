@@ -24,7 +24,7 @@ if (props.loggedIn) {
                         <span className="navbar-toggler-icon"></span>
                     </button> */}
                     {/* <div className="collapse navbar-collapse" id="navbarSupportedContent"> */}
-                    <ul className="right hide-on-med-and-down" id="nav-mobile">
+                    <ul className="right" id="nav-mobile">
                         <li className={window.location.pathname === "/" ? "nav-item active" : "nav-item"}>
                             <a className="nav-link" href="/">Home</a>
                         </li>
