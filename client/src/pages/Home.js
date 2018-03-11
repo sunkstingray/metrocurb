@@ -152,6 +152,7 @@ componentDidMount() {
     //do something to get the content for homepage from MongoDB and save it as the current state
     API.getAllContent()
       .then(result => {
+        console.log("MONGO DATABSE")
         console.log(result.data);
         this.setState({
           mongoData: result.data
@@ -179,31 +180,31 @@ componentDidMount() {
             <div className="card-content cards">
                 <div id="howItWorks">
                     <h3 className="center-align">How It Works</h3>
-                    {/* <ul>
+                    <ul>
                             {this.state.mongoData[1].content.map((paragraph,i) => ( 
                                     
                             <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
                             ))}
-                    </ul> */}
+                    </ul>
                 </div>
                 <div id="pricing">
                     <h3 className="center-align">Pricing</h3>
-                    {/* <ul>
+                    <ul>
                         {this.state.mongoData[0].content.map((paragraph,i) => (          
                         <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
                         ))}
-                    </ul> */}
+                    </ul>
                     <h5>Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
                 </div>
                 <div id="faq">
                     <h3 className="center-align">FAQ</h3>
-                        {/* {this.state.mongoData[3].content.map((paragraph, i) => (          
+                        {this.state.mongoData[3].content.map((paragraph, i) => (          
                         <div key={i}>
                             <h5>{paragraph.value}</h5>
                             <p>{paragraph.attribute}</p>
                             <br />
                         </div>
-                    ))} */}
+                    ))}
                 </div>
             </div>
         </Card>
@@ -212,4 +213,3 @@ componentDidMount() {
   }
 }
 export default Home;
-
