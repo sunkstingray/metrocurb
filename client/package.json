@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.18.0",
+    "email-templates": "^3.5.0",
     "prop-types": "^15.6.1",
     "react": "^16.0.0",
     "react-bootstrap-modal": "^4.0.0",

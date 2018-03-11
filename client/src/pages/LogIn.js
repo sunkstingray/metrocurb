@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
-import Buttons from "./../components/Buttons";
+//import Buttons from "./../components/Buttons";
 import axios from "axios";
-import googleButton from '../images/btn_google_signin_dark_normal_web.png'
+//import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
 class LogIn extends Component {
 	constructor() {
