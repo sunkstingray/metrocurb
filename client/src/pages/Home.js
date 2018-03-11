@@ -152,6 +152,7 @@ componentDidMount() {
     //do something to get the content for homepage from MongoDB and save it as the current state
     API.getAllContent()
       .then(result => {
+        console.log(result);
         console.log(result.data);
         this.setState({
           mongoData: result.data
