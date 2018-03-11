@@ -61,6 +61,11 @@ class Admin extends Component {
         this.setState({
             contents: content
         })
+
+        API.updateContent(this.state.page, content)
+            .then(result => {
+                this.handleClick(this.state.page)
+            })
     }
 
     moveDown = (i) => {
@@ -72,6 +77,11 @@ class Admin extends Component {
         this.setState({
             contents: content
         })
+
+        API.updateContent(this.state.page, content)
+            .then(result => {
+                this.handleClick(this.state.page)
+            })
     }
 
     handleSubmit = (event) => {
