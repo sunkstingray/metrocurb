@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom'
+//import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
 import axios from "axios";
 
@@ -63,7 +63,6 @@ handleSubmit = event => {
 
     username: this.state.username,
     password: this.state.password,
-    password: this.state.passwordVal
    })
   .then(response =>{
     // const user = {username: this.state.username, password: this.state.password};

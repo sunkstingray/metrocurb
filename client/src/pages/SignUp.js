@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom'
+//import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
 import axios from "axios";
 // import googleButton from '../images/btn_google_signin_dark_normal_web.png'
@@ -69,7 +69,6 @@ handleSubmit = event => {
     //local:{
     username: this.state.username,
     password: this.state.password,
-    password: this.state.passwordVal
     // }
   })
   .then(response =>{

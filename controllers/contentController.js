@@ -9,6 +9,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   }, 
   update: function(req,res){
+    console.log("cotentController.js")
     console.log(req.params.component);
     db.Content
       .findOneAndUpdate({component:req.params.component}, req.body)
@@ -20,12 +21,6 @@ module.exports = {
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
-  },
-  findAll: function(req,res){
-    db.Content
-      .find()
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
   }
 };
 
