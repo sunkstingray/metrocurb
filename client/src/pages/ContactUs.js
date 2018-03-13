@@ -5,20 +5,20 @@ import axios from "axios";
 
 function validate(name, email, phone){
 
-  if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(email))
+  if (/^\w+([/.-]?\w+)*@\w+([/.-]?\w+)*(\.\w{2,3})+$/.test(email))
   {
     const emailTest = false;
     return {
       email: emailTest,
       name: name.length === 0,
-      phone: !(/\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*/.test(phone))
+      phone: !(/\D*([/.2-9]\d{2})(\D*)([/.2-9]\d{2})(\D*)(\d{4})\D*/.test(phone))
     };
   } else {
     const emailTest = true;
     return {
       email: emailTest,
       name: name.length === 0,
-      phone: !(/\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*/.test(phone))
+      phone: !(/\D*([/.2-9]\d{2})(\D*)([/.2-9]\d{2})(\D*)(\d{4})\D*/.test(phone))
     };
   }
   // true means invalid, so our conditions got reversed
@@ -98,60 +98,63 @@ class ContactUs extends Component {
     return(
       <div className="container">
         <Card>
-            <h4>Contact Me:</h4>
+            <h4>Contact Us:</h4>
             <form>
-            <div className="form-group">
-              <label htmlFor="nameInput">Name</label>
+            <div className="form-group input-field col s12">
               <input
                 onBlur={this.handleBlur('name')}
                 type="text"
                 required autoComplete="name"
-                className={shouldMarkError('name') ? "error form-control" : "form-control"}
+                className="validate"
                 id="nameInput"
                 name="name"
 							  value={this.state.name}
 							  onChange={this.handleChange}
+                required="true"
               />
+              <label htmlFor="nameInput" data-error="Name is required.">Name</label>
             </div>
-            <div className="form-group">
-              <label htmlFor="emailInput">Email</label>
+            <div className="form-group input-field col s12">
               <input
               onBlur={this.handleBlur('email')}
                 type="email"
                 required autoComplete="email"
-                className={shouldMarkError('email') ? "error form-control" : "form-control"}
+                className="validate"
                 id="emailInput"
                 name="email"
 							  value={this.state.email}
 							  onChange={this.handleChange}
+                required="true"
               />
+              <label htmlFor="emailInput" data-error="Valid email is required">Email</label>
             </div>
-            <div className="form-group">
-              <label htmlFor="phoneInput">Phone</label>
+            <div className="form-group input-field col s12">
               <input
                 onBlur={this.handleBlur('phone')}
                 type="tel"
                 required autoComplete="tel"
-                className={shouldMarkError('phone') ? "error form-control" : "form-control"}
+                className="validate"
                 id="phoneInput"
                 name="phone"
 							  value={this.state.phone}
 							  onChange={this.handleChange}
+                required="true"
               />
+              <label htmlFor="phoneInput" data-error="Please enter phone number.">Phone</label>
             </div>
-            <div className="form-group">
-              <label htmlFor="commentInput">Comments</label>
+            <div className="form-group input-field col s12">
               <textarea
                 onBlur={this.handleBlur('comment')}
-                className={shouldMarkError('comment') ? "error form-control" : "form-control"}
+                className="materialize-area"
                 id="commentInput"
                 rows="5"
                 name="comment"
 							  value={this.state.comment}
 							  onChange={this.handleChange}
               />
+              <label htmlFor="commentInput">Comments</label>
             </div>
-            <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
+            <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Send</button>
             </form>
         </Card>
       </div>

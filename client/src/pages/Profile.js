@@ -61,7 +61,7 @@ class Profile extends Component {
          <div className="container">
           <Card>
             <h1>My Account (View)</h1>
-            <h5><a href="#">Click Here</a> to edit account details. </h5>
+            <h5><a href="#edit">Click Here</a> to edit account details. </h5>
           <form>
              <div className="form-group">
               <label htmlFor="firstInput">First Name</label>
