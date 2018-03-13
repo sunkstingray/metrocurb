@@ -20,6 +20,9 @@ router
 
 router
   .route("/zoho/:zohoId")
-  .get(zoho.findById);
+  .get(zoho.findById)
+  .put(zoho.updateContact)
+
+
 
 module.exports = router;

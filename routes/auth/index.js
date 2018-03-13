@@ -109,4 +109,72 @@ router.post('/signup', (req, res) => {
 
 })
 
+
+router.post('/update', (req, res) => {
+	const { firstName,lastName,address,city,state,zip, username} = req.body
+	// ADD VALIDATION
+	User.findOne({ 'local.username': username }, (err, userMatch) => {
+		if (userMatch) {
+
+			console.log('User');
+			con
+
+			const userData = {
+				"Lead Source"  : "Online Store",
+				"First Name"   : firstName,
+				"Last Name"    : lastName,
+				"Email"		   : username,
+				"Description"  : "Created from Express Route",
+				"Mailing Street" : address,
+				"Mailing City" : city,
+				"Mailing State": state,
+				"Mailing Zip"  : zip
+			}
+		}
+
+		const userData = {
+			"Lead Source"  : "Online Store",
+			"First Name"   : firstName,
+			"Last Name"    : lastName,
+			"Email"		   : username,
+			"Description"  : "Created from Express Route",
+			"Mailing Street" : address,
+			"Mailing City" : city,
+			"Mailing State": state,
+			"Mailing Zip"  : zip
+		}
+
+		console.log(JSON.stringify(userData));
+
+		return zoho.createContact(userData,(err,result) =>{
+			if (err !== null) {
+				console.log(err);
+			} else if (result.isError()){
+				console.log(result.message);
+			} else {
+				const newUser = new User({
+					'local.username': username,
+					'local.password': password, 
+					'zohoId' : result.data[0].Id
+				})
+				return newUser.save((err,savedUser)=> {
+					if (err) return res.json(err);
+					req.login(newUser,(err)=>{
+						if(err){
+							console.log(err);
+						}
+						else {
+							console.log("user logged in");
+						}
+					})
+					return res.json(savedUser);
+				})
+			}
+
+		})
+
+	})
+
+})
+
 module.exports = router

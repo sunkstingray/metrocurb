@@ -7,7 +7,8 @@ import axios from 'axios';
 class Profile extends Component {
   state = {
     page:"Profile",
-    contents:[""]
+    contents:[""],
+    mode:"view"
   }
 
   componentDidMount() {
@@ -55,13 +56,73 @@ class Profile extends Component {
 
     }
 
+  viewOrEdit = () => {
+    if(this.state.mode === 'view'){
+      return 'readOnly';
+    }
+    return ;
+  }
+
+  goToEdit = () => {
+    this.setState ({
+      mode: "edit"
+    })
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = event => {
+  event.preventDefault()
+
+    console.log(this.props.user._id);
+    const url ='/api/users/'+this.props.user._id;
+      axios.get(url)
+           .then(result => {
+            const zohoId = result.data.zohoId;
+            console.log('zohoId: ' + zohoId);
+            const zohoUrl = '/api/users/zoho/' + zohoId;
+            axios.put(zohoUrl,{
+                          firstName: this.state.firstName,
+                          lastName: this.state.lastName,
+                          address: this.state.address,
+                          city: this.state.city,
+                          state: this.state.state,
+                          zip: this.state.zip,
+                          username: this.state.username
+                  })
+                  .then(result => {
+
+                     this.setState({
+                        "firstName" : result.data["First Name"],
+                        "lastName"  : result.data["Last Name"],
+                        "address"   : result.data["Mailing Street"],
+                        "city"      : result.data["Mailing City"],
+                        "state"     : result.data["Mailing State"],
+                        "zip"       : result.data["Mailing Zip"],
+                        "username"  : result.data["Email"],
+                        "mode"      : 'view'
+
+                     })
+                  })
+
+          });
+  }
+
+    
+  
+
+ 
 
   render(){
     return this.props.user !== null ? (
          <div className="container">
           <Card>
             <h1>My Account (View)</h1>
-            <h5><a href="#edit">Click Here</a> to edit account details. </h5>
+            <h5><a href="#edit" onClick={this.goToEdit}>Click Here</a> to edit account details. </h5>
           <form>
              <div className="form-group">
               <label htmlFor="firstInput">First Name</label>
@@ -71,7 +132,10 @@ class Profile extends Component {
                 id="firstInput"
                 name="firstName"
                 value={this.state.firstName}
-                readOnly
+                onChange={this.handleChange}
+                readOnly={this.viewOrEdit()}
+                
+                
               />
             </div>
             <div className="form-group">
@@ -105,7 +169,9 @@ class Profile extends Component {
                   id="inputCity"
                   name="city"
                   value={this.state.city}
-                  readOnly
+                     onChange={this.handleChange}
+                readOnly={this.viewOrEdit()}
+                
                 />
               </div>
               <div className="form-group col-md-4">
@@ -146,8 +212,10 @@ class Profile extends Component {
               />
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
+              
+                {this.state.mode === 'edit' ? <button onClick={this.handleSubmit} className="btn btn-primary">Submit Account Changes</button> : <h1>view mode</h1>}
             
-           
+              
           </form>
           </Card>
           <Card className="iFrame">

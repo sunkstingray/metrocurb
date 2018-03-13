@@ -34,5 +34,20 @@ module.exports = {
           console.log(userData.data);
         }
       });
+  },
+  updateContact: (req,res) => {
+      var zohoId = req.params.zohoId;
+      console.log("PUT zohohoid: " + zohoId);
+      console.log(req.body);
+
+      zoho.execute('crm','Contacts','updateRecords',zohoId,[req.body],function(err,userData){
+        if(err){
+          console.log(err);
+        }
+        else{
+          res.send(userData.data);
+          console.log(userData.data);
+        }
+      });
   }
 }
