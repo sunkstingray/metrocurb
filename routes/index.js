@@ -18,8 +18,8 @@ router.use("/mail", mailRoutes);
 router.use("/reset", resetRoutes);
 
 // If no other routes are hit, send the React app
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// router.use(function(req, res) {
+//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 module.exports = router;

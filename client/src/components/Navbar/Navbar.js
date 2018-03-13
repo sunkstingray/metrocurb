@@ -1,7 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 
-<nav>
+{/* <nav>
 <div class="nav-wrapper">
   <a href="#" class="brand-logo">Logo</a>
   <ul id="nav-mobile" class="right ">
@@ -10,7 +10,7 @@ import "./Navbar.css";
     <li><a href="collapsible.html">JavaScript</a></li>
   </ul>
 </div>
-</nav>
+</nav> */}
 
 
 const Navbar = props => {

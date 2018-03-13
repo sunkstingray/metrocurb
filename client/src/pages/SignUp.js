@@ -7,7 +7,7 @@ import axios from "axios";
 
 function validate(username, password, passwordVal){
   
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(username))
+  if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(username))
   {
     const emailTest = false;
     return {
@@ -164,6 +164,7 @@ canBeSubmitted() {
                     name="state"
                     value={this.state.state}
                     onChange={this.handleChange}
+                    autocomplete='email'
                   >
                     <option>Kansas</option>
                     <option>Missouri</option>
@@ -178,6 +179,7 @@ canBeSubmitted() {
                     name="zip"
                     value={this.state.zip}
                     onChange={this.handleChange}
+                    autocomplete='postal-code'
                   />
                 </div>
               </div> 
@@ -192,6 +194,7 @@ canBeSubmitted() {
                   name="username"
                   value={this.state.username}
                   onChange={this.handleChange}
+                  autocomplete='email'
                 />
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>

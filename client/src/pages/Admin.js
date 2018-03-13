@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Buttons from "./../components/Buttons"
 import Card from "./../components/Card"
 import API from "../utils/API";
-import {Modal, Button} from "react-materialize";
+import {Modal} from "react-materialize";
+// import {Modal, Button} from "react-materialize";
 
 class Admin extends Component {
     constructor() {
@@ -130,12 +131,12 @@ class Admin extends Component {
                                         {(() => {
                                                 let content = this.state.contents
                                                 switch (i) {
-                                                case 0:   return <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg"/></button>;
-                                                case content.length - 1: return <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg"/></button>;
+                                                case 0:   return <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg" alt=""/></button>;
+                                                case content.length - 1: return <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg" alt=""/></button>;
                                                 default:      return (
                                                     <div>
-                                                        <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg"/></button>
-                                                        <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg"/></button>
+                                                        <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg" alt=""/></button>
+                                                        <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg" alt=""/></button>
                                                     </div>
                                                 )
                                                 }

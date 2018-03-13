@@ -5,7 +5,7 @@ import axios from "axios";
 
 function validate(name, email, phone){
 
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+  if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(email))
   {
     const emailTest = false;
     return {
