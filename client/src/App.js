@@ -76,7 +76,7 @@ render() {
                       logoutmethod={this.LogOutMethod}
                     />)
                   } else {
-                    return (<h1></h1>);
+                    return (<h1>Not Logged In.</h1>);
                   }
                 }
               }

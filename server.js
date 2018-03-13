@@ -45,6 +45,7 @@ app.use(passport.session()) // will call the deserializeUser
 app.use(routes);
 
 app.use(logger("dev"));
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -62,10 +63,10 @@ mydb.once("open", function() {
   console.log("Successfully connected to the Mongoose database!");
 });
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// // Serve up static assets (usually on heroku)
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
 
 //****NOTE THAT THESE ROUTES CAN BE TESTED LOCALLY BY GOING TO LOCALHOST:3001****//
 
