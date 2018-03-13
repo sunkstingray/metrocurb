@@ -154,9 +154,11 @@ componentDidMount() {
       .then(result => {
         console.log("MONGO DATABSE")
         console.log(result.data);
-        this.setState({
-          mongoData: result.data
-        })
+        if (result.data.length > 0){
+            this.setState({
+                mongoData: result.data
+            })
+        }
     }).catch(err => console.log(err))
   }
   
