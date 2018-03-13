@@ -4,9 +4,9 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
-const passport = require('./passport')
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const passport = require('./passport');
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const zoho = require('./routes/zoho');
@@ -35,11 +35,11 @@ app.use(
 		resave: false,
 		saveUninitialized: false
 	})
-)
+);
 
 // ===== Passport ====
-app.use(passport.initialize())
-app.use(passport.session()) // will call the deserializeUser
+app.use(passport.initialize());
+app.use(passport.session()); // will call the deserializeUser
 
 // Add routes
 app.use(routes);
@@ -48,7 +48,8 @@ app.use(logger("dev"));
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+	// app.use(express.static("client/build"));
+	app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 
@@ -97,8 +98,8 @@ app.post("/api/contacts/create",function(req,res){
   
     	res.send(result.data);
     	}
-	})
-})
+	});
+});
 
 // Send every request to the React app
 // Define any API routes before this runs
