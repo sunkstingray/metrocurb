@@ -59,21 +59,19 @@ class LogIn extends Component {
           <Card>
             <h1>Log in to your account.</h1>
           <form>
-            <div className="form-group">
-              <label htmlFor="emailInput">Email address</label>
+            <div className="form-group input-field col s12">
               <input
                 type="email"
                 className="form-control"
                 id="emailInput"
-                aria-describedby="emailHelp"
                 name="username"
 							  value={this.state.username}
 							  onChange={this.handleChange}
+                autoComplete='email'
               />
-              <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
+              <label htmlFor="emailInput">Email address</label>
             </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
+            <div className="form-group input-field col s12">
               <input
                 type="password"
                 className="form-control"
@@ -81,7 +79,9 @@ class LogIn extends Component {
                 name="password"
 							  value={this.state.password}
 							  onChange={this.handleChange}
+                autoComplete='no'
               />
+              <label htmlFor="exampleInputPassword1">Password</label>
             </div>
             <button onClick={this.handleSubmit} className="btn btn-primary">Login</button>
             <a href="/forgot" className="btn btn-link"> Forgot Password?</a>

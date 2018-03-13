@@ -108,6 +108,7 @@ canBeSubmitted() {
                 name="password"
 							  value={this.state.password}
 							  onChange={this.handleChange}
+                autoComplete='no'
               />
             </div>
             <div className="form-group">
@@ -120,6 +121,7 @@ canBeSubmitted() {
                 name="passwordVal"
 							  value={this.state.passwordVal}
 							  onChange={this.handleChange}
+                autoComplete='no'
               />
             </div>
             <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Sign Up</button>
