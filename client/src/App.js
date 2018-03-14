@@ -25,7 +25,7 @@ constructor() {
     user: null
   }
   axios.get('/auth/user').then(response => {
-    console.log(response.data)
+    console.log("RD: " + JSON.stringify(response.data));
     if (!!response.data.user) {
       console.log('THERE IS A USER')
       this.setState({
