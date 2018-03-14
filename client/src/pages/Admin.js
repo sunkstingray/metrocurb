@@ -62,8 +62,10 @@ class Admin extends Component {
         this.setState({
             contents: content
         })
-
-        API.updateContent(this.state.page, content)
+        const object = {
+            content: this.state.contents
+        }
+        API.updateContent(this.state.page, object)
             .then(result => {
                 this.handleClick(this.state.page)
             })
@@ -79,7 +81,11 @@ class Admin extends Component {
             contents: content
         })
 
-        API.updateContent(this.state.page, content)
+        const object = {
+            content: this.state.contents
+        }
+
+        API.updateContent(this.state.page, object)
             .then(result => {
                 this.handleClick(this.state.page)
             })
