@@ -139,28 +139,12 @@ componentDidMount() {
   }
 
   uploadContent = () => {
-    
-    API.uploadContent(this.state.mongoData[0])
+    const content = this.state.mongoData
+    API.uploadContent(content)
         .then(result => {
-            API.uploadContent(this.state.mongoData[1])
-                .then(result => {
-                    API.uploadContent(this.state.mongoData[2])
-                        .then(result => {
-                            API.uploadContent(this.state.mongoData[3])
-                            .then(result => {
-                                API.uploadContent(this.state.mongoData[4])
-                                    .then(result => {
-                                        alert("upload successful")
-                                    })
-                            })
-                        })
-                })
+            alert("Success!")
         })
         .catch(err => console.log(err))
-
-   
-    
-    
   }
 
   loadContent = () => {
