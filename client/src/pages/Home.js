@@ -179,7 +179,7 @@ componentDidMount() {
                             ))}
                     </ul>
                     <div className="video-container">
-                        <iframe className="responsive-video" src="https://player.vimeo.com/video/82785910"></iframe>
+                        <iframe className="responsive-video" src="https://player.vimeo.com/video/82785910" title="How it works vicdeo"></iframe>
                     </div>
                 </div>
                 <div id="pricing">

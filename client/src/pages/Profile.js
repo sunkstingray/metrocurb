@@ -7,7 +7,14 @@ import axios from 'axios';
 class Profile extends Component {
   state = {
     page:"Profile",
-    contents:[""]
+    contents:[""],
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    username: ""
   }
 
   componentDidMount() {
@@ -62,7 +69,7 @@ class Profile extends Component {
           <Card>
             <h1>My Account (View)</h1>
             <h5><a href="#edit">Click Here</a> to edit account details. </h5>
-          <form>
+          <form autoComplete="no">
              <div className="form-group">
               <label htmlFor="firstInput">First Name</label>
               <input
