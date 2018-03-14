@@ -135,16 +135,7 @@ class Home extends Component {
 
 
 componentDidMount() {
-    this.uploadContent();
-  }
-
-  uploadContent = () => {
-    const content = this.state.mongoData
-    API.uploadContent(content)
-        .then(result => {
-            alert("Success!")
-        })
-        .catch(err => console.log(err))
+    this.loadContent();
   }
 
   loadContent = () => {
