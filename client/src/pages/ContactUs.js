@@ -89,12 +89,12 @@ class ContactUs extends Component {
     const errors = validate(this.state.name, this.state.email, this.state.phone);
     const isDisabled = Object.keys(errors).some(x => errors[x]);
     
-    const shouldMarkError = (field) => {
-      const hasError = errors[field];
-      const shouldShow = this.state.touched[field];
+    // const shouldMarkError = (field) => {
+    //   const hasError = errors[field];
+    //   const shouldShow = this.state.touched[field];
 
-      return hasError ? shouldShow : false;
-    };
+    //   return hasError ? shouldShow : false;
+    // };
     return(
       <div className="container">
         <Card>
@@ -110,7 +110,6 @@ class ContactUs extends Component {
                 name="name"
 							  value={this.state.name}
 							  onChange={this.handleChange}
-                required="true"
               />
               <label htmlFor="nameInput" data-error="Name is required.">Name</label>
             </div>
@@ -124,7 +123,6 @@ class ContactUs extends Component {
                 name="email"
 							  value={this.state.email}
 							  onChange={this.handleChange}
-                required="true"
               />
               <label htmlFor="emailInput" data-error="Valid email is required">Email</label>
             </div>
@@ -138,7 +136,6 @@ class ContactUs extends Component {
                 name="phone"
 							  value={this.state.phone}
 							  onChange={this.handleChange}
-                required="true"
               />
               <label htmlFor="phoneInput" data-error="Please enter phone number.">Phone</label>
             </div>
