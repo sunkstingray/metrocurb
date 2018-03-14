@@ -93,6 +93,9 @@ class Admin extends Component {
         this.setState({
             contents: contentArray
         })
+
+        console.log(this.state.contents);
+        console.log(this.state.page);
         const object = {
             content: this.state.contents
         }

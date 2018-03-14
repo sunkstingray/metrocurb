@@ -8,7 +8,6 @@ class Home extends Component {
     super()
     this.state = {
       mongoData: [
-          /* 1 */
             {
                 "component" : "Pricing",
                 "content" : [ 
@@ -38,8 +37,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 2 */
             {
                 "component" : "HowItWorks",
                 "content" : [ 
@@ -81,8 +78,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 3 */
             {
                 "component" : "Home",
                 "content" : [ 
@@ -96,8 +91,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 4 */
             {
                 "component" : "Faq",
                 "content" : [ 
@@ -115,8 +108,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 5 */
             {
                 "component" : "ContactUs",
                 "content" : [ 
@@ -139,13 +130,37 @@ class Home extends Component {
                 ]
             }
       ]
-        
     }
 }
 
 
 componentDidMount() {
-    this.loadContent();
+    this.uploadContent();
+  }
+
+  uploadContent = () => {
+    
+    API.uploadContent(this.state.mongoData[0])
+        .then(result => {
+            API.uploadContent(this.state.mongoData[1])
+                .then(result => {
+                    API.uploadContent(this.state.mongoData[2])
+                        .then(result => {
+                            API.uploadContent(this.state.mongoData[3])
+                            .then(result => {
+                                API.uploadContent(this.state.mongoData[4])
+                                    .then(result => {
+                                        alert("upload successful")
+                                    })
+                            })
+                        })
+                })
+        })
+        .catch(err => console.log(err))
+
+   
+    
+    
   }
 
   loadContent = () => {
@@ -188,6 +203,9 @@ componentDidMount() {
                             <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
                             ))}
                     </ul>
+                    <div className="video-container">
+                        <iframe className="responsive-video" src="https://player.vimeo.com/video/82785910"></iframe>
+                    </div>
                 </div>
                 <div id="pricing">
                     <h3 className="center-align">Pricing</h3>
