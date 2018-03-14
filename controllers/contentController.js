@@ -10,7 +10,7 @@ module.exports = {
   }, 
   update: function(req,res){
     db.Content
-      .findOneAndUpdate({component:req.params.component}, {content:req.body})
+      .findOneAndUpdate({component:req.params.component}, {content:req.body.content})
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
@@ -23,6 +23,12 @@ module.exports = {
   findAll: function(req,res){
     db.Content
       .find()
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+  upload: function(req,res){
+    db.Content
+      .create(req.body)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   }
