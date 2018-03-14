@@ -12,8 +12,5 @@ export default {
     },
     getAllContent: function(){
         return axios.get("/api/content")
-    },
-    uploadContent: function(content){
-        return axios.post("/api/content/upload", content)
     }
 }

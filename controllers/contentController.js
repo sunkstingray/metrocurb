@@ -25,11 +25,5 @@ module.exports = {
       .find()
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
-  },
-  upload: function(req,res){
-    db.Content
-      .create(req.body)
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
   }
 };

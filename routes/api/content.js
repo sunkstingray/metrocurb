@@ -12,9 +12,6 @@ router
 router
   .route("/")
   .get(contentController.findAll)
-
-router
-  .route("/upload")
-  .post(contentController.upload)
+  
   
 module.exports = router;
