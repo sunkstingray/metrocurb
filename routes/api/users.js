@@ -24,5 +24,9 @@ router
   .put(zoho.updateContact)
 
 
+router
+  .route("/zoho/cc")
+  .post(zoho.getForm)
+
 
 module.exports = router;

@@ -8,11 +8,14 @@ class Profile extends Component {
   state = {
     page:"Profile",
     contents:[""],
-    mode:"view"
+    mode:"view",
+    iFrame:"https://subscriptions.zoho.com/subscribe/6ebbfd08b4cde1f9e3d79454c55797d0a5e12fff46ccfe5bad482bf477cf719e/1"
   }
 
   componentDidMount() {
     this.loadContent();
+    this.loadCreditCard();
+    
   }
 
   componentWillReceiveProps(){
@@ -29,12 +32,12 @@ class Profile extends Component {
 
 
   loadContent = () => {
-    console.log(this.props.user._id);
+    //console.log(this.props.user._id);
     const url ='/api/users/'+this.props.user._id;
       axios.get(url)
            .then(result => {
             const zohoId = result.data.zohoId;
-            console.log('zohoId: ' + zohoId);
+            //console.log('zohoId: ' + zohoId);
             const zohoUrl = '/api/users/zoho/' + zohoId;
             axios.get(zohoUrl)
                   .then(result => {
@@ -112,12 +115,37 @@ class Profile extends Component {
           });
   }
 
-    
+  loadCreditCard = () => {
+    const url ='/api/users/zoho/cc';
+    console.log('Load Credit Card');
+    axios.post(url,{
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.state,
+      zip: this.state.zip,
+      username: this.state.username
+    })
+         .then(result => {
+           console.log("Result: ");
+           console.log(result);
+           this.setState({
+             iFrame: result.data
+           });
+         })
+         .catch(error=>{
+           console.log(error);
+         })
+  }  
   
 
  
 
   render(){
+
+   
+
     return this.props.user !== null ? (
          <div className="container">
           <Card>
@@ -146,7 +174,8 @@ class Profile extends Component {
                 id="lastInput"
                 name="lastName"
                 value={this.state.lastName}
-                readOnly
+                onChange={this.handleChange}
+                readOnly={this.viewOrEdit()}
               />
             </div>
             <div className="form-group">
@@ -157,7 +186,8 @@ class Profile extends Component {
                 id="inputAddress"
                 name="address"
                 value={this.state.address}
-                readOnly
+                onChange={this.handleChange}
+                readOnly={this.viewOrEdit()}
               />
             </div>
             <div className="form-row">
@@ -169,8 +199,8 @@ class Profile extends Component {
                   id="inputCity"
                   name="city"
                   value={this.state.city}
-                     onChange={this.handleChange}
-                readOnly={this.viewOrEdit()}
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
                 
                 />
               </div>
@@ -181,7 +211,8 @@ class Profile extends Component {
                   className="form-control"
                   name="state"
                   value={this.state.state}
-                  readOnly
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
                 >
                   <option>Kansas</option>
                   <option>Missouri</option>
@@ -195,7 +226,8 @@ class Profile extends Component {
                   id="inputZip"
                   name="zip"
                   value={this.state.zip}
-                  readOnly
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
                 />
               </div>
             </div> 
@@ -219,7 +251,7 @@ class Profile extends Component {
           </form>
           </Card>
           <Card className="iFrame">
-            <iframe src="https://subscriptions.zoho.com/subscribe/6ebbfd08b4cde1f9e3d79454c55797d0a5e12fff46ccfe5bad482bf477cf719e/1" title="zoho sub"></iframe>
+            <iframe src={this.state.iFrame} title="zoho sub"></iframe>
           </Card>  
         </div>
 
