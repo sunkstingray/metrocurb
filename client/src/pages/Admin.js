@@ -140,12 +140,14 @@ class Admin extends Component {
                                         {(() => {
                                                 let content = this.state.contents
                                                 switch (i) {
-                                                case 0:   return <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg" alt=""/></button>;
-                                                case content.length - 1: return <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg" alt=""/></button>;
+                                                case 0:   return <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveDown(i)}><i class="material-icons">arrow_downward</i></a>;
+                                                case content.length - 1: return <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveUp(i)}><i class="material-icons">arrow_upward</i></a>;
                                                 default:      return (
                                                     <div>
-                                                        <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg" alt=""/></button>
-                                                        <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg" alt=""/></button>
+                                                        {/* <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg" alt=""/></button> */}
+                                                        <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveUp(i)}><i class="material-icons">arrow_upward</i></a>
+                                                        <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveDown(i)}><i class="material-icons">arrow_downward</i></a>
+                                                        {/* <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg" alt=""/></button> */}
                                                     </div>
                                                 )
                                                 }
