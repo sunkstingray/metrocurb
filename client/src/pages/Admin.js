@@ -13,6 +13,8 @@ class Admin extends Component {
             contents: [],
             contentEdit: "",
             arrayIndex: 0,
+            contentHeader:"",
+            contentBody:""
         };
     }
 
@@ -107,7 +109,6 @@ class Admin extends Component {
         }
         API.updateContent(this.state.page, object)
             .then(result => {
-                alert("Element successfully updated!");
                 this.setState({
                     contentEdit: "",
                 })
@@ -127,6 +128,20 @@ class Admin extends Component {
                 
                     <table className="bordered">
                         <thead>
+                            <Modal 
+                                header={this.state.page}
+                                trigger={<Buttons>Add</Buttons>}
+                                onClick={() => this.addContentButton()}>
+                            
+                                <form>
+                                    <textarea className="form-control" rows="3" value={this.state.contentHeader} onChange={this.handleNewInputChange}></textarea>
+                                    <br />
+                                    <textarea className="form-control" rows="3" value={this.state.contentBody} onchange={this.handleNewInputChange}></textarea>
+                                    <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
+                                </form>
+
+
+                            </Modal>
                             <tr>
                                 <th>Move</th>
                                 <th>Content</th>
@@ -140,13 +155,13 @@ class Admin extends Component {
                                         {(() => {
                                                 let content = this.state.contents
                                                 switch (i) {
-                                                case 0:   return <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveDown(i)}><i class="material-icons">arrow_downward</i></a>;
-                                                case content.length - 1: return <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveUp(i)}><i class="material-icons">arrow_upward</i></a>;
+                                                case 0:   return <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveDown(i)}><i className="material-icons">arrow_downward</i></a>;
+                                                case content.length - 1: return <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveUp(i)}><i className="material-icons">arrow_upward</i></a>;
                                                 default:      return (
                                                     <div>
                                                         {/* <button type="submit" onClick={() => this.moveUp(i)}><img className="responsive-img" width="30px" src="./images/up.jpeg" alt=""/></button> */}
-                                                        <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveUp(i)}><i class="material-icons">arrow_upward</i></a>
-                                                        <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveDown(i)}><i class="material-icons">arrow_downward</i></a>
+                                                        <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveUp(i)}><i className="material-icons">arrow_upward</i></a>
+                                                        <a className="btn-floating waves-effect waves-light red" onClick={() => this.moveDown(i)}><i className="material-icons">arrow_downward</i></a>
                                                         {/* <button type="submit" onClick={() => this.moveDown(i)}><img className="responsive-img" width="30px" src="./images/down.jpeg" alt=""/></button> */}
                                                     </div>
                                                 )
@@ -164,7 +179,7 @@ class Admin extends Component {
                                             onClick={() => this.handleEditButtons(i)}>
                                             
                                             <form>
-                                                <textarea className="form-control" rows="3" placeholder={this.state.contentEdit} onChange={this.handleInputChange}></textarea>
+                                                <textarea className="form-control" rows="3" value={this.state.contentEdit} onChange={this.handleInputChange}></textarea>
                                                 <br />
                                                 <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
                                             </form>

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Card from "./../components/Card";
 import axios from "axios";
-
+import API from "../utils/API";
+import facebookLogo from "../images/facebook_logo.png";
+import mailLogo from "../images/mail.png";
 
 function validate(name, email, phone){
 
@@ -37,9 +39,40 @@ class ContactUs extends Component {
         email: false,
         phone: false
       },
-			redirectTo: "null"
+      redirectTo: "null", 
+      contact: [ 
+        {
+            "value" : "Address",
+            "attribute" : "12345 Main St. "
+        }, 
+        {
+            "value" : "City",
+            "attribute" : "Overland Park"
+        }, 
+        {
+            "value" : "State",
+            "attribute" : "KS"
+        }, 
+        {
+            "value" : "Zip Code",
+            "attribute" : "66213"
+        }
+    ],
 		}
-	}
+  }
+
+  componentDidMount() {
+    this.getContactInfo();
+  }
+  
+  getContactInfo = () => {
+    API.getAllContent()
+      .then(result => {
+        this.setState({
+          contact: result.data[4].content
+        })
+      })
+  }
 
 
   handleBlur = (field) => (evt) => {
@@ -97,63 +130,80 @@ class ContactUs extends Component {
     // };
     return(
       <div className="container">
-        <Card>
-            <h4>Contact Us:</h4>
-            <form>
-            <div className="form-group input-field col s12">
-              <input
-                onBlur={this.handleBlur('name')}
-                type="text"
-                required autoComplete="name"
-                className="validate"
-                id="nameInput"
-                name="name"
-							  value={this.state.name}
-							  onChange={this.handleChange}
-              />
-              <label htmlFor="nameInput" data-error="Name is required.">Name</label>
-            </div>
-            <div className="form-group input-field col s12">
-              <input
-              onBlur={this.handleBlur('email')}
-                type="email"
-                required autoComplete="email"
-                className="validate"
-                id="emailInput"
-                name="email"
-							  value={this.state.email}
-							  onChange={this.handleChange}
-              />
-              <label htmlFor="emailInput" data-error="Valid email is required">Email</label>
-            </div>
-            <div className="form-group input-field col s12">
-              <input
-                onBlur={this.handleBlur('phone')}
-                type="tel"
-                required autoComplete="tel"
-                className="validate"
-                id="phoneInput"
-                name="phone"
-							  value={this.state.phone}
-							  onChange={this.handleChange}
-              />
-              <label htmlFor="phoneInput" data-error="Please enter phone number.">Phone</label>
-            </div>
-            <div className="form-group input-field col s12">
-              <textarea
-                onBlur={this.handleBlur('comment')}
-                className="materialize-area"
-                id="commentInput"
-                rows="5"
-                name="comment"
-							  value={this.state.comment}
-							  onChange={this.handleChange}
-              />
-              <label htmlFor="commentInput">Comments</label>
-            </div>
-            <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Send</button>
-            </form>
-        </Card>
+        <div className="row">
+          <div className="col s6">
+              <h4>Contact Us:</h4>
+              <form>
+              <div className="form-group input-field col s12">
+                <input
+                  onBlur={this.handleBlur('name')}
+                  type="text"
+                  required autoComplete="name"
+                  className="validate"
+                  id="nameInput"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+                <label htmlFor="nameInput" data-error="Name is required.">Name</label>
+              </div>
+              <div className="form-group input-field col s12">
+                <input
+                onBlur={this.handleBlur('email')}
+                  type="email"
+                  required autoComplete="email"
+                  className="validate"
+                  id="emailInput"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+                <label htmlFor="emailInput" data-error="Valid email is required">Email</label>
+              </div>
+              <div className="form-group input-field col s12">
+                <input
+                  onBlur={this.handleBlur('phone')}
+                  type="tel"
+                  required autoComplete="tel"
+                  className="validate"
+                  id="phoneInput"
+                  name="phone"
+                  value={this.state.phone}
+                  onChange={this.handleChange}
+                />
+                <label htmlFor="phoneInput" data-error="Please enter phone number.">Phone</label>
+              </div>
+              <div className="form-group input-field col s12">
+                <textarea
+                  onBlur={this.handleBlur('comment')}
+                  className="materialize-area"
+                  id="commentInput"
+                  rows="5"
+                  name="comment"
+                  value={this.state.comment}
+                  onChange={this.handleChange}
+                />
+                <label htmlFor="commentInput">Comments</label>
+              </div>
+              <button disabled={isDisabled} onClick={this.handleSubmit} className="btn btn-primary">Send</button>
+              </form>
+
+          </div>
+          <div className="col s6 center-align">
+
+            <h3 className="center-align">Metro Curbside</h3>
+                <ul>
+                    {this.state.contact.map((paragraph,i) => (          
+                    <li key={i}>{paragraph.attribute}</li>
+                    ))}
+                </ul>
+
+                <a href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" target="_blank"><img src={facebookLogo} className="logo" /></a>
+                <a href="/ContactUs"><img src={mailLogo} className="logo" /></a>
+
+          </div>
+        </div>
+        
       </div>
     )
   }

@@ -22,10 +22,10 @@ constructor() {
   super()
   this.state = {
     loggedIn: false,
-    user: null
+    user: null, 
   }
   axios.get('/auth/user').then(response => {
-    console.log("RD: " + JSON.stringify(response.data));
+    console.log(response.data)
     if (!!response.data.user) {
       console.log('THERE IS A USER')
       this.setState({
@@ -40,9 +40,7 @@ constructor() {
     }
   })
 }
-componentWillMount() {
-  
-}
+
 
 LogOutMethod = () => {
   console.log('logging out')
@@ -71,10 +69,15 @@ render() {
               path="/Profile"
               render={() =>{
                   if(this.state.user) {
+                    if(this.state.user.userRole === "user"){
                       return (<Profile
-                      user={this.state.user}
-                      logoutmethod={this.LogOutMethod}
-                    />)
+                        user={this.state.user}
+                        logoutmethod={this.LogOutMethod}
+                      />)
+                    } else if(this.state.user.userRole === "admin"){
+                      return (<Admin/>)
+                    }
+                     
                   } else {
                     return (<h1>Not Logged In.</h1>);
                   }
