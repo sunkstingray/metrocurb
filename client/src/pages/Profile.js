@@ -8,13 +8,12 @@ class Profile extends Component {
   state = {
     page:"Profile",
     contents:[""],
-    mode:"view",
-    iFrame:"https://subscriptions.zoho.com/subscribe/6ebbfd08b4cde1f9e3d79454c55797d0a5e12fff46ccfe5bad482bf477cf719e/1"
+    mode:"view"
   }
 
   componentDidMount() {
     this.loadContent();
-    this.loadCreditCard();
+    
     
   }
 
@@ -49,7 +48,9 @@ class Profile extends Component {
                         "city"      : result.data["Mailing City"],
                         "state"     : result.data["Mailing State"],
                         "zip"       : result.data["Mailing Zip"],
-                        "username"  : result.data["Email"]
+                        "username"  : result.data["Email"],
+                        "trashday"  : result.data["Trash Day"],
+                        "servicelevel": result.data["Service Level"]
 
                      })
                   })
@@ -115,30 +116,7 @@ class Profile extends Component {
           });
   }
 
-  loadCreditCard = () => {
-    const url ='/api/users/zoho/cc';
-    console.log('Load Credit Card');
-    axios.post(url,{
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      address: this.state.address,
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip,
-      username: this.state.username
-    })
-         .then(result => {
-           console.log("Result: ");
-           console.log(result);
-           this.setState({
-             iFrame: result.data
-           });
-         })
-         .catch(error=>{
-           console.log(error);
-         })
-  }  
-  
+
 
  
 
@@ -211,11 +189,12 @@ class Profile extends Component {
                   className="form-control"
                   name="state"
                   value={this.state.state}
+                  defaultValue={this.state.state}
                   onChange={this.handleChange}
                   readOnly={this.viewOrEdit()}
                 >
-                  <option>Kansas</option>
-                  <option>Missouri</option>
+                  <option value="Kansas">Kansas</option>
+                  <option value="Missouri">Missouri</option>
                 </select>
               </div>
               <div className="form-group col-md-2">
@@ -244,15 +223,40 @@ class Profile extends Component {
               />
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-              
-                {this.state.mode === 'edit' ? <button onClick={this.handleSubmit} className="btn btn-primary">Submit Account Changes</button> : <h1>view mode</h1>}
+            <div className="form-group col-md-2">
+                <label htmlFor="trashday">Trash Day</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="trashday"
+                  name="trashday"
+                  value={this.state.trashday}
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
+                />
+            </div>
+            <div className="form-group col-md-2">
+                <label htmlFor="servicelevel">Service Level</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="servicelevel"
+                  name="servicelevel"
+                  value={this.state.servicelevel}
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
+                />
+            </div>
+
+
+
+
+                {this.state.mode === 'edit' ? <button onClick={this.handleSubmit} className="btn btn-primary">Submit Account Changes</button> : <h1></h1>}
             
               
           </form>
           </Card>
-          <Card className="iFrame">
-            <iframe src={this.state.iFrame} title="zoho sub"></iframe>
-          </Card>  
+          
         </div>
 
 
@@ -267,64 +271,3 @@ export default Profile;
 
 
 
-
-/// CONTACTID
-// :
-// "3071280000000197009"
-// Contact Owner
-// :
-// "Leo Galey"
-// Created By
-// :
-// "Leo Galey"
-// Created Time
-// :
-// "2018-03-06 17:07:04"
-// Description
-// :
-// "Created from Express Route"
-// Email
-// :
-// "12345@test.com"
-// Email Opt Out
-// :
-// "false"
-// First Name
-// :
-// "test"
-// Full Name
-// :
-// "test testlastname"
-// Last Name
-// :
-// "testlastname"
-// Lead Source
-// :
-// "Online Store"
-// MODIFIEDBY
-// :
-// "3071280000000143013"
-// Mailing City
-// :
-// "test city"
-// Mailing State
-// :
-// "Missouri"
-// Mailing Street
-// :
-// "1234"
-// Mailing Zip
-// :
-// "64060"
-// Modified By
-// :
-// "Leo Galey"
-// Modified Time
-// :
-// "2018-03-06 17:07:04"
-// SMCREATORID
-// :
-// "3071280000000143013"
-// SMOWNERID
-// :
-// "3071280000000143013"

@@ -55,8 +55,22 @@ router.post('/logout', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
-	const { firstName,lastName,address,city,state,zip, username, password } = req.body
+	const { firstName,lastName,address,city,state,zip, username, password,trashday,servicelevel } = req.body
 	// ADD VALIDATION
+	let crmServiceLevel;
+	switch (servicelevel) {
+		
+		case "10":
+			crmServiceLevel = "Weekly"
+			break;
+		case "20":
+			crmServiceLevel = "Monthly";
+			break;
+		default:
+			crmServiceLevel = "";
+			break;
+	}
+
 	User.findOne({ 'local.username': username }, (err, userMatch) => {
 		if (userMatch) {
 			return res.json({
@@ -73,10 +87,13 @@ router.post('/signup', (req, res) => {
 			"Mailing Street" : address,
 			"Mailing City" : city,
 			"Mailing State": state,
-			"Mailing Zip"  : zip
+			"Mailing Zip"  : zip,
+			"Service Level": crmServiceLevel,
+			"Trash Day"    : trashday
+
 		}
 
-		console.log(JSON.stringify(userData));
+		//console.log(JSON.stringify(userData));
 
 		return zoho.createContact(userData,(err,result) =>{
 			if (err !== null) {

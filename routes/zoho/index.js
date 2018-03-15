@@ -70,8 +70,12 @@ module.exports = {
 			"Mailing Street" : req.body.address,
 			"Mailing City" : req.body.city,
 			"Mailing State": req.body.state,
-			"Mailing Zip"  : req.body.zip
+      "Mailing Zip"  : req.body.zip,
+  
     }
+
+    console.log("Create form payload: ");
+    console.log(req.body);
 
     var zohoObject = {
       "customer": {
@@ -104,15 +108,15 @@ module.exports = {
           "is_taxable": true
       },
       "plan": {
-          "plan_code": "10",
+          "plan_code": "20",
           "billing_cycles": -1,
           "trial_days": 0
       },
       
-      "reference_id": "bowmanfurniture",
+    
       "additional_param": "new_subscription",
-      "starts_at": "2018-03-13",
-      "redirect_url": "https://afternoon-tor-85875.herokuapp.com/profile"
+      "starts_at": "2018-03-15",
+      "redirect_url": "http://127.0.0.1:3000/profile"
   }
 
     axios.post(url,zohoObject,{
