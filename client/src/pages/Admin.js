@@ -131,12 +131,13 @@ class Admin extends Component {
                             <Modal 
                                 header={this.state.page}
                                 trigger={<Buttons>Add</Buttons>}
-                                onClick={() => this.addContentButton()}>
-                            
+                                >
+                                {/* onClick={() => this.addContentButton()} */}
+                                {/* value={this.state.contentHeader} onChange={this.handleNewInputChange} */}
                                 <form>
-                                    <textarea className="form-control" rows="3" value={this.state.contentHeader} onChange={this.handleNewInputChange}></textarea>
+                                    <textarea className="form-control" rows="3" ></textarea>
                                     <br />
-                                    <textarea className="form-control" rows="3" value={this.state.contentBody} onchange={this.handleNewInputChange}></textarea>
+                                    <textarea className="form-control" rows="3" ></textarea>
                                     <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
                                 </form>
 
