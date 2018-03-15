@@ -130,6 +130,7 @@ class ContactUs extends Component {
     // };
     return(
       <div className="container">
+        <Card>
         <div className="row">
           <div className="col s6">
               <h4>Contact Us:</h4>
@@ -203,7 +204,7 @@ class ContactUs extends Component {
 
           </div>
         </div>
-        
+        </Card>
       </div>
     )
   }
