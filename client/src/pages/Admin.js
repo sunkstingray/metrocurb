@@ -13,6 +13,8 @@ class Admin extends Component {
             contents: [],
             contentEdit: "",
             arrayIndex: 0,
+            contentHeader:"",
+            contentBody:""
         };
     }
 
@@ -126,6 +128,20 @@ class Admin extends Component {
                 
                     <table className="bordered">
                         <thead>
+                            <Modal 
+                                header={this.state.page}
+                                trigger={<Buttons>Add</Buttons>}
+                                onClick={() => this.addContentButton()}>
+                            
+                                <form>
+                                    <textarea className="form-control" rows="3" value={this.state.contentHeader} onChange={this.handleNewInputChange}></textarea>
+                                    <br />
+                                    <textarea className="form-control" rows="3" value={this.state.contentBody} onchange={this.handleNewInputChange}></textarea>
+                                    <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
+                                </form>
+
+
+                            </Modal>
                             <tr>
                                 <th>Move</th>
                                 <th>Content</th>
