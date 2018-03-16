@@ -166,7 +166,7 @@ canBeSubmitted() {
       return(
         <div className="container">
           <Card>
-            <h3>Sign up for a new account.</h3>
+            <h1>Sign up for a new account.</h1>
             <h6 className="amber-text text-darken-4">All fields are required.</h6>
             <form>
               <div className="form-group input-field ">

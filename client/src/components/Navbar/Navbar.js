@@ -10,10 +10,11 @@ if (props.loggedIn) {
             <Navbar >
                 <div className="logoName left">Metro Curbside Cleaning</div>
                 <div className="right links">
-                    <NavItem className="navLink" href='/'>Home</NavItem>
-                    <NavItem className="navLink" href='/ContactUs'>Contact Us</NavItem>
-                    <NavItem className="navLink" href='/Profile'>Profile</NavItem>
-                    <NavItem className="navLink" href='/LogIn' onClick={props.logoutmethod}>Log Out</NavItem>
+                {/* className={window.location.pathname === "/" ? "nav-item active" : "nav-item" */}
+                    <NavItem className={window.location.pathname === "/" ? "nav-item active" : "nav-item"} href='/'>Home</NavItem>
+                    <NavItem className={window.location.pathname === "/ContactUs" ? "nav-item active" : "nav-item"} href='/ContactUs'>Contact Us</NavItem>
+                    <NavItem className={window.location.pathname === "/Profile" ? "nav-item active" : "nav-item"} href='/Profile'>Profile</NavItem>
+                    <NavItem className={window.location.pathname === "/LogIn" ? "nav-item active" : "nav-item"} href='/LogIn' onClick={props.logoutmethod}>Log Out</NavItem>
                 </div>
             </Navbar>
         </div>
@@ -24,10 +25,10 @@ if (props.loggedIn) {
                 <Navbar >
                     <div className="logoName left">Metro Curbside Cleaning</div>
                     <div className="right">
-                        <NavItem className="navLink" href='/'>Home</NavItem>
-                        <NavItem className="navLink" href='/ContactUs'>Contact Us</NavItem>
-                        <NavItem className="navLink" href='/SignUp'>Sign Up</NavItem>
-                        <NavItem className="navLink" href='/LogIn'>Log In</NavItem>
+                        <NavItem className={window.location.pathname === "/" ? "nav-item active" : "nav-item"} href='/'>Home</NavItem>
+                        <NavItem className={window.location.pathname === "/ContactUs" ? "nav-item active" : "nav-item"} href='/ContactUs'>Contact Us</NavItem>
+                        <NavItem className={window.location.pathname === "/SignUp" ? "nav-item active" : "nav-item"} href='/SignUp'>Sign Up</NavItem>
+                        <NavItem className={window.location.pathname === "/LogIn" ? "nav-item active" : "nav-item"} href='/LogIn'>Log In</NavItem>
                     </div>
                 </Navbar>
             </div>

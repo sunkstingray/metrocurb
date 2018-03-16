@@ -57,7 +57,7 @@ class LogIn extends Component {
       return(
         <div className="container">
           <Card>
-            <h3>Log in to your account.</h3>
+            <h1>Log in to your account.</h1>
           <form>
             <div className="form-group input-field col s12">
               <input

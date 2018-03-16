@@ -163,14 +163,14 @@ componentDidMount() {
             </div>
             <div className="card-tabs green darken-3">
                 <ul className="tabs tabs-fixed-width green darken-3">
-                    <li className="tab"><a href="#howItWorks" className="black">How It Works</a></li>
-                    <li className="tab"><a href="#pricing" className="black">Pricing</a></li>
-                    <li className="tab"><a href="#faq" className="black">FAQ</a></li>
+                    <li className="tab"><a href="#howItWorks" className="tabHeader">How It Works</a></li>
+                    <li className="tab"><a href="#pricing" className="tabHeader">Pricing</a></li>
+                    <li className="tab"><a href="#faq" className="tabHeader">FAQ</a></li>
                 </ul>
             </div>
             <div className="card-content cards">
                 <div id="howItWorks">
-                    <h3 className="center-align">How It Works</h3>
+                    <h1 className="center-align">How It Works</h1>
                     <ul>
                             {this.state.mongoData[1].content.map((paragraph,i) => ( 
                                     
@@ -182,7 +182,7 @@ componentDidMount() {
                     </div>
                 </div>
                 <div id="pricing">
-                    <h3 className="center-align">Pricing</h3>
+                    <h1 className="center-align">Pricing</h1>
                     <ul>
                         {this.state.mongoData[0].content.map((paragraph,i) => (          
                         <li key={i} className="center-align"><h5 >{paragraph.value} : </h5>{paragraph.attribute}<br /><br /></li>
@@ -191,7 +191,7 @@ componentDidMount() {
                     <h5 className="center-align">Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
                 </div>
                 <div id="faq">
-                    <h3 className="center-align">FAQ</h3>
+                    <h1 className="center-align">FAQ</h1>
                         {this.state.mongoData[3].content.map((paragraph, i) => (          
                         <div key={i}>
                             <h5>{paragraph.value}</h5>

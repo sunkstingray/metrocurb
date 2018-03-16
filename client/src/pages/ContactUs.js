@@ -134,8 +134,10 @@ class ContactUs extends Component {
       <div className="container">
         <Card>
         <div className="row">
+          <div className="col s12 center-align">
+            <h1>Contact Us</h1>
+          </div>
           <div className="col l6">
-              <h4>Contact Us:</h4>
               <form>
               <div className="form-group input-field col s12">
                 <input
@@ -193,10 +195,10 @@ class ContactUs extends Component {
 
           </div>
           <div className="col l6 center-align">
+            <h4> 913-555-1234</h4>
+            <div class="fb-page" data-href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" data-tabs="messages" data-width="500" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/">Metro Curbside Cleaning LLC</a></blockquote></div>
+                {/* <h4 className="center-align">Metro Curbside Cleaning</h4> */}
             
-            <div class="fb-page" data-href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" data-tabs="messages" data-width="300" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/">Metro Curbside Cleaning LLC</a></blockquote></div>
-              {/* <h4 className="center-align">Metro Curbside Cleaning</h4> */}
-            <h3>Phone Number:</h3><h4> 913-555-1234</h4>
                 
           </div>
         </div>
