@@ -60,7 +60,8 @@ class Profile extends Component {
                         "zip"       : result.data["Mailing Zip"],
                         "username"  : result.data["Email"],
                         "trashday"  : result.data["Trash Day"],
-                        "servicelevel": result.data["Service Level"]
+                        "servicelevel": result.data["Service Level"],
+                        "subscriptionId": result.data["Subscription ID"]
 
                      })
                   })
@@ -126,6 +127,14 @@ class Profile extends Component {
           });
   }
 
+  editPayment = (event) => {
+    event.preventDefault()
+    const url ='/api/users/subscriptions/update/'+this.props.user._id;
+    axios.put(url)
+         .then(result => {
+         }) 
+
+  }
 
 
  
@@ -137,10 +146,15 @@ class Profile extends Component {
     return this.props.user !== null ? (
          <div className="container">
           <Card>
-            <h1>My Account (View)</h1>
+            <h1>My Account</h1>
 
-            <h5><a href="#edit" onClick={this.goToEdit}>Click Here</a> to edit account details. </h5>
-
+            
+            {this.state.mode === 'view' ? (
+            <div>
+              <button onClick={this.goToEdit} className="btn btn-primary">Update Profile</button> 
+              <button onClick={this.editPayment} className="btn btn-primary">Update Payment Method</button>
+            </div>)
+              : ''}
         
           <form autoComplete="no">
 

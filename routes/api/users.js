@@ -32,5 +32,8 @@ router
   .route("/subscriptions/new")
   .get(zoho.updateHostedPageId)
 
+router
+  .route("/subscriptions/update")
+  .put(zoho.getSubscription)
 
 module.exports = router;
