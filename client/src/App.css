@@ -112,11 +112,22 @@ button{
 
 h1 {
   font-size: 3em;
+  color: #192231;
+  font-family: 'Merriweather', serif;
 }
 
-h1, h4, h5 {
+h3 {
+  color: #192231;
+  font-family: 'Merriweather', serif;
+}
+
+h4 {
   color: #33691e;
   font-family: 'Merriweather', serif;
+}
+
+h5 {
+  color: #33691e;
 }
 
 .tabs .tab a{
@@ -125,12 +136,19 @@ h1, h4, h5 {
 }
 .tabs .tab a:hover,.tabs .tab a.active {
   background-color:#cccccc;
-  /* color: #33691e; */
-  /* border-color: #33691e */
+  color: #192231;
+}
 
+.tabs .indicator {
+  background-color: #192231;
 }
 .tabs .tab.disabled a,.tabs .tab.disabled a:hover {
   color:rgba(102,147,153,0.7);	
+}
+
+.price {
+  color: #565656;
+  font-size: 1.2em;
 }
 
 @media only screen and (min-width: 993px){
