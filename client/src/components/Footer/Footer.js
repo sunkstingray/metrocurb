@@ -8,7 +8,7 @@ const Footer = props =>
         <div className="container">
             <div className="row">
                 <div className="col s6">
-                    <h5>&copy; Metro Curbside Cleaning</h5>
+                    <h5 className="logoName">&copy; Metro Curbside Cleaning</h5>
                 </div>
                 <div className="col s6">
                     <a href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" target="_blank"><img src={facebookLogo} className="logo" /></a>

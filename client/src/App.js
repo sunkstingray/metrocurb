@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from 'axios'
 
-import Navbar from "./components/Navbar";
+import NavBar from "./components/Navbar";
 import Wrapper from "./components/Wrapper";
 import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
@@ -60,7 +60,7 @@ render() {
   <Router>
       <div>
           <Wrapper>
-            <Navbar loggedIn={this.state.loggedIn} logoutmethod={this.LogOutMethod}/>
+            <NavBar loggedIn={this.state.loggedIn} logoutmethod={this.LogOutMethod}/>
             <Route exact path="/" render={() => <Home user={this.state.user} />} />
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/SignUp" component={SignUp} />

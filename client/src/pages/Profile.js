@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "./../components/Card";
-
+import {Row, Input} from "react-materialize"
 
 import axios from 'axios';
 
@@ -115,7 +115,7 @@ class Profile extends Component {
                   readOnly
                 />
               </div>
-              <div className="form-group col-md-4">
+              {/* <div className="form-group col-md-4">
                 <label htmlFor="inputState">State</label>
                 <select
                   id="inputState"
@@ -127,7 +127,13 @@ class Profile extends Component {
                   <option>Kansas</option>
                   <option>Missouri</option>
                 </select>
-              </div>
+              </div> */}
+              <Row>
+                <Input s={12} type='select' label="State" disabled="disabled">
+                  <option value='Kansas'>Kansas</option>
+                  <option value='Missouri'>Missouri</option>
+                </Input>
+              </Row>
               <div className="form-group col-md-2">
                 <label htmlFor="inputZip">Zip</label>
                 <input

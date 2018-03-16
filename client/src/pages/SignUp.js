@@ -2,6 +2,7 @@ import React, { Component } from "react";
 //import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
 import axios from "axios";
+import {Row, Input} from "react-materialize"
 // import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
 
@@ -173,21 +174,14 @@ canBeSubmitted() {
                   <label htmlFor="inputCity" data-error="Required Field">City</label>
                 </div>
 
-
-                <label>State</label>
-                  <select
-                      id="inputState"
-                      className="form-control validate browser-default light-green lighten-5"
-                      name="state"
-                      value={this.state.state}
-                      onChange={this.handleChange}
-                      autocomplete='address-level1'
-                      required="true"
-                    >
-                      <option>Kansas</option>
-                      <option>Missouri</option>
-                    </select>
-
+                  <Row className="form-group input-field col s12" >
+                    <Input className="form-group input-field" s={12} type='select'>
+                      {/* <option value='Kansas'>Kansas</option> */}
+                      <option value='Kansas'>Kansas</option>
+                      <option value='Missouri'>Missouri</option>
+                    </Input>
+                    <label htmlFor="inputCity" data-error="Required Field">State</label>
+                  </Row>
                   
                 <div className="form-group input-field col s12">
                   <input
