@@ -13,4 +13,8 @@ router
   .route("/")
   .get(contentController.findAll)
   
+router
+  .route("/contact")
+  .get(contentController.findContact)
+  
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "./../components/Card";
 import API from "../utils/API";
+import metrocurbHeader from "../images/metrocurb-header.jpg";
 
 class Home extends Component {
 
@@ -8,7 +9,6 @@ class Home extends Component {
     super()
     this.state = {
       mongoData: [
-          /* 1 */
             {
                 "component" : "Pricing",
                 "content" : [ 
@@ -38,8 +38,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 2 */
             {
                 "component" : "HowItWorks",
                 "content" : [ 
@@ -81,8 +79,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 3 */
             {
                 "component" : "Home",
                 "content" : [ 
@@ -96,8 +92,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 4 */
             {
                 "component" : "Faq",
                 "content" : [ 
@@ -115,8 +109,6 @@ class Home extends Component {
                     }
                 ]
             },
-
-            /* 5 */
             {
                 "component" : "ContactUs",
                 "content" : [ 
@@ -139,7 +131,6 @@ class Home extends Component {
                 ]
             }
       ]
-        
     }
 }
 
@@ -168,9 +159,7 @@ componentDidMount() {
       <div  className="container">
         <Card>
             <div className="center-align">
-                <h1>Metro Curbside Cleaning</h1>
-                <h4>We are a curbside cleaning service for your trash and recycle bins. </h4>
-                <h5>All of our cleaning products are eco friendly (which means they will not hurt the environment)</h5>
+                <img src={metrocurbHeader} className="responsive-img" />
             </div>
             <div className="card-tabs transparent">
                 <ul className="tabs tabs-fixed-width transparent">
@@ -188,6 +177,9 @@ componentDidMount() {
                             <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
                             ))}
                     </ul>
+                    <div className="video-container">
+                        <iframe className="responsive-video" src="https://player.vimeo.com/video/82785910" title="How it works vicdeo"></iframe>
+                    </div>
                 </div>
                 <div id="pricing">
                     <h3 className="center-align">Pricing</h3>
