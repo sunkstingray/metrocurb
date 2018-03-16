@@ -8,6 +8,9 @@ class Profile extends Component {
   state = {
     page:"Profile",
     contents:[""],
+
+    mode:"view",
+
     firstName: "",
     lastName: "",
     address: "",
@@ -15,10 +18,13 @@ class Profile extends Component {
     state: "",
     zip: "",
     username: ""
+
   }
 
   componentDidMount() {
     this.loadContent();
+    
+    
   }
 
   componentWillReceiveProps(){
@@ -35,12 +41,12 @@ class Profile extends Component {
 
 
   loadContent = () => {
-    console.log(this.props.user._id);
+    //console.log(this.props.user._id);
     const url ='/api/users/'+this.props.user._id;
       axios.get(url)
            .then(result => {
             const zohoId = result.data.zohoId;
-            console.log('zohoId: ' + zohoId);
+            //console.log('zohoId: ' + zohoId);
             const zohoUrl = '/api/users/zoho/' + zohoId;
             axios.get(zohoUrl)
                   .then(result => {
@@ -52,7 +58,9 @@ class Profile extends Component {
                         "city"      : result.data["Mailing City"],
                         "state"     : result.data["Mailing State"],
                         "zip"       : result.data["Mailing Zip"],
-                        "username"  : result.data["Email"]
+                        "username"  : result.data["Email"],
+                        "trashday"  : result.data["Trash Day"],
+                        "servicelevel": result.data["Service Level"]
 
                      })
                   })
@@ -62,14 +70,80 @@ class Profile extends Component {
 
     }
 
+  viewOrEdit = () => {
+    if(this.state.mode === 'view'){
+      return 'readOnly';
+    }
+    return ;
+  }
+
+  goToEdit = () => {
+    this.setState ({
+      mode: "edit"
+    })
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = event => {
+  event.preventDefault()
+
+    console.log(this.props.user._id);
+    const url ='/api/users/'+this.props.user._id;
+      axios.get(url)
+           .then(result => {
+            const zohoId = result.data.zohoId;
+            console.log('zohoId: ' + zohoId);
+            const zohoUrl = '/api/users/zoho/' + zohoId;
+            axios.put(zohoUrl,{
+                          firstName: this.state.firstName,
+                          lastName: this.state.lastName,
+                          address: this.state.address,
+                          city: this.state.city,
+                          state: this.state.state,
+                          zip: this.state.zip,
+                          username: this.state.username
+                  })
+                  .then(result => {
+
+                     this.setState({
+                        "firstName" : result.data["First Name"],
+                        "lastName"  : result.data["Last Name"],
+                        "address"   : result.data["Mailing Street"],
+                        "city"      : result.data["Mailing City"],
+                        "state"     : result.data["Mailing State"],
+                        "zip"       : result.data["Mailing Zip"],
+                        "username"  : result.data["Email"],
+                        "mode"      : 'view'
+
+                     })
+                  })
+
+          });
+  }
+
+
+
+ 
 
   render(){
+
+   
+
     return this.props.user !== null ? (
          <div className="container">
           <Card>
             <h1>My Account (View)</h1>
-            <h5><a href="#edit">Click Here</a> to edit account details. </h5>
+
+            <h5><a href="#edit" onClick={this.goToEdit}>Click Here</a> to edit account details. </h5>
+
+        
           <form autoComplete="no">
+
              <div className="form-group">
               <label htmlFor="firstInput">First Name</label>
               <input
@@ -78,7 +152,10 @@ class Profile extends Component {
                 id="firstInput"
                 name="firstName"
                 value={this.state.firstName}
-                readOnly
+                onChange={this.handleChange}
+                readOnly={this.viewOrEdit()}
+                
+                
               />
             </div>
             <div className="form-group">
@@ -89,7 +166,8 @@ class Profile extends Component {
                 id="lastInput"
                 name="lastName"
                 value={this.state.lastName}
-                readOnly
+                onChange={this.handleChange}
+                readOnly={this.viewOrEdit()}
               />
             </div>
             <div className="form-group">
@@ -100,7 +178,8 @@ class Profile extends Component {
                 id="inputAddress"
                 name="address"
                 value={this.state.address}
-                readOnly
+                onChange={this.handleChange}
+                readOnly={this.viewOrEdit()}
               />
             </div>
             <div className="form-row">
@@ -112,7 +191,9 @@ class Profile extends Component {
                   id="inputCity"
                   name="city"
                   value={this.state.city}
-                  readOnly
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
+                
                 />
               </div>
               <div className="form-group col-md-4">
@@ -122,10 +203,12 @@ class Profile extends Component {
                   className="form-control"
                   name="state"
                   value={this.state.state}
-                  readOnly
+                  defaultValue={this.state.state}
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
                 >
-                  <option>Kansas</option>
-                  <option>Missouri</option>
+                  <option value="Kansas">Kansas</option>
+                  <option value="Missouri">Missouri</option>
                 </select>
               </div>
               <div className="form-group col-md-2">
@@ -136,7 +219,8 @@ class Profile extends Component {
                   id="inputZip"
                   name="zip"
                   value={this.state.zip}
-                  readOnly
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
                 />
               </div>
             </div> 
@@ -153,13 +237,40 @@ class Profile extends Component {
               />
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
+            <div className="form-group col-md-2">
+                <label htmlFor="trashday">Trash Day</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="trashday"
+                  name="trashday"
+                  value={this.state.trashday}
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
+                />
+            </div>
+            <div className="form-group col-md-2">
+                <label htmlFor="servicelevel">Service Level</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="servicelevel"
+                  name="servicelevel"
+                  value={this.state.servicelevel}
+                  onChange={this.handleChange}
+                  readOnly={this.viewOrEdit()}
+                />
+            </div>
+
+
+
+
+                {this.state.mode === 'edit' ? <button onClick={this.handleSubmit} className="btn btn-primary">Submit Account Changes</button> : <h1></h1>}
             
-           
+              
           </form>
           </Card>
-          <Card className="iFrame">
-            <iframe src="https://subscriptions.zoho.com/subscribe/6ebbfd08b4cde1f9e3d79454c55797d0a5e12fff46ccfe5bad482bf477cf719e/1" title="zoho sub"></iframe>
-          </Card>  
+          
         </div>
 
 
@@ -174,64 +285,3 @@ export default Profile;
 
 
 
-
-/// CONTACTID
-// :
-// "3071280000000197009"
-// Contact Owner
-// :
-// "Leo Galey"
-// Created By
-// :
-// "Leo Galey"
-// Created Time
-// :
-// "2018-03-06 17:07:04"
-// Description
-// :
-// "Created from Express Route"
-// Email
-// :
-// "12345@test.com"
-// Email Opt Out
-// :
-// "false"
-// First Name
-// :
-// "test"
-// Full Name
-// :
-// "test testlastname"
-// Last Name
-// :
-// "testlastname"
-// Lead Source
-// :
-// "Online Store"
-// MODIFIEDBY
-// :
-// "3071280000000143013"
-// Mailing City
-// :
-// "test city"
-// Mailing State
-// :
-// "Missouri"
-// Mailing Street
-// :
-// "1234"
-// Mailing Zip
-// :
-// "64060"
-// Modified By
-// :
-// "Leo Galey"
-// Modified Time
-// :
-// "2018-03-06 17:07:04"
-// SMCREATORID
-// :
-// "3071280000000143013"
-// SMOWNERID
-// :
-// "3071280000000143013"
