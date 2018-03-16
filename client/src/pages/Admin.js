@@ -13,8 +13,6 @@ class Admin extends Component {
             contents: [],
             contentEdit: "",
             arrayIndex: 0,
-            contentHeader:"",
-            contentBody:""
         };
     }
 

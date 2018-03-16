@@ -2,6 +2,7 @@ import React, { Component } from "react";
 //import { Redirect } from 'react-router-dom'
 import Card from "./../components/Card";
 import axios from "axios";
+import {Row, Input} from "react-materialize"
 // import googleButton from '../images/btn_google_signin_dark_normal_web.png'
 
 
@@ -24,6 +25,10 @@ function validate(username, password, passwordVal){
   // true means invalid, so our conditions got reversed
 }
 
+function getFormURL (user){
+
+}
+
 class SignUp extends Component {
 	constructor() {
 		super()
@@ -41,7 +46,11 @@ class SignUp extends Component {
         username: false,
         password: false,
       },
-			redirectTo: "null"
+      redirectTo: "null",
+      userCreated:false,
+      iFrame:"",
+      trashday:"",
+      servicelevel:""
 		}
 	}
 
@@ -75,22 +84,51 @@ handleSubmit = event => {
     //local:{
     username: this.state.username,
     password: this.state.password,
+    trashday: this.state.trashday,
+    servicelevel: this.state.servicelevel
     // }
   })
   .then(response =>{
     // const user = {username: this.state.username, password: this.state.password};
     console.log(response);
-    window.location.href = "/Profile";
+    //window.location.href = "/Profile";
+    this.loadCreditCardForm();
   })
   .catch(error =>{
     console.log(error);
   });
 
-  // this.props._login(this.state.username, this.state.password)
-  // this.setState({
-  //   redirectTo: '/'
-  // })
 }
+
+loadCreditCardForm = () => {
+  const url ='/api/users/zoho/cc';
+  console.log('Load Credit Card');
+  axios.post(url,{
+    firstName: this.state.firstName,
+    lastName: this.state.lastName,
+    address: this.state.address,
+    city: this.state.city,
+    state: this.state.state,
+    zip: this.state.zip,
+    username: this.state.username,
+    trashday:this.state.trashday,
+    servicelevel: this.state.servicelevel
+  })
+       .then(result => {
+         console.log("Result: ");
+         console.log(result);
+         this.setState({
+           iFrame: result.data,
+           userCreated: true
+         });
+       })
+       .catch(error=>{
+         console.log(error);
+       })
+}  
+
+
+
 
 canBeSubmitted() {
   const errors = validate(this.state.username, this.state.password, this.state.passwordVal);
@@ -100,19 +138,31 @@ canBeSubmitted() {
 
   
   render(){
-    const errors = validate(this.state.username, this.state.password, this.state.passwordVal);
-    console.log("errors? " + JSON.stringify(errors));
-    const isDisabled = Object.keys(errors).some(x => errors[x]);
-    console.log("Disabled? " + isDisabled);
-    const shouldMarkError = (field) => {
-      const hasError = errors[field];
-      const shouldShow = this.state.touched[field];
+    
+    if (this.state.userCreated) {
+		   return (
+        <div className="container">
+          <Card>
+            <h1>Payment Information</h1>         
+          </Card>
+          <Card className="iFrame">
+            <iframe src={this.state.iFrame} title="zoho sub"></iframe>
+          </Card>  
+        </div>
+       );
+	  } else {
 
-      return hasError ? shouldShow : false;
-    };
-    // if (this.state.redirectTo) {
-		// 	return <Redirect to={{ pathname: this.state.redirectTo }} />
-		// } else {
+      const errors = validate(this.state.username, this.state.password, this.state.passwordVal);
+      console.log("errors? " + JSON.stringify(errors));
+      const isDisabled = Object.keys(errors).some(x => errors[x]);
+      console.log("Disabled? " + isDisabled);
+      const shouldMarkError = (field) => {
+        const hasError = errors[field];
+        const shouldShow = this.state.touched[field];
+  
+        return hasError ? shouldShow : false;
+      };
+
       return(
         <div className="container">
           <Card>
@@ -173,21 +223,14 @@ canBeSubmitted() {
                   <label htmlFor="inputCity" data-error="Required Field">City</label>
                 </div>
 
-
-                <label>State</label>
-                  <select
-                      id="inputState"
-                      className="form-control validate browser-default light-green lighten-5"
-                      name="state"
-                      value={this.state.state}
-                      onChange={this.handleChange}
-                      autocomplete='address-level1'
-                      required="true"
-                    >
-                      <option>Kansas</option>
-                      <option>Missouri</option>
-                    </select>
-
+                  <Row className="form-group input-field col s12" >
+                    <Input className="form-group input-field" s={12} type='select'>
+                      {/* <option value='Kansas'>Kansas</option> */}
+                      <option value='Kansas'>Kansas</option>
+                      <option value='Missouri'>Missouri</option>
+                    </Input>
+                    <label htmlFor="inputCity" data-error="Required Field">State</label>
+                  </Row>
                   
                 <div className="form-group input-field col s12">
                   <input
@@ -244,6 +287,35 @@ canBeSubmitted() {
                 />
                 <label htmlFor="passwordInput2">Re-Enter Password</label>
               </div>
+              <label>Service Level</label>
+                  <select
+                      id="inputServiceLevel"
+                      className="form-control validate browser-default light-green lighten-5"
+                      name="servicelevel"
+                      value={this.state.servicelevel}
+                      onChange={this.handleChange}
+                      autocomplete='no'
+                      required="true"
+                    >
+                      <option value="10">Weekly Cleaning Subscription ($400/year)</option>
+                      <option value="20">Monthly Cleaning Subscription ($199/year)</option>
+                  </select>
+                <label>Trash Day</label>
+                  <select
+                    id="inputTrashDay"
+                    className="form-control validate browser-default light-green lighten-5"
+                    name="trashday"
+                    value={this.state.trashday}
+                    onChange={this.handleChange}
+                    autocomplete='no'
+                    required="true"
+                  >
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                  </select>
               <button onClick={this.handleSubmit} className={isDisabled ? "disabled btn btn-primary" : "btn btn-primary"}>Sign Up</button>
             </form>
           </Card>
@@ -252,6 +324,6 @@ canBeSubmitted() {
       );
     }
   }
-// }
+}
 export default SignUp;
 
