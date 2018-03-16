@@ -13,9 +13,10 @@ class Admin extends Component {
             contents: [],
             contentEdit: "",
             arrayIndex: 0,
+            addValue: "",
+            addAttribute: "",
         };
     }
-
 
     componentDidMount() {
         this.handleClick("HowItWorks");
@@ -51,8 +52,7 @@ class Admin extends Component {
             contentEdit: contentEdit,
         });
 
-        };
-
+    };
 
     moveUp = (i) => {
         const content = this.state.contents;
@@ -123,6 +123,70 @@ class Admin extends Component {
             })
             .catch(err => console.log(err));
     }
+
+    handleAddAttributeChange = event => {
+        let attributeEdit = event.target.value;
+        this.setState({
+            addAttribute: attributeEdit
+        })   
+    }
+
+    handleAddValueChange = event => {
+        let valueEdit = event.target.value;
+        this.setState ({
+            addValue: valueEdit
+        })
+
+    }
+
+    handleAddSubmit = event => {
+        event.preventDefault();
+
+        if (this.state.addAttribute !== "" && this.state.addValue !== "") {
+            let object = {
+                value: this.state.addValue,
+                attribute: this.state.addAttribute
+            }
+            let newContent = this.state.contents;
+            newContent.push(object);
+            let newObject = {
+                content: newContent,
+            }
+            
+            
+            API.updateContent(this.state.page, newObject)
+                .then(result => {
+                    console.log("success");
+                })
+                .catch(err => console.log(err));
+        }
+        
+    }
+
+    handleDelete = i => {
+        let currentContent = this.state.contents;
+        console.log(currentContent)
+        currentContent.splice(i, 1)
+        console.log(currentContent)
+        let object = {
+            content: currentContent
+        }
+
+        if (this.state.page === "HowItWorks"){
+            for (let k = i; k < currentContent.length; k ++){
+                currentContent[k].value = i+1;
+                i ++;
+            }
+        } 
+        
+        API.updateContent(this.state.page, object)
+        .then(result => {
+            console.log("success")
+        })
+        .catch(err => console.log(err));
+        
+    }
+
     
     render(){
         return(
@@ -142,11 +206,11 @@ class Admin extends Component {
                                 >
                                 <form>
                                     <p>Heading</p>
-                                    <textarea className="form-control" rows="1" ></textarea>
+                                    <textarea className="form-control" rows="1" onChange={this.handleAddValueChange}></textarea>
                                     <br />
                                     <p>Text</p>
-                                    <textarea className="form-control" rows="3" ></textarea>
-                                    <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
+                                    <textarea className="form-control" rows="3" onChange={this.handleAddAttributeChange}></textarea>
+                                    <Buttons type="submit" onClick={this.handleAddSubmit}>Submit Add</Buttons>
                                 </form>
 
 
@@ -193,6 +257,7 @@ class Admin extends Component {
                                                 <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
                                             </form>
                                         </Modal>
+                                        <Buttons onClick={() => this.handleDelete(i)}>Delete</Buttons>
                                     </td>
                                 </tr>
                             ))}
