@@ -87,10 +87,14 @@ module.exports = {
               console.log(result.data);
               const subId = result.data.data.subscription.subscription_id;
               const zohoContact = {
-                "Hosted Page Id": subId
+                "Subscription ID": subId
               }
               zoho.execute('crm','Contacts','updateRecords',zohoId,[zohoContact],(err,userData)=>{
-                  res.send(userData);
+                  if(err){
+                    res.redirect('/');
+                  }
+                  //window.location.href = "/Profile";
+                  res.redirect('http://127.0.0.1:3000/profile');
               })
             })
             
@@ -107,6 +111,7 @@ module.exports = {
 			"Mailing City" : req.body.city,
 			"Mailing State": req.body.state,
       "Mailing Zip"  : req.body.zip,
+      
   
     }
 
@@ -115,43 +120,39 @@ module.exports = {
 
     var zohoObject = {
       "customer": {
-          "display_name": "Bowman Furniture",
-          "salutation": "Mr.",
-          "first_name": "Benjamin",
-          "last_name": "George",
-          "email": "benjamin.george@bowmanfurniture.com",
-          "company_name": "Bowman Furniture",
+          "display_name": req.body.firstName + ' ' + req.body.lastName,
+          "first_name": req.body.firstName,
+          "last_name": req.body.lastName,
+          "email": req.body.username,
           "billing_address": {
-              "attention": "Benjamin George",
-              "street": "Harrington Bay Street",
-              "city": "Salt Lake City",
-              "state": "CA",
+              "attention": req.body.firstName + ' ' + req.body.lastName,
+              "street": req.body.address,
+              "city": req.body.city,
+              "state": "MO",
               "country": "U.S.A",
-              "zip": "92612",
-              "fax": "4527389"
+              "zip": req.body.zip
           },
           "shipping_address": {
-              "attention": "Benjamin George",
-              "street": req.body.address,
-              "city": "Salt Lake City",
-              "state": "CA",
-              "country": "U.S.A",
-              "zip": "92612",
-              "fax": "4527389"
+            "attention": req.body.firstName + ' ' + req.body.lastName,
+            "street": req.body.address,
+            "city": req.body.city,
+            "state": "MO",
+            "country": "U.S.A",
+            "zip": req.body.zip
           },
           "payment_terms": 1,
           "payment_terms_label": "Due On Receipt",
           "is_taxable": true
       },
       "plan": {
-          "plan_code": "20",
+          "plan_code": req.body.servicelevel,
           "billing_cycles": -1,
           "trial_days": 0
       },
       
     
       "additional_param": "new_subscription",
-      "starts_at": "2018-03-15",
+      "starts_at": "2018-03-16",
       "redirect_url": "http://127.0.0.1:3001/api/users/subscriptions/new"
   }
 
@@ -168,5 +169,32 @@ module.exports = {
     })
       
     
+  },
+  getSubscription: (req,res) => {
+    const subId = req.params.subId;
+    const url = 'https://subscriptions.zoho.com/api/v1/hostedpages/updatecard';
+
+    const zohoObject = {
+      "subscription_id": subId,
+      "additional_param": "update_card",
+      "auto_collect": true,
+      "redirect_url": "http://127.0.0.1:3000/Profile"
+    }
+    console.log(zohoObject);
+    axios.post(url,zohoObject,{
+      headers: {
+        "Authorization":"Zoho-authtoken " + 'c4e12486fab21594d38c518a19dbdba7',
+        "X-com-zoho-subscriptions-organizationid": "663298163",
+        "Content-Type": "application/json"
+
+      }
+    }).then(result => {
+      console.log('result from zoho sub update:');
+      console.log(result.data.hostedpage.url);
+      res.send(result.data.hostedpage.url);
+    })
+
+
+
   }
 }

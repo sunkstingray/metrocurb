@@ -17,7 +17,9 @@ class Profile extends Component {
     city: "",
     state: "",
     zip: "",
-    username: ""
+    username: "",
+    iFrame: "",
+    updateCard: false
 
   }
 
@@ -60,7 +62,8 @@ class Profile extends Component {
                         "zip"       : result.data["Mailing Zip"],
                         "username"  : result.data["Email"],
                         "trashday"  : result.data["Trash Day"],
-                        "servicelevel": result.data["Service Level"]
+                        "servicelevel": result.data["Service Level"],
+                        "subscriptionId": result.data["Subscription ID"]
 
                      })
                   })
@@ -126,21 +129,53 @@ class Profile extends Component {
           });
   }
 
+  editPayment = (event) => {
+    event.preventDefault()
+    const url ='/api/users/subscriptions/update/'+this.state.subscriptionId;
+    axios.put(url)
+         .then(result => {
+          
+           
+           this.setState ({
+             iFrame: result.data,
+             updateCard: true
+           })
+         }) 
+
+  }
 
 
  
 
   render(){
-
-   
+    if (this.state.updateCard) {
+      return (
+       <div className="container">
+         <Card>
+           <h1>Update Payment Information</h1>         
+         </Card>
+         <Card className="iFrame">
+           <iframe src={this.state.iFrame} title="update card"></iframe>
+         </Card>  
+       </div>
+      );
+   }
+   else {
 
     return this.props.user !== null ? (
          <div className="container">
           <Card>
-            <h3>My Account (View)</h3>
 
-            <h5><a href="#edit" onClick={this.goToEdit}>Click Here</a> to edit account details. </h5>
+            <h1>My Account</h1>
 
+
+            
+            {this.state.mode === 'view' ? (
+            <div>
+              <button onClick={this.goToEdit} className="btn btn-primary">Edit Profile</button> 
+              <button onClick={this.editPayment} className="btn btn-primary">Update Credit Card</button>
+            </div>)
+              : ''}
         
           <form autoComplete="no">
             
@@ -282,7 +317,8 @@ class Profile extends Component {
 
 
 
-    ) : <div className="container"></div>;
+      ) : <div className="container"></div>;
+    }
   }  
   
   
