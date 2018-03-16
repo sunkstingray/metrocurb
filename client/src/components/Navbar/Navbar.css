@@ -3,8 +3,18 @@ nav {
     background-color: #192231;
 }
 
+nav ul li:hover {
+    background-color: #606163;
+}
+
+nav ul li.active {
+background-color: #54637c;
+}
+
+
 .logoName {
     font-size: 30px;
+    padding-left: 20px
 }
 
 
