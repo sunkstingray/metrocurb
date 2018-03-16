@@ -2,6 +2,8 @@ var Zoho = require('node-zoho');
 var token = "819a8ad65f01c4aa231231e8d6b5ad81";
 var zoho = new Zoho({ authToken: token });
 var axios = require('axios');
+var userController = require("../../controllers/userController");
+const db = require("../../models");
 
 var records = [
   {
@@ -62,6 +64,40 @@ module.exports = {
       }
     });
   },
+  updateHostedPageId: (req,res) => {
+      console.log("params: ");
+      console.log(req.query);
+      const hostedPageId = req.query.hostedpage_id; 
+      console.log("userid:" + req.user._id);
+
+      db.Users
+          .findById(req.user._id)
+          .then(dbUser => {
+            const zohoId = dbUser.zohoId;
+            const url = 'https://subscriptions.zoho.com/api/v1/hostedpages/' + hostedPageId;
+
+            axios.get(url,{
+              headers: {
+                "Authorization":"Zoho-authtoken " + 'c4e12486fab21594d38c518a19dbdba7',
+                "X-com-zoho-subscriptions-organizationid": "663298163",
+                "Content-Type": "application/json"
+              }
+            })
+            .then(result => {
+              console.log(result.data);
+              const subId = result.data.data.subscription.subscription_id;
+              const zohoContact = {
+                "Hosted Page Id": subId
+              }
+              zoho.execute('crm','Contacts','updateRecords',zohoId,[zohoContact],(err,userData)=>{
+                  res.send(userData);
+              })
+            })
+            
+          })
+          .catch(err => res.status(422).json(err));
+
+  },
   getForm: (req,res) => {
     const url = 'https://subscriptions.zoho.com/api/v1/hostedpages/newsubscription';
     var zohoContact = {
@@ -96,7 +132,7 @@ module.exports = {
           },
           "shipping_address": {
               "attention": "Benjamin George",
-              "street": "Harrington Bay Street",
+              "street": req.body.address,
               "city": "Salt Lake City",
               "state": "CA",
               "country": "U.S.A",
@@ -116,7 +152,7 @@ module.exports = {
     
       "additional_param": "new_subscription",
       "starts_at": "2018-03-15",
-      "redirect_url": "http://127.0.0.1:3000/profile"
+      "redirect_url": "http://127.0.0.1:3001/api/users/subscriptions/new"
   }
 
     axios.post(url,zohoObject,{

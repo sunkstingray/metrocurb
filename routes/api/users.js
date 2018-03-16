@@ -28,5 +28,9 @@ router
   .route("/zoho/cc")
   .post(zoho.getForm)
 
+router
+  .route("/subscriptions/new")
+  .get(zoho.updateHostedPageId)
+
 
 module.exports = router;
