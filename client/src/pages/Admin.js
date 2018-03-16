@@ -120,6 +120,7 @@ class Admin extends Component {
                 this.setState({
                     contentEdit: "",
                 })
+                window.location.href = "/Profile";
             })
             .catch(err => console.log(err));
     }
@@ -157,6 +158,7 @@ class Admin extends Component {
             API.updateContent(this.state.page, newObject)
                 .then(result => {
                     console.log("success");
+                    window.location.href = "/Profile";
                 })
                 .catch(err => console.log(err));
         }
@@ -182,6 +184,8 @@ class Admin extends Component {
         API.updateContent(this.state.page, object)
         .then(result => {
             console.log("success")
+            window.location.href = "/Profile";
+            this.handleClick(this.state.page)
         })
         .catch(err => console.log(err));
         
