@@ -28,7 +28,7 @@ class LogOut extends Component {
     return(
       <div className="container">
         <Card>
-            <h1>You have been logged out.</h1>
+            <h3>You have been logged out.</h3>
         </Card>
       </div>
     )

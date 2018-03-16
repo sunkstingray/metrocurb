@@ -161,8 +161,8 @@ componentDidMount() {
             <div className="center-align">
                 <img src={metrocurbHeader} className="responsive-img" />
             </div>
-            <div className="card-tabs transparent">
-                <ul className="tabs tabs-fixed-width transparent">
+            <div className="card-tabs green darken-3">
+                <ul className="tabs tabs-fixed-width green darken-3">
                     <li className="tab"><a href="#howItWorks" className="black">How It Works</a></li>
                     <li className="tab"><a href="#pricing" className="black">Pricing</a></li>
                     <li className="tab"><a href="#faq" className="black">FAQ</a></li>
@@ -174,7 +174,7 @@ componentDidMount() {
                     <ul>
                             {this.state.mongoData[1].content.map((paragraph,i) => ( 
                                     
-                            <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
+                            <li key={i}><h5>{paragraph.value} : </h5>{paragraph.attribute}<br /><br /></li>
                             ))}
                     </ul>
                     <div className="video-container">
@@ -185,10 +185,10 @@ componentDidMount() {
                     <h3 className="center-align">Pricing</h3>
                     <ul>
                         {this.state.mongoData[0].content.map((paragraph,i) => (          
-                        <li key={i}>{paragraph.value} : {paragraph.attribute}</li>
+                        <li key={i} className="center-align"><h5 >{paragraph.value} : </h5>{paragraph.attribute}<br /><br /></li>
                         ))}
                     </ul>
-                    <h5>Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
+                    <h5 className="center-align">Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
                 </div>
                 <div id="faq">
                     <h3 className="center-align">FAQ</h3>

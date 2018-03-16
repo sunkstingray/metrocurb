@@ -4,6 +4,7 @@ import axios from "axios";
 import API from "../utils/API";
 import facebookLogo from "../images/facebook_logo.png";
 import mailLogo from "../images/mail.png";
+import logoImage from "../images/logo.jpg"
 
 function validate(name, email, phone){
 
@@ -68,6 +69,7 @@ class ContactUs extends Component {
   getContactInfo = () => {
     API.getAllContent()
       .then(result => {
+        console.log(result.data[4].content)
         this.setState({
           contact: result.data[4].content
         })
@@ -132,7 +134,7 @@ class ContactUs extends Component {
       <div className="container">
         <Card>
         <div className="row">
-          <div className="col s6">
+          <div className="col l6">
               <h4>Contact Us:</h4>
               <form>
               <div className="form-group input-field col s12">
@@ -190,18 +192,12 @@ class ContactUs extends Component {
               </form>
 
           </div>
-          <div className="col s6 center-align">
-
-            <h3 className="center-align">Metro Curbside</h3>
-                <ul>
-                    {this.state.contact.map((paragraph,i) => (          
-                    <li key={i}>{paragraph.attribute}</li>
-                    ))}
-                </ul>
-
-                <a href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" target="_blank"><img src={facebookLogo} className="logo" /></a>
-                <a href="/ContactUs"><img src={mailLogo} className="logo" /></a>
-
+          <div className="col l6 center-align">
+            
+            <div class="fb-page" data-href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" data-tabs="messages" data-width="300" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/">Metro Curbside Cleaning LLC</a></blockquote></div>
+              {/* <h4 className="center-align">Metro Curbside Cleaning</h4> */}
+            <h3>Phone Number:</h3><h4> 913-555-1234</h4>
+                
           </div>
         </div>
         </Card>
