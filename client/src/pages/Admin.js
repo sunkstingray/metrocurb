@@ -13,9 +13,10 @@ class Admin extends Component {
             contents: [],
             contentEdit: "",
             arrayIndex: 0,
+            addValue: "",
+            addAttribute: "",
         };
     }
-
 
     componentDidMount() {
         this.handleClick("HowItWorks");
@@ -51,13 +52,17 @@ class Admin extends Component {
             contentEdit: contentEdit,
         });
 
-        };
+    };
 
     moveUp = (i) => {
         const content = this.state.contents;
         const tempContent = content[i];
         content[i] = content[i - 1];
         content[i - 1] = tempContent;
+        if (this.state.page === "HowItWorks") {
+            content[i].value = i+1;
+            content[i - 1].value = i;
+        }        
         
         this.setState({
             contents: content
@@ -77,6 +82,11 @@ class Admin extends Component {
         content[i] = content[i + 1];
         content[i + 1] = tempContent;
         
+        if (this.state.page === "HowItWorks") {
+            content[i].value = i + 1;
+            content[i + 1].value = i + 2;
+        }
+
         this.setState({
             contents: content
         })
@@ -110,9 +120,77 @@ class Admin extends Component {
                 this.setState({
                     contentEdit: "",
                 })
+                window.location.href = "/Profile";
             })
             .catch(err => console.log(err));
     }
+
+    handleAddAttributeChange = event => {
+        let attributeEdit = event.target.value;
+        this.setState({
+            addAttribute: attributeEdit
+        })   
+    }
+
+    handleAddValueChange = event => {
+        let valueEdit = event.target.value;
+        this.setState ({
+            addValue: valueEdit
+        })
+
+    }
+
+    handleAddSubmit = event => {
+        event.preventDefault();
+
+        if (this.state.addAttribute !== "" && this.state.addValue !== "") {
+            let object = {
+                value: this.state.addValue,
+                attribute: this.state.addAttribute
+            }
+            let newContent = this.state.contents;
+            newContent.push(object);
+            let newObject = {
+                content: newContent,
+            }
+            
+            
+            API.updateContent(this.state.page, newObject)
+                .then(result => {
+                    console.log("success");
+                    window.location.href = "/Profile";
+                })
+                .catch(err => console.log(err));
+        }
+        
+    }
+
+    handleDelete = i => {
+        let currentContent = this.state.contents;
+        console.log(currentContent)
+        currentContent.splice(i, 1)
+        console.log(currentContent)
+        let object = {
+            content: currentContent
+        }
+
+        if (this.state.page === "HowItWorks"){
+            for (let k = i; k < currentContent.length; k ++){
+                currentContent[k].value = i+1;
+                i ++;
+            }
+        } 
+        
+        API.updateContent(this.state.page, object)
+        .then(result => {
+            console.log("success")
+            window.location.href = "/Profile";
+            this.handleClick(this.state.page)
+        })
+        .catch(err => console.log(err));
+        
+    }
+
     
     render(){
         return(
@@ -130,13 +208,13 @@ class Admin extends Component {
                                 header={this.state.page}
                                 trigger={<Buttons>Add</Buttons>}
                                 >
-                                {/* onClick={() => this.addContentButton()} */}
-                                {/* value={this.state.contentHeader} onChange={this.handleNewInputChange} */}
                                 <form>
-                                    <textarea className="form-control" rows="3" ></textarea>
+                                    <p>Heading</p>
+                                    <textarea className="form-control" rows="1" onChange={this.handleAddValueChange}></textarea>
                                     <br />
-                                    <textarea className="form-control" rows="3" ></textarea>
-                                    <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
+                                    <p>Text</p>
+                                    <textarea className="form-control" rows="3" onChange={this.handleAddAttributeChange}></textarea>
+                                    <Buttons type="submit" onClick={this.handleAddSubmit}>Submit Add</Buttons>
                                 </form>
 
 
@@ -183,6 +261,7 @@ class Admin extends Component {
                                                 <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
                                             </form>
                                         </Modal>
+                                        <Buttons onClick={() => this.handleDelete(i)}>Delete</Buttons>
                                     </td>
                                 </tr>
                             ))}

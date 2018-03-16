@@ -27,10 +27,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findContact: function(req,res){
-    console.log("here +=====================================")
     db.Content
       .findOne({component: "ContactUs"})
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err))
-  }
+  },
 };

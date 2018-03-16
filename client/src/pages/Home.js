@@ -174,7 +174,7 @@ componentDidMount() {
                     <ul>
                             {this.state.mongoData[1].content.map((paragraph,i) => ( 
                                     
-                            <li key={i}><h5>{paragraph.value} : </h5>{paragraph.attribute}<br /><br /></li>
+                            <li key={i}><h5>Step {paragraph.value} : </h5>{paragraph.attribute}<br /><br /></li>
                             ))}
                     </ul>
                     <div className="video-container">
