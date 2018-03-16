@@ -53,11 +53,16 @@ class Admin extends Component {
 
         };
 
+
     moveUp = (i) => {
         const content = this.state.contents;
         const tempContent = content[i];
         content[i] = content[i - 1];
         content[i - 1] = tempContent;
+        if (this.state.page === "HowItWorks") {
+            content[i].value = i+1;
+            content[i - 1].value = i;
+        }        
         
         this.setState({
             contents: content
@@ -77,6 +82,11 @@ class Admin extends Component {
         content[i] = content[i + 1];
         content[i + 1] = tempContent;
         
+        if (this.state.page === "HowItWorks") {
+            content[i].value = i + 1;
+            content[i + 1].value = i + 2;
+        }
+
         this.setState({
             contents: content
         })
@@ -130,11 +140,11 @@ class Admin extends Component {
                                 header={this.state.page}
                                 trigger={<Buttons>Add</Buttons>}
                                 >
-                                {/* onClick={() => this.addContentButton()} */}
-                                {/* value={this.state.contentHeader} onChange={this.handleNewInputChange} */}
                                 <form>
-                                    <textarea className="form-control" rows="3" ></textarea>
+                                    <p>Heading</p>
+                                    <textarea className="form-control" rows="1" ></textarea>
                                     <br />
+                                    <p>Text</p>
                                     <textarea className="form-control" rows="3" ></textarea>
                                     <Buttons type="submit" onClick={this.handleSubmit}>Submit Change</Buttons>
                                 </form>
