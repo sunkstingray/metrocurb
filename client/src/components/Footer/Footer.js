@@ -6,16 +6,12 @@ import mailLogo from "../../images/mail.png";
 const Footer = props => 
     <footer className="footer-fixed">
         <div className="container">
-            <div className="row">
+            <div className="row valign-wrapper">
                 <div className="col s6">
-                    <h5>&copy; Metro Curbside Cleaning</h5>
+                    <h5>&copy;2018 Metro Curbside Cleaning</h5>
                 </div>
-                <div className="col s6">
-                    <a href="https://www.facebook.com/Metro-Curbside-Cleaning-LLC-452583424794712/" target="_blank"><img src={facebookLogo} className="logo" /></a>
-                    <a href="/ContactUs"><img src={mailLogo} className="logo" /></a>
+                <div className="fb-like  valign-wrapper" data-href="http://metrocurb.com" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="true"></div>
                 </div>
-                
-            </div>
         </div>
     </footer>;
 
