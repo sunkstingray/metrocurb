@@ -170,7 +170,7 @@ componentDidMount() {
             </div>
             <div className="card-content cards">
                 <div id="howItWorks">
-                    <h1 className="center-align">How It Works</h1>
+                    <h1>How It Works</h1>
                     <ul>
                             {this.state.mongoData[1].content.map((paragraph,i) => ( 
                                     
@@ -182,16 +182,16 @@ componentDidMount() {
                     </div>
                 </div>
                 <div id="pricing">
-                    <h1 className="center-align">Pricing</h1>
+                    <h1>Pricing</h1>
                     <ul>
                         {this.state.mongoData[0].content.map((paragraph,i) => (          
-                        <li key={i} className="center-align"><h5 >{paragraph.value} : </h5>{paragraph.attribute}<br /><br /></li>
+                        <li key={i}><h5 className="center-align">{paragraph.value} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span className="price">{paragraph.attribute}</span></h5><br /><br /></li>
                         ))}
                     </ul>
                     <h5 className="center-align">Rates listed above are for 2 bins (1 trash & 1 recycle)</h5>
                 </div>
                 <div id="faq">
-                    <h1 className="center-align">FAQ</h1>
+                    <h1>FAQ</h1>
                         {this.state.mongoData[3].content.map((paragraph, i) => (          
                         <div key={i}>
                             <h5>{paragraph.value}</h5>
