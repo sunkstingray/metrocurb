@@ -180,7 +180,7 @@ module.exports = {
       "auto_collect": true,
       "redirect_url": "http://127.0.0.1:3000/Profile"
     }
-
+    console.log(zohoObject);
     axios.post(url,zohoObject,{
       headers: {
         "Authorization":"Zoho-authtoken " + 'c4e12486fab21594d38c518a19dbdba7',
@@ -188,6 +188,10 @@ module.exports = {
         "Content-Type": "application/json"
 
       }
+    }).then(result => {
+      console.log('result from zoho sub update:');
+      console.log(result.data.hostedpage.url);
+      res.send(result.data.hostedpage.url);
     })
 
 

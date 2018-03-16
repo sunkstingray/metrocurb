@@ -17,7 +17,9 @@ class Profile extends Component {
     city: "",
     state: "",
     zip: "",
-    username: ""
+    username: "",
+    iFrame: "",
+    updateCard: false
 
   }
 
@@ -129,9 +131,15 @@ class Profile extends Component {
 
   editPayment = (event) => {
     event.preventDefault()
-    const url ='/api/users/subscriptions/update/'+this.props.user._id;
+    const url ='/api/users/subscriptions/update/'+this.state.subscriptionId;
     axios.put(url)
          .then(result => {
+          
+           
+           this.setState ({
+             iFrame: result.data,
+             updateCard: true
+           })
          }) 
 
   }
@@ -140,8 +148,19 @@ class Profile extends Component {
  
 
   render(){
-
-   
+    if (this.state.updateCard) {
+      return (
+       <div className="container">
+         <Card>
+           <h1>Update Payment Information</h1>         
+         </Card>
+         <Card className="iFrame">
+           <iframe src={this.state.iFrame} title="update card"></iframe>
+         </Card>  
+       </div>
+      );
+   }
+   else {
 
     return this.props.user !== null ? (
          <div className="container">
@@ -151,8 +170,8 @@ class Profile extends Component {
             
             {this.state.mode === 'view' ? (
             <div>
-              <button onClick={this.goToEdit} className="btn btn-primary">Update Profile</button> 
-              <button onClick={this.editPayment} className="btn btn-primary">Update Payment Method</button>
+              <button onClick={this.goToEdit} className="btn btn-primary">Edit Profile</button> 
+              <button onClick={this.editPayment} className="btn btn-primary">Update Credit Card</button>
             </div>)
               : ''}
         
@@ -296,7 +315,8 @@ class Profile extends Component {
 
 
 
-    ) : <div className="container"></div>;
+      ) : <div className="container"></div>;
+    }
   }  
   
   

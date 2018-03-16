@@ -33,7 +33,7 @@ router
   .get(zoho.updateHostedPageId)
 
 router
-  .route("/subscriptions/update")
+  .route("/subscriptions/update/:subId")
   .put(zoho.getSubscription)
 
 module.exports = router;
