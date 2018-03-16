@@ -70,6 +70,15 @@ module.exports = {
       const hostedPageId = req.query.hostedpage_id; 
       console.log("userid:" + req.user._id);
 
+      let redirect;
+      if(process.env.NODE_ENV === "production"){
+        redirect = 'https://afternoon-tor-85875.herokuapp.com/api/Profile';
+      }
+      else {
+        redirect = 'http://127.0.0.1:3000/Profile';
+      }
+      
+
       db.Users
           .findById(req.user._id)
           .then(dbUser => {
@@ -94,7 +103,7 @@ module.exports = {
                     res.redirect('/');
                   }
                   //window.location.href = "/Profile";
-                  res.redirect('http://127.0.0.1:3000/profile');
+                  res.redirect(redirect);
               })
             })
             
@@ -117,6 +126,13 @@ module.exports = {
 
     console.log("Create form payload: ");
     console.log(req.body);
+    let redirect;
+    if(process.env.NODE_ENV === "production"){
+      redirect = 'https://afternoon-tor-85875.herokuapp.com/api/users/subscriptions/new';
+    }
+    else {
+      redirect = 'http://127.0.0.1:3001/api/users/subscriptions/new';
+    }
 
     var zohoObject = {
       "customer": {
@@ -153,7 +169,7 @@ module.exports = {
     
       "additional_param": "new_subscription",
       "starts_at": "2018-03-16",
-      "redirect_url": "http://127.0.0.1:3001/api/users/subscriptions/new"
+      "redirect_url": redirect
   }
 
     axios.post(url,zohoObject,{
@@ -173,12 +189,20 @@ module.exports = {
   getSubscription: (req,res) => {
     const subId = req.params.subId;
     const url = 'https://subscriptions.zoho.com/api/v1/hostedpages/updatecard';
+    
+    let redirect;
+    if(process.env.NODE_ENV === "production"){
+      redirect = 'https://afternoon-tor-85875.herokuapp.com/Profile';
+    }
+    else {
+      redirect = 'http://127.0.0.1:3000/Profile';
+    }
 
     const zohoObject = {
       "subscription_id": subId,
       "additional_param": "update_card",
       "auto_collect": true,
-      "redirect_url": "http://127.0.0.1:3000/Profile"
+      "redirect_url": redirect
     }
     console.log(zohoObject);
     axios.post(url,zohoObject,{
