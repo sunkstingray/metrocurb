@@ -137,13 +137,13 @@ class Profile extends Component {
     return this.props.user !== null ? (
          <div className="container">
           <Card>
-            <h1>My Account (View)</h1>
+            <h3>My Account (View)</h3>
 
             <h5><a href="#edit" onClick={this.goToEdit}>Click Here</a> to edit account details. </h5>
 
         
           <form autoComplete="no">
-
+            
              <div className="form-group">
               <label htmlFor="firstInput">First Name</label>
               <input
@@ -212,7 +212,7 @@ class Profile extends Component {
                 </select>
               </div> */}
               <Row>
-                <Input s={12} type='select' label="State" disabled="disabled">
+                <Input s={12} type='select' label="State" disabled={this.viewOrEdit === "disabled" ? "" : "false"}>
                   <option value='Kansas'>Kansas</option>
                   <option value='Missouri'>Missouri</option>
                 </Input>
@@ -241,7 +241,7 @@ class Profile extends Component {
                 value={this.state.username}
                 readOnly
               />
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
             </div>
             <div className="form-group col-md-2">
                 <label htmlFor="trashday">Trash Day</label>
@@ -271,7 +271,7 @@ class Profile extends Component {
 
 
 
-                {this.state.mode === 'edit' ? <button onClick={this.handleSubmit} className="btn btn-primary">Submit Account Changes</button> : <h1></h1>}
+                {this.state.mode === 'edit' ? <button onClick={this.handleSubmit} className="btn btn-primary">Submit Changes</button> : <h1></h1>}
             
               
           </form>

@@ -5,27 +5,30 @@ import {Navbar, NavItem} from "react-materialize"
 const NavBar = props => {
 if (props.loggedIn) {
     return (
-        <div className="navbar-fixed">
+        <div className="navbar">
             
             <Navbar >
                 <div className="logoName left">Metro Curbside Cleaning</div>
-                <div className="right">
-                    <NavItem href='/'>Home</NavItem>
-                    <NavItem href='/ContactUs'>Contact Us</NavItem>
-                    <NavItem href='/Profile'>Profile</NavItem>
-                    <NavItem href='/LogIn' onClick={props.logoutmethod}>Log Out</NavItem>
+                <div className="right links">
+                    <NavItem className="navLink" href='/'>Home</NavItem>
+                    <NavItem className="navLink" href='/ContactUs'>Contact Us</NavItem>
+                    <NavItem className="navLink" href='/Profile'>Profile</NavItem>
+                    <NavItem className="navLink" href='/LogIn' onClick={props.logoutmethod}>Log Out</NavItem>
                 </div>
             </Navbar>
         </div>
 		)
 	} else {
 		return (
-            <div className="navbar-fixed">
-                <Navbar brand='Metro Curbside' right>
-                    <NavItem href='/'>Home</NavItem>
-                    <NavItem href='/ContactUs'>Contact Us</NavItem>
-                    <NavItem href='/SignUp'>Sign Up</NavItem>
-                    <NavItem href='/LogIn'>Log In</NavItem>
+            <div className="navbar">
+                <Navbar >
+                    <div className="logoName left">Metro Curbside Cleaning</div>
+                    <div className="right">
+                        <NavItem className="navLink" href='/'>Home</NavItem>
+                        <NavItem className="navLink" href='/ContactUs'>Contact Us</NavItem>
+                        <NavItem className="navLink" href='/SignUp'>Sign Up</NavItem>
+                        <NavItem className="navLink" href='/LogIn'>Log In</NavItem>
+                    </div>
                 </Navbar>
             </div>
 

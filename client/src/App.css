@@ -11,11 +11,15 @@
   font-family: 'Special Elite', cursive;
   font-size: 1.1em;
 }
+.black {
+  width: 33%
+}
 
 body {
   background-image: url("./images/grey_wash_wall.png");
   /* background-color: #98878F; */
   display: flex;
+  coloe: #33691e;
   min-height: 100vh;
   flex-direction: column;
 }
@@ -67,10 +71,6 @@ iframe {
   color: black;
 }
 
-.tabs { 
-  color: black;
-}
-
 .line-separator {
   border-bottom: 1px solid #000000;
 }
@@ -110,3 +110,27 @@ button{
 .input-field .prefix.active {
   color: #000;
 }
+
+h3, h4, h5 {
+  color: #33691e;
+}
+
+.tabs .tab a{
+  color:#33691e;
+}
+.tabs .tab a:hover,.tabs .tab a.active {
+background-color:transparent;
+color:#33691e;
+}
+.tabs .tab.disabled a,.tabs .tab.disabled a:hover {
+color:rgba(102,147,153,0.7);	
+}
+.tabs .indicator {
+background-color:#33691e;
+}
+
+@media only screen and (min-width: 993px){
+  .tab {
+      display: block;
+  }
+  }

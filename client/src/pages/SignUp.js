@@ -166,10 +166,10 @@ canBeSubmitted() {
       return(
         <div className="container">
           <Card>
-            <h1>Sign up for a new account.</h1>
+            <h3>Sign up for a new account.</h3>
             <h6 className="amber-text text-darken-4">All fields are required.</h6>
             <form>
-              <div className="form-group input-field col s12">
+              <div className="form-group input-field ">
                 <input
                   type="text"
                   className="form-control validate"
@@ -182,7 +182,7 @@ canBeSubmitted() {
                 />
                 <label htmlFor="firstInput" data-error="Required Field">First Name</label>
               </div>
-              <div className="form-group input-field col s12">
+              <div className="form-group input-field ">
                 <input
                   type="text"
                   className="form-control validate"
@@ -195,7 +195,7 @@ canBeSubmitted() {
                 />
                 <label htmlFor="lastInput" data-error="Required Field">Last Name</label>
               </div>
-              <div className="form-group input-field col s12">
+              <div className="form-group input-field ">
                 <input
                   type="text"
                   className="form-control validate"
@@ -209,7 +209,7 @@ canBeSubmitted() {
                 <label htmlFor="inputAddress" data-error="Required Field">Address</label>
               </div>
               <div className="form-row">
-                <div className="form-group input-field col s12">
+                <div className="form-group input-field ">
                   <input
                     type="text"
                     className="form-control validate"
@@ -223,16 +223,14 @@ canBeSubmitted() {
                   <label htmlFor="inputCity" data-error="Required Field">City</label>
                 </div>
 
-                  <Row className="form-group input-field col s12" >
-                    <Input className="form-group input-field" s={12} type='select'>
-                      {/* <option value='Kansas'>Kansas</option> */}
-                      <option value='Kansas'>Kansas</option>
-                      <option value='Missouri'>Missouri</option>
-                    </Input>
-                    <label htmlFor="inputCity" data-error="Required Field">State</label>
-                  </Row>
+                <Row>
+                  <Input s={12} type='select' label="State" >
+                    <option value='Kansas'>Kansas</option>
+                    <option value='Missouri'>Missouri</option>
+                  </Input>
+                </Row>
                   
-                <div className="form-group input-field col s12">
+                <div className="form-group input-field ">
                   <input
                     ref="dropdown"
                     type="text"
@@ -247,7 +245,7 @@ canBeSubmitted() {
                   <label htmlFor="inputZip" data-error="Required Field">Zip</label>
                 </div>
               </div> 
-              <div className="form-group input-field col s12">
+              <div className="form-group input-field ">
                 <input
                   onBlur={this.handleBlur('username')}
                   type="email"
@@ -261,7 +259,7 @@ canBeSubmitted() {
                 <label htmlFor="emailInput" data-error="wrong">Email address</label>
               </div>
 
-              <div className="form-group input-field col s12">
+              <div className="form-group input-field ">
                 <input
                   onBlur={this.handleBlur('password')}
                   type="password"
@@ -274,7 +272,7 @@ canBeSubmitted() {
                 />
                 <label htmlFor="passwordInput1">Password</label>
               </div>
-              <div className="form-group input-field col s12">
+              <div className="form-group input-field ">
                 <input
                   onBlur={this.handleBlur('password')}
                   type="password"
