@@ -72,7 +72,7 @@ module.exports = {
 
       let redirect;
       if(process.env.NODE_ENV === "production"){
-        redirect = 'https://afternoon-tor-85875.herokuapp.com/api/Profile';
+        redirect = 'https://afternoon-tor-85875.herokuapp.com/Profile';
       }
       else {
         redirect = 'http://127.0.0.1:3000/Profile';
